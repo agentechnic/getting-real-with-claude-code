@@ -1,6 +1,7 @@
 # Block 2 — Structured Intent
 
 **Time:** 00:20 – 00:40
+
 **Goal:** Everyone has read and understood the PRD, the `CLAUDE.md`, and the slash commands. No code is written yet.
 
 <!-- participant-start -->

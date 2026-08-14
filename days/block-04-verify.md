@@ -1,6 +1,7 @@
 # Block 4 — Verify
 
 **Time:** 01:25 – 01:40
+
 **Goal:** Every attendee sees a test fail, watches Claude read the failure, and watches the test pass. This is the workshop's central beat.
 
 <!-- participant-start -->

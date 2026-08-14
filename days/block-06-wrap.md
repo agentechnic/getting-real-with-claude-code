@@ -1,6 +1,7 @@
 # Block 6 — Wrap
 
 **Time:** 01:50 – 02:00
+
 **Goal:** Close cleanly. Every attendee names one thing they'll do differently. The room remembers what it just built and why.
 
 <!-- participant-start -->

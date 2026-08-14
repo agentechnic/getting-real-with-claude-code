@@ -1,6 +1,7 @@
 # Block 5 — Pick Your Track
 
 **Time:** 01:40 – 01:50
+
 **Goal:** Every attendee leaves with a clear next step — one extension track chosen, and a starting prompt either already pasted into Claude Code or saved for the evening.
 
 <!-- participant-start -->

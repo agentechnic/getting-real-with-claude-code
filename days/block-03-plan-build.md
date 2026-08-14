@@ -1,6 +1,7 @@
 # Block 3 — Plan, Build
 
 **Time:** 00:40 – 01:25
+
 **Goal:** Every attendee finishes the block with a working `receipts add` and `receipts list` against the supplied samples. The harness in Block 4 will tell us whether it's right.
 
 <!-- participant-start -->

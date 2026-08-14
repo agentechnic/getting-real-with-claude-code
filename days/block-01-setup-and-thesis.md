@@ -1,6 +1,7 @@
 # Block 1 — Setup & The Thesis
 
 **Time:** 00:00 – 00:20
+
 **Goal:** Everyone has a working tool, knows the workshop's three claims, and has watched the bad-vs-good prompt demo land.
 
 > **Not familiar with the jargon?** Check the [Glossary](viewer.html?file=resources/glossary.md) — plain-language definitions for every term used in this workshop, written for non-techies.
