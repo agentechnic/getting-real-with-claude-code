@@ -46,6 +46,8 @@ For a fixed input folder, the output of `receipts report --month YYYY-MM --forma
 
 ## Acceptance criteria
 
+- [ ] `uv run pytest tests/` is green
+- [ ] `receipts report --month 2026-05 --format csv` is byte-identical to `tests/golden/may.csv`
 - [ ] `receipts add inbox/` on the supplied ten samples produces ten rows
 - [ ] Re-running it adds zero rows and reports ten duplicates
 - [ ] `receipts report --month 2026-05 --format csv` prints a valid CSV to stdout

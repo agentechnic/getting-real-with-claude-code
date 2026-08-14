@@ -1,15 +1,18 @@
-[TODO: Replace with a realistic receipt in text format]
-Sample receipt 05 — placeholder for workshop seed repo.
+amazon.sa
+Order Confirmation
 
-Fields to be extractable by Claude:
-- date (YYYY-MM-DD)
-- vendor (business name)
-- category (groceries|dining|transport|utilities|office|other)
-- amount (numeric)
-- currency (SAR|USD|EUR|GBP|other)
+Order placed: 9 May 2026
+Order # 405-7729103-2284XX
 
-Example content:
-  Receipt from [Vendor Name]
-  Date: 2026-05-005
-  Items: ...
-  Total: [amount] [currency]
+Shipped to: An Narjis, Riyadh 13324, SA
+
+Items
+  Logitech MX Master 3S Wireless Mouse    x1     379.00
+  Anker 65W USB-C Charger                 x1     129.00
+  A4 Copy Paper, 500 sheets               x2      32.00
+                                               --------
+  Item subtotal                                  540.00
+  Shipping                                         0.00
+  Order total                                    540.00 SAR
+
+Payment method: Mada Debit ending 4417

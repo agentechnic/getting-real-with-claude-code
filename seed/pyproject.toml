@@ -18,3 +18,11 @@ receipts = "receipts.cli:cli"
 [tool.hatch.build.targets.wheel]
 packages = ["src/receipts"]
 
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+

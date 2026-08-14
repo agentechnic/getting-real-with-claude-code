@@ -1,15 +1,13 @@
-[TODO: Replace with a realistic receipt in text format]
-Sample receipt 03 — placeholder for workshop seed repo.
+Starbucks — Tahlia Street, Riyadh
 
-Fields to be extractable by Claude:
-- date (YYYY-MM-DD)
-- vendor (business name)
-- category (groceries|dining|transport|utilities|office|other)
-- amount (numeric)
-- currency (SAR|USD|EUR|GBP|other)
+Order #4471
+05 May 2026, 08:14
 
-Example content:
-  Receipt from [Vendor Name]
-  Date: 2026-05-003
-  Items: ...
-  Total: [amount] [currency]
+  1x Flat White (Grande)        21.00
+  1x Almond Croissant           16.00
+  1x Still Water                 5.00
+                              -------
+  Total                         42.00 SAR
+
+Card: Visa ending 8802
+Stars earned: 42

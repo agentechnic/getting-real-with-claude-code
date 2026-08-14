@@ -9,13 +9,13 @@ Starting point for the "Getting Real with Claude Code" workshop. Source files ar
 uv sync
 
 # Confirm the test harness loads (everything will fail — expected)
-pytest tests/ --collect-only
+uv run pytest tests/ --collect-only
 
 # Confirm Claude Code can see the slash commands
 claude /prime
 ```
 
-If `pytest --collect-only` lists three tests and `/prime` reads the PRD back to you, you're ready.
+If `uv run pytest --collect-only` lists five tests and `/prime` reads the PRD back to you, you're ready.
 
 ## What's in here
 

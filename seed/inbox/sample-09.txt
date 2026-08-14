@@ -1,15 +1,15 @@
-[TODO: Replace with a realistic receipt in text format]
-Sample receipt 09 — placeholder for workshop seed repo.
+Uber
+Trip receipt
 
-Fields to be extractable by Claude:
-- date (YYYY-MM-DD)
-- vendor (business name)
-- category (groceries|dining|transport|utilities|office|other)
-- amount (numeric)
-- currency (SAR|USD|EUR|GBP|other)
+19 May 2026
 
-Example content:
-  Receipt from [Vendor Name]
-  Date: 2026-05-009
-  Items: ...
-  Total: [amount] [currency]
+Riyadh, Saudi Arabia
+Pickup 07:52  ·  Dropoff 08:16
+
+  Trip fare                  27.50
+  Booking fee                 3.50
+                           -------
+  Total                      31.00 SAR
+
+Charged to Visa ****8802
+UberX  ·  9.8 km  ·  24 min

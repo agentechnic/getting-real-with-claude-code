@@ -1,0 +1,10 @@
+date,vendor,category,amount,currency,source_file
+2026-05-01,Careem,transport,24.50,SAR,sample-01.txt
+2026-05-03,Tamimi Markets,groceries,312.80,SAR,sample-02.txt
+2026-05-05,Starbucks,dining,42.00,SAR,sample-03.txt
+2026-05-07,STC,utilities,199.00,SAR,sample-04.txt
+2026-05-09,Amazon.sa,office,540.00,SAR,sample-05.txt
+2026-05-14,Al Baik,dining,38.50,SAR,sample-07.txt
+2026-05-16,Noon,office,189.00,SAR,sample-08.txt
+2026-05-19,Uber,transport,31.00,SAR,sample-09.txt
+2026-05-21,Panda Retail,groceries,228.40,SAR,sample-10.txt

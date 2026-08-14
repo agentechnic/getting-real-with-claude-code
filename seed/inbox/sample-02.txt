@@ -1,15 +1,23 @@
-[TODO: Replace with a realistic receipt in text format]
-Sample receipt 02 — placeholder for workshop seed repo.
+TAMIMI MARKETS
+Al Narjis Branch, Riyadh
+VAT No. 300012345600003
 
-Fields to be extractable by Claude:
-- date (YYYY-MM-DD)
-- vendor (business name)
-- category (groceries|dining|transport|utilities|office|other)
-- amount (numeric)
-- currency (SAR|USD|EUR|GBP|other)
+Date: 2026-05-03    Time: 19:42
+Cashier: 07        Terminal: 3
 
-Example content:
-  Receipt from [Vendor Name]
-  Date: 2026-05-002
-  Items: ...
-  Total: [amount] [currency]
+QTY  ITEM                      AMOUNT
+ 2   Almarai Milk 2L            23.00
+ 1   Chicken Breast 1kg         34.90
+ 3   Basmati Rice 5kg          134.70
+ 1   Olive Oil 1L               48.00
+ 4   Tomatoes 1kg               22.00
+ 2   Laban 1.5L                 14.00
+ 1   Eggs 30pc                  27.50
+ 1   Detergent 3kg              38.70
+                            --------
+              SUBTOTAL        272.00
+              VAT 15%          40.80
+              TOTAL           312.80 SAR
+
+PAID: MADA DEBIT
+THANK YOU FOR SHOPPING WITH US

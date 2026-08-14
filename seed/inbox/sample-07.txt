@@ -1,15 +1,14 @@
-[TODO: Replace with a realistic receipt in text format]
-Sample receipt 07 — placeholder for workshop seed repo.
+AL BAIK
+Exit 9 - Riyadh
 
-Fields to be extractable by Claude:
-- date (YYYY-MM-DD)
-- vendor (business name)
-- category (groceries|dining|transport|utilities|office|other)
-- amount (numeric)
-- currency (SAR|USD|EUR|GBP|other)
+Receipt 20260514-1187
+14 May 2026  21:33
 
-Example content:
-  Receipt from [Vendor Name]
-  Date: 2026-05-007
-  Items: ...
-  Total: [amount] [currency]
+  Broast 4 pcs Meal            26.00
+  Extra Garlic Sauce            2.50
+  Pepsi 345ml                   5.00
+  Apple Pie                     5.00
+                             ------
+  TOTAL                        38.50 SAR
+
+Cash

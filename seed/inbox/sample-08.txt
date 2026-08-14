@@ -1,15 +1,14 @@
-[TODO: Replace with a realistic receipt in text format]
-Sample receipt 08 — placeholder for workshop seed repo.
+noon.com
 
-Fields to be extractable by Claude:
-- date (YYYY-MM-DD)
-- vendor (business name)
-- category (groceries|dining|transport|utilities|office|other)
-- amount (numeric)
-- currency (SAR|USD|EUR|GBP|other)
+Your order has been delivered
 
-Example content:
-  Receipt from [Vendor Name]
-  Date: 2026-05-008
-  Items: ...
-  Total: [amount] [currency]
+Order ID  : NSA-2026-4471902
+Date      : 16 May 2026
+Address   : An Narjis, Riyadh
+
+  Ergonomic Laptop Stand (Aluminium)          x1    139.00
+  Cable Management Sleeve                     x1     50.00
+                                                  --------
+  Total paid                                        189.00 SAR
+
+Paid via noon One / Mada

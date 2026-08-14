@@ -1,15 +1,20 @@
-[TODO: Replace with a realistic receipt in text format]
-Sample receipt 06 — placeholder for workshop seed repo.
+     JARIR BOOKSTORE
+   Olaya Branch - Riyadh
+   VAT 300000000000003
 
-Fields to be extractable by Claude:
-- date (YYYY-MM-DD)
-- vendor (business name)
-- category (groceries|dining|transport|utilities|office|other)
-- amount (numeric)
-- currency (SAR|USD|EUR|GBP|other)
+INVOICE  /  فاتورة
+No: JB-2026-55210
+Date: 12-05-2026
 
-Example content:
-  Receipt from [Vendor Name]
-  Date: 2026-05-006
-  Items: ...
-  Total: [amount] [currency]
+Description                    Amount
+------------------------------------
+Moleskine Notebook A5           89.00
+Pilot G2 Pen (box of 12)        66.00
+Desk Organizer                 120.00
+------------------------------------
+Subtotal                       275.00
+Included VAT 15%                35.87
+TOTAL                          275.00 SAR
+
+Payment: Credit Card
+Returns accepted within 14 days with invoice

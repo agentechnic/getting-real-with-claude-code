@@ -1,15 +1,19 @@
-[TODO: Replace with a realistic receipt in text format]
-Sample receipt 04 — placeholder for workshop seed repo.
+From: no-reply@stc.com.sa
+To: me@example.com
+Subject: Your STC bill for May 2026 is ready
+Date: Thu, 7 May 2026 09:03:11 +0300
 
-Fields to be extractable by Claude:
-- date (YYYY-MM-DD)
-- vendor (business name)
-- category (groceries|dining|transport|utilities|office|other)
-- amount (numeric)
-- currency (SAR|USD|EUR|GBP|other)
+Dear Customer,
 
-Example content:
-  Receipt from [Vendor Name]
-  Date: 2026-05-004
-  Items: ...
-  Total: [amount] [currency]
+Your monthly bill for account 0501234567 has been issued.
+
+  Billing period : 01 May 2026 - 31 May 2026
+  Mobile plan    : STC Pro 120GB          149.00 SAR
+  Device payment :                         30.00 SAR
+  International  :                         20.00 SAR
+  ------------------------------------------------
+  Amount due     :                        199.00 SAR
+
+Due date: 22 May 2026
+
+You can pay through the mySTC app or any Mada-enabled channel.

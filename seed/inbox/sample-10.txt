@@ -1,15 +1,21 @@
-[TODO: Replace with a realistic receipt in text format]
-Sample receipt 10 — placeholder for workshop seed repo.
+PANDA RETAIL COMPANY
+Hypermarket - Al Narjis, Riyadh
+VAT No. 300099887700003
 
-Fields to be extractable by Claude:
-- date (YYYY-MM-DD)
-- vendor (business name)
-- category (groceries|dining|transport|utilities|office|other)
-- amount (numeric)
-- currency (SAR|USD|EUR|GBP|other)
+TAX INVOICE
+Date 21/05/2026   21:07
+Invoice 8842-0031
 
-Example content:
-  Receipt from [Vendor Name]
-  Date: 2026-05-010
-  Items: ...
-  Total: [amount] [currency]
+  Fresh Vegetables Mixed          46.40
+  Chicken Whole 1.2kg             29.00
+  Bread Arabic (pack)             12.00
+  Yoghurt 12x150g                 33.00
+  Cleaning Supplies               58.00
+  Frozen Vegetables 2kg           28.00
+  Juice 6-pack                    22.00
+                               --------
+  NET                            198.61
+  VAT 15%                         29.79
+  TOTAL                          228.40 SAR
+
+MADA  ****4417

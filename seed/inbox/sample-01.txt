@@ -1,15 +1,20 @@
-[TODO: Replace with a realistic receipt in text format]
-Sample receipt 01 — placeholder for workshop seed repo.
+CAREEM RIDE RECEIPT
+===================
 
-Fields to be extractable by Claude:
-- date (YYYY-MM-DD)
-- vendor (business name)
-- category (groceries|dining|transport|utilities|office|other)
-- amount (numeric)
-- currency (SAR|USD|EUR|GBP|other)
+Thanks for riding with Careem!
 
-Example content:
-  Receipt from [Vendor Name]
-  Date: 2026-05-001
-  Items: ...
-  Total: [amount] [currency]
+Trip ID      : CRM-88413920
+Date         : 01/05/2026
+Pickup       : An Narjis, Riyadh
+Dropoff      : King Fahd District, Riyadh
+Distance     : 11.4 km
+Duration     : 18 min
+
+Fare breakdown
+  Base fare        12.00 SAR
+  Distance         10.50 SAR
+  Waiting           2.00 SAR
+  ------------------------
+  TOTAL            24.50 SAR
+
+Paid with Mada **** 4417

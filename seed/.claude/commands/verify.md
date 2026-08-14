@@ -1,6 +1,6 @@
 Run the verification checklist in this order. Fix any failures before moving to the next step.
 
-1. `pytest tests/ -v` — all tests must pass (the golden test will fail until the implementation is correct)
+1. `uv run pytest tests/ -v` — all tests must pass (the golden test will fail until the implementation is correct)
 2. `receipts add inbox/` — must process 10 receipts without error
 3. `receipts add inbox/` (again) — must report "skipped 10 duplicates" and add zero records
 4. `receipts report --month 2026-05 --format csv` — output must match `tests/golden/may.csv` byte-for-byte
