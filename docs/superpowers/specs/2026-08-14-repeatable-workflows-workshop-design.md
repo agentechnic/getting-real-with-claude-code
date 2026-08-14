@@ -68,7 +68,7 @@ This is the missing-golden-row moment from the current kit, rebuilt for an audie
 
 `tickets-q2/` has a deliberately different dominant theme — a payment-provider migration producing failed and duplicated charges — so a Skill that quietly hardcoded Q1's findings visibly fails the cold run.
 
-The answer key lives in `expected/q1-signal.md`, facilitator-only.
+The answer key lives in `facilitator/sufra-answer-key.md` — outside the seed folder, so it is not sitting in the directory attendees are told to open.
 
 ## Structure — A + B + C
 
@@ -119,18 +119,27 @@ Explicitly out: hooks, MCP authoring, multi-agent orchestration, anything requir
 ## Seed repository
 
 ```
-tickets-q1/          ~200 messy ticket files; inconsistent formats, some
-                     duplicates, a few near-empty. Holds the planted cluster.
-tickets-q2/          Second batch for the cold run. Different dominant theme,
-                     so a Skill that hardcoded Q1's answers visibly fails.
-context/
-  changelog.md       Releases with dates. The planted cluster follows one.
-  themes-2025-q4.md  Last quarter's report — the house format to match.
-                     This is the spec, without being called a PRD.
-CLAUDE.md            Conventions, plus the report format rule.
-expected/
-  q1-signal.md       Facilitator-only answer key: the cluster, the release,
-                     the counts.
+sufra/                 Attendee-facing. The only folder they open.
+  tickets-q1/          200 messy ticket files; inconsistent formats, some
+                       duplicates, a few near-empty. Holds the planted cluster.
+  tickets-q2/          120 more for the cold run. Different dominant theme,
+                       so a Skill that hardcoded Q1's answers visibly fails.
+  context/
+    changelog.md       Releases with dates. The planted cluster follows one,
+                       and nothing in the file admits it.
+    themes-2025-q4.md  Last quarter's report — the house format to match.
+                       This is the spec, without being called a PRD.
+  CLAUDE.md            Conventions, plus the report format rule.
+  README.md            What this is and how to start.
+
+tools/                 Authoring surface. Attendees never run any of it.
+  corpus/              Seeded generator and phrase banks.
+  tests/               The corpus's own verification suite.
+
+facilitator/
+  sufra-answer-key.md  The cluster, the release, the counts, and how to run
+                       the moment. Deliberately OUTSIDE sufra/, so it is not
+                       sitting in the folder attendees are told to open.
 ```
 
 **No pre-written Skill ships.** Harvesting it is the workshop.
@@ -205,7 +214,7 @@ None blocking. Remaining detail is corpus authoring, resolved during phase 1.
 
 Too large for one implementation plan. Three phases, each independently verifiable, each on the branch:
 
-1. **Seed corpus.** `tickets-q1/`, `tickets-q2/`, `context/`, `expected/`, `CLAUDE.md`. Verified by a facilitator dry run producing a report that names the planted cluster. Nothing else can be tested until this exists.
+1. **Seed corpus.** `sufra/`, the `tools/` generator and its verification suite, and the `facilitator/` answer key. Verified by a facilitator dry run producing a report that names the planted cluster. Nothing else can be tested until this exists. Planned in `docs/superpowers/plans/2026-08-14-sufra-seed-corpus.md`.
 2. **Workshop content.** The seven beats as participant-first pages, plus the facilitator overlay and a Start Here page.
 3. **Migration and landing page.** Archive to `old/`, widen `isSafePath`, build `archive.html`, rewrite the introduction and concepts copy, re-point every link. Verified by `verify-links.sh` and a live-site check after merge.
 
