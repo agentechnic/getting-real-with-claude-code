@@ -67,7 +67,10 @@ def test_every_seed_file_is_actually_committed():
     ).stdout.split()
     tracked_paths = {ROOT / p for p in tracked}
 
+    IGNORED = {".DS_Store", "Thumbs.db"}
     for path in NUSSAA.rglob("*"):
+        if path.name in IGNORED or path.name.startswith("."):
+            continue  # OS clutter; correctly untracked, and excluded from the zip
         if path.is_file() and "__pycache__" not in path.parts:
             assert path in tracked_paths, (
                 f"{path.relative_to(ROOT)} exists but is not tracked — it will "
