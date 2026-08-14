@@ -1,134 +1,118 @@
-# How Claude Code Actually Works — and Why This Workshop Is Built This Way
+# How Claude Code Actually Works
 
-*For attendees who want the theory behind the steps.*
+*For anyone who wants the theory behind what they are being asked to do.*
 
 ---
 
-## The mental model: the loop
+## The loop
 
-Claude Code is not a chatbot with a terminal attached. It is an agentic loop — a model that reads context, acts through tools, and waits for your review.
+Claude Code is not a chatbot with a terminal attached. It runs a loop, and the loop is the product.
 
-Each turn works like this:
+Each turn:
 
-1. **Read context.** Claude reads your message, `CLAUDE.md`, `PRD.md`, and any files it has opened so far. This happens on *every* turn — not just the first one. The quality of your context files determines the quality of the output.
-2. **Act through tools.** Claude can Read files, Edit files, Run Bash commands, Search across a codebase. Each tool call is visible to you before it executes (in default mode). You are in the loop.
-3. **Wait for your review.** Claude stops after each action. It doesn't chain 200 edits together unilaterally.
+1. **It reads context.** Your message, `CLAUDE.md`, and any file it has opened. This happens on *every* turn, not once at the start.
+2. **It acts through tools.** Read a file, edit a file, run a command, search a folder. You see each call before it executes.
+3. **It stops for you.** Then round again.
 
 ```mermaid
 flowchart LR
-    msg(["Your message"]) --> read["Read context\nCLAUDE.md · PRD.md · open files"]
+    msg(["Your message"]) --> read["Read context\nCLAUDE.md · open files"]
     read --> act["Act through tools\nRead · Edit · Bash · Search"]
     act --> review(["Your review"])
     review -->|next turn| read
 ```
 
-**The critical implication:** you steer Claude Code by editing files, not by arguing in chat. A line in `CLAUDE.md` that says *"never call Claude inside a test"* does more work than a paragraph of in-prompt explanation — because it is re-read on every turn.
+**The implication people miss:** you steer it by editing files, not by arguing in chat. A line in `CLAUDE.md` saying *"group tickets by meaning, never by language"* does more work than a paragraph of explanation in a prompt, because it gets re-read every turn while your explanation scrolls out of memory.
 
-### Plan Mode: tool-level enforcement
+### Plan Mode is enforcement, not etiquette
 
-When Plan Mode is on, the edit and bash tools are disabled at the framework level. Claude physically cannot write a file, run a command, or modify anything. It can only Read, Search, and produce a plan.
+With Plan Mode on, the edit and command tools are switched off at the framework level. Claude cannot write a file even if it decides it should. It reads, searches, and produces a plan.
 
-This is not a suggestion. It is enforced by the tool registry, not by Claude's willingness to comply. In Plan Mode you get a written plan, you read it, you push back on anything wrong, and then you approve. Boris Cherny, the engineer who built Claude Code: *"start in Plan Mode, iterate until the plan is right, switch to Auto-Accept, and let Claude one-shot the implementation. A good plan is really important."*
+You read the plan, push back, then approve. Boris Cherny, who built Claude Code, describes his own workflow the same way: iterate in Plan Mode until the plan is right, then switch to auto-accept and let it run.
 
 ```mermaid
 flowchart TD
-    on(["Plan Mode ON"]) --> locked["Read + Search only\nEdit and Bash are disabled"]
+    on(["Plan Mode ON"]) --> locked["Read + Search only\nEdit and Bash disabled"]
     locked --> plan["Claude writes a plan"]
     plan --> review{{"You review"}}
     review -->|"push back"| plan
-    review -->|"approve"| auto["Switch to Auto-Accept"]
-    auto --> impl["One-shot implementation"]
+    review -->|"approve"| auto["Auto-accept"]
+    auto --> impl["It runs"]
 ```
-
-### Subagents
-
-A subagent is a separate Claude session with its own context window and a narrower brief — defined as a Markdown file in `.claude/agents/`. It doesn't share context with the main session. Use subagents for isolated tasks (code review, security review, running a specific test suite) where you want a clean context, not accumulated history.
 
 ---
 
-## The three theses, explained
+## The three claims
 
-The workshop opens with three claims. Here is what each one actually means.
+### 1. Do the work once, then keep it
 
-### Thesis 1 — Structured intent beats clever prompting
+Getting a good answer out of an AI stopped being the hard part some time ago. Getting the same answer next quarter, without re-explaining yourself, is where the actual leverage sits.
 
-The model fills every gap with an assumption. If you don't name the language, it picks one. If you don't define the output schema, it invents one. If you don't say what "done" looks like, it guesses.
+A **Skill** is how that survives. A folder with a `SKILL.md` describing a job and how you want it done. Claude scans the first line of every Skill each session and loads the ones that match. You write it once.
 
-A one-page PRD and a 60-line `CLAUDE.md` fill those gaps before the first token of code is generated. Once they do, the good prompt can be *short* — it doesn't need to specify everything in-prompt because the files already said it. The structure carries the load.
+The trick this workshop teaches is that you do not write it from a blank page. You do the job first, then ask Claude to write down what you both just did. Everything it needs is still in its context: the corrections you made, the conventions you insisted on, the order you worked in.
 
-This is why the bad-vs-good demo lands: both prompts use the same model. The difference is not phrasing. It is the presence or absence of `PRD.md` and `CLAUDE.md`.
+### 2. You cannot test your own instructions
 
-The pattern: **write the files before you write the prompt.**
+You wrote them, so you read straight past the step that only makes sense if you remember the conversation. This is the same reason writers cannot proofread their own work.
 
-→ *See: [Bad vs Good Prompts](bad-vs-good-prompts.md)*
+A **subagent** solves it structurally. It is a separate session with its own context window, and it knows nothing about your conversation. Send it at your Skill and ask what it had to guess. The guesses are the sentences you did not write.
 
-### Thesis 2 — Verification makes the demo real
+Notice what that is: a test harness. You did not build one, you asked for an isolated run and read the complaints.
 
-**What is an eval?** An eval — short for evaluation — is a saved input, the known-right answer, and an automated check that they match. Nothing more. The simplest eval for this project is two files: `inbox/sample_01.txt` (the input) and `tests/golden/may.csv` (the answer you hand-labelled), connected by a `pytest` test that runs the tool and diffs the output. If the diff is empty, it passes.
+### 3. Give it the reach the task needs
 
-Why does this matter? Because "it looks right" is not a test. Demos always look right. The same build that passes an eyeball check will fail on the next receipt format you didn't think of, the next model update you didn't anticipate, or the next refactor a colleague makes next week. An eval suite catches those regressions automatically, on every change, forever. The eval suite is the compounding asset — the prompts come and go, models change, but the tests stay.
+An agent confined to a folder can do a lot, and everything in this workshop happens inside one.
 
-Hamel Husain, who has reviewed more LLM evaluation systems than almost anyone: *"In the projects we've worked on, we've spent 60–80% of our development time on error analysis and evaluation."* That is not a target to hit. It is a direction of travel. If you are spending 0% of your time on evals, you are building demos, not software.
+When a task genuinely needs to reach further, an **MCP server** grants one specific capability. A browser. A database. A ticketing system. One server, one reach.
 
-When a test fails and you paste the failure into Claude — verbatim, not paraphrased — and Claude fixes it, you have closed the loop. That moment in Block 4 is what the workshop is for.
-
-→ *See: [The Eval Harness](eval-harness.md)*
-
-### Thesis 3 — Collaborator, not a genie
-
-A genie grants wishes. A collaborator needs a brief.
-
-Think of Claude Code as a sharp new hire who arrived this morning with no context about your project, no knowledge of your preferences, and no idea what "done" means for you. Given a clear brief — `PRD.md`, `CLAUDE.md`, a written plan it helped produce — it does exceptional work. Given a vague wish ("build me a receipts tool"), it makes reasonable guesses that compound into a codebase you didn't want.
-
-The collaboration model has concrete implications:
-
-- **Brief it before you run it.** `PRD.md` + `CLAUDE.md` exist so you brief Claude once, in a file, not on every prompt.
-- **Read the plan before approving it.** Claude can be wrong. Plans are cheap to edit. Implementations are expensive to rewrite.
-- **Correct it via files, not arguments.** If Claude keeps doing something wrong — wrong exit code, wrong sort order — the fix is a line in `CLAUDE.md`. Files persist across turns. Prompt arguments do not.
-- **It should ask before structural changes.** If Claude is adding dependencies or changing schemas without asking, your `CLAUDE.md` needs a *"What to ask me about, never assume"* section.
-
-The corollary: if something goes wrong repeatedly, look at your `CLAUDE.md` before blaming the model.
-
-→ *See: [Plan Mode Walkthrough](plan-mode.md)*
+The alternative on offer elsewhere is an agent with access to your whole machine. That is a real trade and worth making deliberately rather than by default. You can always see the boundary of what you granted, which matters more the more useful these things become.
 
 ---
 
 ## What a chat box structurally cannot do
 
-There are things Claude Code does that ChatGPT, Claude.ai, Gemini, and every other chat interface cannot — not because of capability, but because of architecture. The chat box doesn't have these primitives.
+Not a criticism of chat interfaces. They are the wrong shape for some jobs, and knowing which is the point.
 
-### Files — iterate a folder, including files that arrive later
+### Work through a folder
 
-A chat interface works on one input at a time. You paste something in; it responds. There is no primitive for *"watch `inbox/` and process every receipt that lands there, including the one I'll drop in tomorrow."*
+A chat window takes one input at a time. You paste, it responds. There is no primitive for *"read all two hundred of these, including the ones that arrive next quarter."*
 
-Claude Code runs as a process on your machine. It can read, write, and watch the filesystem. `receipts add inbox/` on a cron job is one line.
+Claude Code runs as a process on your machine and can read, write and watch the filesystem. In this workshop that is the entire difference between beat 1 and beat 2.
 
-### Durable state — sessions that remember
+### Remember anything
 
-Each chat session starts fresh. Yesterday's conversation is gone.
+Close the tab and the work is gone. Next quarter you start from the first ticket, re-explaining the same conventions.
 
-`ledger.db` doesn't forget. You ran `receipts add inbox/` last Tuesday; those entries are in the ledger. Running it again today adds this week's receipts and skips last week's with *"skipped N duplicates."* That idempotency guarantee — repeating the operation is always safe — is what the test harness checks. No chat interface has an equivalent.
+A `CLAUDE.md` and a `SKILL.md` are both just files on disk, which means they persist, they can be version controlled, and they can be handed to somebody else.
 
-### Determinism — same input, same output, testable
+### Produce the artifact
 
-Ask Claude.ai a question twice and you will get two different answers. Useful for brainstorming. Disqualifying for software.
+Whatever a chat tells you, you copy back out by hand into a document you make yourself. You remain the integration layer.
 
-`receipts report --month 2026-05 --format csv` produces byte-identical output for a fixed ledger, every time, on every model version. This is what makes regression testing possible. You commit the golden file, change a line of code, run `pytest`, and know immediately whether the change broke anything.
-
-### Composability — works with everything else
-
-A chat response lives in a browser tab. A CLI is a process with stdin, stdout, stderr, and an exit code — the universal interface that everything else speaks.
-
-```bash
-receipts report --month 2026-05 --format csv | mail -s "May expenses" me@example.com
-```
-
-That's one line. A cron job, a Makefile, a GitHub Action, an MCP server, a bash script — they all talk to CLIs. None of them talk to chat tabs.
+Claude Code writes the file. That sounds small until you have done it both ways in the same morning.
 
 ---
 
-**The BLUF:** anything you can fully accomplish in a chat tab, you don't need Claude Code for. Anything that touches files, persistent state, schedules, or other tools is exactly what Claude Code is for. The gap between those two sentences is this workshop.
+## A useful way to hold it
+
+Think of Claude Code as a capable colleague who started this morning. No context about your work, no knowledge of your preferences, no idea what "done" means here.
+
+Given a clear brief written down where they can re-read it, they do exceptional work. Given a vague wish, they make reasonable guesses that compound into something you did not want.
+
+So:
+
+- **Brief it in a file**, once, rather than in every prompt.
+- **Read the plan** before approving it. That is the habit, not approving.
+- **Correct through files**, not arguments.
+- **Have something check the result** that was not present when you did the work.
 
 ---
+
+## Where to go deeper
+
+Anthropic Academy publishes free courses on [Agent Skills](https://anthropic.skilljar.com/), subagents, and MCP. They cover the features thoroughly.
+
+What they do not cover, and what this workshop is for, is the move in the middle: you did the work once, now make it repeatable, and find out whether it actually is.
 
 [← Back to home](index.html)

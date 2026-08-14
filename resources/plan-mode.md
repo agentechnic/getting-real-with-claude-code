@@ -51,12 +51,12 @@ Shift+Tab, Shift+Tab. Confirm the footer reads `plan mode on`.
 /prime
 ```
 
-This runs the `.claude/commands/prime.md` slash command, which reads `PRD.md` and `CLAUDE.md` and reads them back to you. If the readback is wrong, the files are wrong — fix the files, not the prompt.
+Claude reads `CLAUDE.md` and the material in the folder, then tells you what it understood. If the readback is wrong, the file is wrong. Fix the file, not the prompt.
 
 ### 4. Ask for a plan
 
 ```text
-/plan implement the v0.1 acceptance criteria from PRD.md
+/plan analyse the Q1 tickets and write the themes report
 ```
 
 Claude reads, thinks, produces a numbered plan. The plan is saved to `~/.claude/plans/` (a folder in your home directory) with a random name like `dreamy-orbiting-quokka.md`. It survives `/clear`, it survives context compaction (what happens when a long session fills up Claude's working memory and older parts get summarised), you can open it in any text editor.
@@ -76,7 +76,7 @@ What you're looking for:
 
 Press **Ctrl + G**. The plan opens in your editor. Edit it. Save. Come back to the terminal.
 
-You can also just type back in chat: *"Change step 4 to run pytest before step 5."* Both work.
+You can also type it back in chat: *"Change step 4 to count every ticket rather than sampling."* Both work.
 
 ### 7. Approve
 
@@ -121,7 +121,7 @@ The right default for the workshop is **always Plan Mode for the build block**. 
 
 Plan Mode is where the "collaborator, not genie" principle becomes concrete.
 
-A genie executes wishes. You say "build me a receipts tool" and it builds something. You get what it built, not necessarily what you wanted.
+A genie executes wishes. You say "tell me the themes" and it tells you something. You get what it produced, not necessarily what you asked for.
 
 A collaborator works from a brief. You produce a PRD. Claude reads it, produces a plan, and you read the plan — together. If the plan is wrong, you catch it before any code is written. If the implementation drifts, you re-plan. At every step, Claude is executing something you agreed to.
 

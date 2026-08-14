@@ -358,44 +358,47 @@
   <!-- ===== Getting Started ===== -->
   <section class="mb-16">
     <h2 class="text-2xl font-semibold mb-1 text-center">Getting Started</h2>
-    <p class="text-fg-muted text-sm mb-6 text-center">Do these before you walk in.</p>
+    <p class="text-fg-muted text-sm mb-6 text-center">The first three before you walk in. The rest if you want them.</p>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
       <div class="card">
-        <div class="tag mb-3">Start here</div>
-        <h3 class="text-lg font-semibold mb-2">Start Here — 3 Minutes</h3>
-        <p class="text-fg-muted mb-4 leading-relaxed">Didn't get to the pre-read? This is the whole mental model in one page. Read it while you set up.</p>
-        <a href="viewer.html?file=resources/start-here.md" class="btn btn-primary">Read it</a>
-      </div>
-      <div class="card">
-        <div class="tag mb-3">Background</div>
-        <h3 class="text-lg font-semibold mb-2">How Claude Code Works</h3>
-        <p class="text-fg-muted mb-4 leading-relaxed">The full mental model, the three theses explained, and what a chat box can't do.</p>
-        <a href="viewer.html?file=resources/how-claude-code-works.md" class="btn btn-secondary">Read it</a>
-      </div>
-      <div class="card">
-        <div class="tag mb-3">Setup</div>
+        <div class="tag mb-3">1 · Setup</div>
         <h3 class="text-lg font-semibold mb-2">Prerequisites</h3>
-        <p class="text-fg-muted mb-4 leading-relaxed">Claude Pro or an API key, Claude Code installed, Python 3.11+, uv, the seed repo cloned.</p>
+        <p class="text-fg-muted mb-4 leading-relaxed">Claude Pro or an API key, and Claude Code installed and logged in. Do this at home, not on venue wifi.</p>
         <a href="viewer.html?file=resources/prerequisites.md" class="btn btn-primary">Read Prereqs</a>
       </div>
       <div class="card">
-        <div class="tag mb-3">Repo</div>
+        <div class="tag mb-3">2 · Repo</div>
         <h3 class="text-lg font-semibold mb-2">The Material</h3>
-        <p class="text-fg-muted mb-4 leading-relaxed">Clone the starter repo: PRD, CLAUDE.md, ten sample receipts, starter test suite.</p>
+        <p class="text-fg-muted mb-4 leading-relaxed">Clone the workshop and open <code style="background:rgba(209,125,89,0.12);color:#E8A687;padding:0.1rem 0.3rem;border-radius:3px;font-size:0.8125rem;">nussaa/</code>: 320 support tickets, a changelog, and last quarter's report.</p>
         <a href="viewer.html?file=resources/the-material.md" class="btn btn-primary">Get the Repo</a>
       </div>
       <div class="card">
-        <div class="tag mb-3">Payments</div>
-        <h3 class="text-lg font-semibold mb-2">KSA Payment Notes</h3>
-        <p class="text-fg-muted mb-4 leading-relaxed">What cards work for Claude Pro from Saudi Arabia, and what to do if yours doesn't.</p>
-        <a href="viewer.html?file=resources/ksa-payments.md" class="btn btn-secondary">Quick Notes</a>
+        <div class="tag mb-3">3 · Pre-read</div>
+        <h3 class="text-lg font-semibold mb-2">Start Here — 3 Minutes</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">The whole mental model in one page. If you read nothing else, read this on the way in.</p>
+        <a href="viewer.html?file=resources/start-here.md" class="btn btn-primary">Read it</a>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="card">
+        <div class="tag mb-3">Optional</div>
+        <h3 class="text-lg font-semibold mb-2">How Claude Code Works</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">The agent loop in more depth, for anyone who wants the theory before the practice.</p>
+        <a href="viewer.html?file=resources/how-claude-code-works.md" class="btn btn-secondary">Read it</a>
       </div>
       <div class="card">
-        <div class="tag mb-3">Access</div>
+        <div class="tag mb-3">Optional</div>
         <h3 class="text-lg font-semibold mb-2">Free &amp; Low-Cost Options</h3>
         <p class="text-fg-muted mb-4 leading-relaxed">No Pro subscription? What an API key actually costs for a session, and the cheaper ways in.</p>
         <a href="viewer.html?file=resources/free-options.md" class="btn btn-secondary">See Options</a>
+      </div>
+      <div class="card">
+        <div class="tag mb-3">Optional</div>
+        <h3 class="text-lg font-semibold mb-2">KSA Payment Notes</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">What cards work from Saudi Arabia, and what to do if yours is declined.</p>
+        <a href="viewer.html?file=resources/ksa-payments.md" class="btn btn-secondary">Quick Notes</a>
       </div>
     </div>
   </section>
@@ -502,8 +505,8 @@
       </div>
       <div class="card">
         <div class="tag mb-3">Template</div>
-        <h3 class="text-lg font-semibold mb-2">CLAUDE.md Template</h3>
-        <p class="text-fg-muted mb-4 leading-relaxed">The conventions file, annotated. The highest-return fifteen minutes you can spend on any folder you work in.</p>
+        <h3 class="text-lg font-semibold mb-2">Write Your Own CLAUDE.md</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">The conventions file, annotated, for a folder of your own. The highest-return fifteen minutes in the whole toolkit.</p>
         <a href="viewer.html?file=resources/claude-md-template.md" class="btn btn-secondary">View Template</a>
       </div>
       <div class="card">
@@ -544,20 +547,20 @@
   <!-- ===== For Facilitators ===== -->
   <section class="mb-16">
     <h2 class="text-2xl font-semibold mb-1 text-center">For Facilitators</h2>
-    <p class="text-fg-muted text-sm mb-6 text-center">Running this yourself in your own city? Start here.</p>
+    <p class="text-fg-muted text-sm mb-6 text-center">Running this yourself in your own city? Everything you need is here.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="card">
-        <div class="tag mb-3">Notes</div>
-        <h3 class="text-lg font-semibold mb-2">Facilitator Notes</h3>
-        <p class="text-fg-muted mb-4 leading-relaxed">Tone, where to pause, mixed-skill survival rules, coffee-shop pitfalls, what to do when someone is stuck.</p>
-        <a href="viewer.html?file=resources/facilitator-notes.md" class="btn btn-secondary">Open Notes</a>
+        <div class="tag mb-3">Start</div>
+        <h3 class="text-lg font-semibold mb-2">The Facilitator Tabs</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">Every beat page has one. Timings, where to pause, the exact questions to ask, and what to do when somebody is stuck. Beat 3's carries the planted-signal numbers.</p>
+        <a href="viewer.html?file=beats/beat-0-setup.md" class="btn btn-secondary">Open Beat 0</a>
       </div>
       <div class="card">
-        <div class="tag mb-3">Future</div>
-        <h3 class="text-lg font-semibold mb-2">GCC Regulation Re-skin</h3>
-        <p class="text-fg-muted mb-4 leading-relaxed">Sketch for a follow-up session: the same anchor, swapped onto PDPL / NCA ECC / SAMA documents.</p>
-        <a href="viewer.html?file=appendix/gcc-reskin.md" class="btn btn-secondary">Open Sketch</a>
+        <div class="tag mb-3">Repo</div>
+        <h3 class="text-lg font-semibold mb-2">The Answer Key</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">Not on this site, on purpose. <code style="background:rgba(209,125,89,0.12);color:#E8A687;padding:0.1rem 0.3rem;border-radius:3px;font-size:0.8125rem;">facilitator/</code> in the repo holds the planted signal, both routes attendees take to it, and a record of a real dry run.</p>
+        <a href="https://github.com/thepandanlabs/claude-code-workshop/tree/main/facilitator" class="btn btn-secondary">View on GitHub</a>
       </div>
     </div>
   </section>

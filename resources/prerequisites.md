@@ -1,137 +1,105 @@
 # Prerequisites
 
-**Read this before you arrive. Plan 30 minutes of setup at home.**
+**Read this before you arrive. Twenty minutes of setup at home.**
 
-Two hours in a coffee shop is not enough time to debug a broken install. Everyone needs the four things below working *before* walking in.
+Three hours is not enough time to debug an install. Two things have to work before you walk in, and neither of them is Python.
 
-## 1. A paid Claude plan *or* an API key
+## 1. Claude Code, installed and logged in
 
-Either works. Pick one and have it working before you arrive.
-
-**Option A — Claude Pro ($20/month).** Simplest. Claude Code is included; you log in through the browser once and forget about it.
-
-**Option B — an Anthropic API key.** Pay per use. Set it in your terminal before the session:
+**Install it:**
 
 ```bash
-export ANTHROPIC_API_KEY=sk-ant-...          # add to ~/.zshrc or ~/.bashrc to persist
-```
-
-Budget roughly SAR 0.40–2.00 for the whole workshop, depending on how much you build. See [free and low-cost options](free-options.md) if that's a concern.
-
-Subscribe at `claude.com/pricing` → pick **Pro**. Monthly billing is fully supported as of May 2026; annual is optional ($17/month if you prefer to pre-pay). The free claude.ai plan will **not** work — Claude Code needs a paid plan or an API key.
-
-For Saudi Arabia specifically: Anthropic officially supports Saudi Arabia for both Claude.ai and the API. No VPN needed. See the [KSA payment notes](ksa-payments.md) page if your card is declined.
-
-## 2. Claude Code installed
-
-Two install paths. Pick one. The native installer is the current recommendation.
-
-**Native installer (no Node.js needed):**
-
-```bash
-# macOS / Linux / WSL (Windows Subsystem for Linux)
+# macOS / Linux / WSL
 curl -fsSL https://claude.ai/install.sh | bash
 
 # Windows (PowerShell)
 irm https://claude.ai/install.ps1 | iex
 ```
 
-The `curl` / `irm` commands download and run the installer automatically — same idea as a web-based setup wizard, just in the terminal.
-
-**npm fallback (if you prefer Node.js):**
+If you would rather use Node:
 
 ```bash
 npm install -g @anthropic-ai/claude-code
 ```
 
-`npm` is the package manager that comes with Node.js — a way to install command-line tools with one command.
-
-If you hit `EACCES` errors on npm (a permission error meaning "this installer doesn't have write access to the system folder"), **do not use `sudo`**. Set up a user-local prefix instead — this tells npm to install tools into your own home folder where it has permission:
+Hit an `EACCES` permission error on npm? Do not reach for `sudo`. Set a user-local prefix instead:
 
 ```bash
 mkdir ~/.npm-global
 npm config set prefix '~/.npm-global'
-echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc   # or ~/.zshrc
-source ~/.bashrc
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.zshrc
+source ~/.zshrc
 ```
 
-Then retry.
-
-**Verify it works:**
+**Then check it:**
 
 ```bash
-claude --version    # should print 2.x or higher
-claude doctor       # should show green checkmarks
+claude --version    # prints 2.x or higher
+claude doctor       # green
 ```
 
-Run `claude` once in any folder. You'll be prompted to log in via browser. Use your paid Claude account.
+Run `claude` once in any folder. It sends you to a browser to log in.
 
-## 3. Python 3.11 or higher
+### You need a paid plan or an API key
 
-The workshop's anchor project is a Python CLI. Check:
+Either works.
+
+**Claude Pro, $20/month.** Simplest. Log in through the browser once and forget about it. Subscribe at `claude.com/pricing`.
+
+**An Anthropic API key.** Pay per use. Set it before the session:
 
 ```bash
-python --version   # or: python3 --version
+export ANTHROPIC_API_KEY=sk-ant-...   # add to ~/.zshrc to persist
 ```
 
-If you're below 3.11, install via [python.org](https://www.python.org/downloads/), Homebrew (`brew install python@3.12` — Homebrew is a popular tool installer for macOS), or your operating system's package manager.
+Budget a couple of riyals for the whole workshop. See [free and low-cost options](free-options.md) if that is a concern.
 
-## 4. uv (Python package manager)
+The free claude.ai tier will not work. Claude Code needs one or the other.
 
-```bash
-# macOS / Linux / WSL
-curl -LsSf https://astral.sh/uv/install.sh | sh
+Saudi Arabia is supported for both, no VPN needed. If your card is declined, see the [KSA payment notes](ksa-payments.md).
 
-# Windows (PowerShell)
-pip install uv
+## 2. The material, cloned
 
-# Verify
-uv --version
-```
-
-## 5. The seed repo cloned
-
-Don't try to clone at the coffee shop on shared Wi-Fi — do this at home.
-
-The seed lives inside the workshop repo, in the `seed/` subfolder:
+Do this at home. Do not clone on venue wifi alongside twenty other people.
 
 ```bash
 git clone https://github.com/thepandanlabs/claude-code-workshop.git
-cd claude-code-workshop/seed
-uv sync                              # dependencies — under 30 seconds
-uv run pytest tests/ --collect-only  # should list nine tests
-claude /prime                        # should read the PRD back to you
+cd claude-code-workshop/nussaa
+ls
 ```
 
-Two green signals and you're ready: `--collect-only` lists **nine tests**, and `/prime` reads the PRD back to you.
+You should see `tickets-q1`, `tickets-q2`, `context`, and a `CLAUDE.md`.
 
-If `pytest` reports errors rather than listing tests, that's worth sorting out before Saturday — say so in the group. (Once you *run* the tests they will fail. That's correct and it's the exercise; don't try to fix it in advance.)
+**Then check Claude can see it:**
 
-The seed folder ships with:
+```bash
+claude
+```
 
-- `PRD.md` — the one-page spec for the receipts CLI.
-- `CLAUDE.md` — the codebase conventions.
-- `.claude/commands/` — the four slash commands (`/prime`, `/plan`, `/implement`, `/verify`).
-- `inbox/` — ten sample receipt files for the build.
-- `tests/` — the verification harness, pre-written.
-- `fixtures/extractions/` — one recorded extraction per sample receipt; the tests replay these, and so does the tool when you have no API key.
-- `src/receipts/` — stub source files (Claude builds the implementation during the workshop).
-- `dashboard.html` — visual viewer for the exported data.
+Ask it how many files are in `tickets-q1/`. If it answers 200, you are ready for the morning.
 
-## Also helpful
+## What you do not need
 
-- **Git installed.** Windows: install [Git for Windows](https://git-scm.com/download/win) so Claude Code's Bash tool works correctly.
-- **A code editor.** VS Code, Cursor, or whatever you already use. Not strictly required — Claude Code edits files for you — but useful for reading diffs.
-- **A real meeting transcript or two pages of work notes** (anonymised) if you want to try the receipts CLI on something other than the supplied samples. Optional.
+No Python. No `uv`, no `pip`, no virtual environment. No test framework.
 
-## Day-of setup
+The job today is reading a quarter of support tickets and writing a report, which is work rather than code. If you are a developer expecting to write software, adjust your expectations. If you are not a developer and you have been nervous about that, stop being nervous.
 
-Arrive at 100% battery. Coffee-shop power outlets are unreliable. A 2-hour workshop running an agent on Sonnet 4.6 will drain a laptop to ~30%.
+## Also worth having
 
-Bring your phone, with mobile hotspot ready. Coffee-shop Wi-Fi is the single most common failure mode.
+- **Git.** On Windows, install [Git for Windows](https://git-scm.com/download/win) so Claude Code's shell tools behave.
+- **A text editor** you already like. Not required, since Claude edits files for you, but useful for reading diffs.
+- **A pile of your own feedback**, anonymised, if you want to point the finished Skill at real data at the end. Optional.
 
-## If something is broken the morning of the workshop
+## On the day
 
-Run `claude doctor` and read the output. If it doesn't fix itself, message the facilitator with the **exact** error text — not a paraphrase. Don't show up with nothing installed; the room has twenty-odd people and one facilitator, and one broken laptop can swallow ten minutes.
+Arrive at full battery. Three hours of agent work will drain a laptop.
+
+Bring your phone with a hotspot ready. Venue wifi is the most common failure, though the workshop material is all local, so a drop only affects Claude itself.
+
+## If something is broken that morning
+
+Run `claude doctor` and read the output. If it does not fix itself, message the facilitator the **exact** error text rather than a description of it.
+
+Do not turn up with nothing installed. There are twenty-odd people and one facilitator, and one broken laptop eats ten minutes of everybody's session.
 
 [← Back to home](index.html)

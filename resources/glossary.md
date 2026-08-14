@@ -1,87 +1,84 @@
 # Glossary — Plain-Language Definitions
 
-Every term used in this workshop, defined for non-technical readers. No assumed knowledge. Use this as a reference during any block.
+Every term used in this workshop, defined for people who do not write software. Use it as a reference during any beat.
 
 ---
 
-## Workshop-specific terms
+## The four pieces
 
-**PRD (Product Requirements Document)**
-A short spec — usually one page — that says what the tool must do, what it must not do, and how you know when it's done. Think of it as the brief you hand a contractor before building work starts. Claude reads it on every turn. Without it, Claude guesses.
-
-**CLAUDE.md**
-A plain-text instruction file that lives in your project folder. Claude reads it automatically at the start of every session. It contains your rules: which language to use, how to name things, what to ask about before changing, what never to do. Think of it as the onboarding memo for a new employee — except Claude re-reads it on every turn, so your rules stick.
-
-**Eval (evaluation)**
-A saved test case. Three parts: (1) an input you prepared, (2) the correct output you labelled by hand, (3) a script that compares them. If the output matches your label, the test passes. If not, it fails. The simplest eval for this project is a sample receipt and a CSV file you hand-labelled "this is the right answer." Business translation: evals are the insurance policy between "the demo worked" and "it works every time."
-
-**Golden file**
-The "correct answer" for a test — a file you labelled by hand once, containing exactly what the tool should output for a given input. The test compares future runs against it. If the tool changes its output, the test fails. You find out immediately instead of in production.
-
-**Deterministic**
-A fancy word for "same input → same output, always." A calculator is deterministic: 2+2 is always 4, no matter when you run it. The receipts tool is deterministic: the same receipt always produces the same CSV row. This is what makes automated testing possible — if output can vary randomly, you can't tell whether a failure is a bug or just randomness.
-
-**Acceptance criteria**
-The specific, checkable conditions in the PRD that define when the tool is "done." Example: *"Running `receipts add inbox/` twice adds zero rows the second time."* Either it does that or it doesn't. No ambiguity, no judgment call. Acceptance criteria are what separates a working tool from a tool that "looks finished."
-
-**Schema**
-The shape of the data — the list of fields a piece of data contains and what type each field is. A receipt schema might be: date (a date), vendor (text), amount (a number), currency (3-letter code). Claude needs to know the schema before it generates data; otherwise it invents one, and you get inconsistent output.
-
-**Idempotent / Idempotency**
-An operation is idempotent if you can run it multiple times and get the same result as running it once. Adding the same receipt twice should add it once and skip the duplicate — that's idempotency. The alternative (each run always adds a new row) causes duplicates in your data. A chat interface has no memory between sessions, so it can't guarantee this. A proper database tool can.
-
----
-
-## Claude Code concepts
-
-**Plan Mode**
-A special Claude Code mode where Claude can only *read and plan* — it cannot write files or run commands. You turn it on with **Shift + Tab** (twice). Claude produces a numbered plan; you review it, push back on anything wrong, then approve. Only then does Claude start building. Think of it as "talk before touching anything."
-
-**Auto-accept mode**
-The opposite of Plan Mode. Claude runs through its plan and makes changes without stopping after each one. You switch to this after approving the plan, so Claude can execute quickly without asking for permission at every step.
-
-**Agentic loop**
-The cycle Claude Code runs on every turn: read your context files → act through tools → show you what it did → wait for your input. It is not a chatbot that just answers questions. It reads, acts, and pauses for review. Rinse and repeat.
-
-**Tool (in Claude Code)**
-A capability Claude Code can use: Read a file, Edit a file, run a Bash command, search the codebase. Each tool call is visible to you before it runs. In Plan Mode, Edit and Bash are disabled — Claude can only Read and Search.
-
-**Context window**
-The amount of text Claude can "see" at once in a single session. Think of it as working memory. If your CLAUDE.md, PRD, and conversation history together fill the window, older parts get pushed out. This is why a short, focused CLAUDE.md works better than a long one — every line competes for the same limited attention.
+**Skill**
+A folder with a `SKILL.md` inside it, describing a job you want done and how you want it done. Claude reads the first line of every Skill at the start of a session and loads the ones that match what you asked for. Write it once, and next quarter the work starts with the instructions already in place. This is what you take home today.
 
 **Subagent**
-A separate Claude session with a narrower brief and its own fresh context. Used for isolated tasks — like a code review — where you want clean, unbiased attention, not an assistant that has accumulated a long session history.
+A separate Claude session with its own memory, launched by the one you are talking to. It knows nothing about your conversation, which is exactly why it is useful: it is the only thing that can honestly tell you whether your instructions make sense to someone who was not there when you wrote them.
+
+**MCP server (Model Context Protocol)**
+An open standard for connecting an AI to something outside its folder. One server grants one capability, like reading a browser tab or querying a database. The point is that you choose what to grant. An agent with an MCP server for a browser has a browser, and nothing else.
+
+**Plugin**
+A bundle of Skills, commands and MCP servers, versioned and installable in one step. How a habit that works on your laptop becomes how your team works.
 
 ---
 
-## Software terms you'll encounter
+## How Claude Code behaves
 
-**CLI (Command Line Interface)**
-A program you control by typing commands in a terminal instead of clicking buttons. The `receipts` tool is a CLI: you type `receipts add inbox/` and it runs. CLIs can be automated, piped together, and scheduled in ways that a UI with buttons cannot.
+**Agentic loop**
+The cycle Claude Code runs every turn: read your context files, act through tools, show you what it did, wait for you. Not a chatbot that answers questions. It reads, acts, and pauses.
+
+**CLAUDE.md**
+A plain-text instruction file in your project folder. Claude reads it at the start of every turn, not just the first. Your conventions live here: how to group things, what to never assume, what to ask about. Think of it as the onboarding memo for a colleague who re-reads it constantly.
+
+The practical consequence is the main lesson of the day. Correct Claude in conversation and the correction dies with the session. Write the same correction into `CLAUDE.md` and it holds forever.
+
+**Plan Mode**
+A mode where Claude can only read and plan. It cannot edit files or run commands, because those tools are switched off. Turn it on with **Shift + Tab** twice. Claude writes you a numbered plan, you push back on anything wrong, then you approve. Talk before touching anything.
+
+**Auto-accept mode**
+The opposite. Claude works through its plan without stopping after each step. You switch into it once you have approved a plan you actually read.
+
+**Tool**
+Something Claude Code can do: read a file, edit a file, run a command, search a folder. You see each call before it happens. In Plan Mode, edit and run are disabled.
+
+**Context window**
+How much text Claude can hold at once in a session. Working memory. When your files and conversation history fill it, the oldest parts fall out. This is why a short focused `CLAUDE.md` beats a long thorough one, and why a subagent starting fresh is genuinely a fresh start.
+
+---
+
+## Terms from the task
+
+**Theme**
+A group of tickets complaining about the same thing, whatever language they used. *"ما لقى العنوان"*, *"driver couldn't find building"* and *"الـ pin ودى الكابتن لحي ثاني"* are one theme, not three. Grouping by language would produce fake themes and hide a real one.
+
+**Colloquial and fusha**
+Fusha is formal written Arabic, the kind used in official complaints and news. Colloquial is how people actually type. The tickets contain both, because real queues contain both. The same customer might write نص ساعة casually and نصف ساعة when they are annoyed enough to be formal.
+
+**Code-switching**
+Using two languages in one sentence, usually an Arabic frame with English product words dropped in: *"الـ app يطفي كل ما افتحه"*. Extremely common in Riyadh and completely normal. It is not broken Arabic or broken English.
+
+**Signal**
+Something in the data that points at a cause rather than describing a symptom. A pile of complaints is symptoms. A pile of complaints that all start the week after a release is a signal.
+
+---
+
+## Terms from the tools
 
 **Terminal**
-The black (or dark) window where you type commands. On Mac: open Spotlight (Cmd+Space), type "Terminal," press Enter. On Windows: search for "PowerShell" or "Command Prompt." If you can open one and type `ls` (Mac/Linux) or `dir` (Windows), you're ready for this workshop.
+The window where you type commands instead of clicking. On a Mac, press Cmd+Space and type "Terminal". On Windows, search for PowerShell. If you can open one and type `ls`, you are ready for today.
 
-**Pytest**
-A Python testing tool. It runs all your test files and tells you which pass and which fail. You run it by typing `uv run pytest tests/` in the terminal. Green = pass. Red = fail. The failure message is what you paste back to Claude.
+**Repository (repo)**
+A folder of files tracked by git, usually shared online. Cloning one copies it to your machine.
 
-**Pydantic**
-A Python library that validates data against a schema. If Claude returns a receipt with the date in the wrong format or a negative price, Pydantic catches it before the data reaches your database. Think of it as a strict receptionist that rejects badly filled forms before they enter the filing system.
+**Markdown**
+Plain text with light formatting marks: `#` for a heading, `**bold**`, `-` for a bullet. Every file you read and write today is markdown. It stays readable even without anything to render it.
 
-**LLM-as-judge**
-Using a second AI call to evaluate the output of the first. Instead of a human checking whether Claude assigned the right category to each receipt, you ask Claude again: "Was this category correct? PASS or FAIL." Useful for checking things that are subjective enough that a deterministic test won't work, but common enough that human review would take too long.
+**Diff**
+The change Claude is proposing, shown as lines added and lines removed. Green is added, red is removed. Reading diffs is how you check work before it becomes permanent. You do not need to read every line, only look for anything that does not belong.
 
-**Fixture**
-In testing, a pre-prepared piece of data used as the input for a test. The workshop has sample receipts in `fixtures/extractions/` — they stand in for real receipts so tests run without calling the live Claude API.
-
-**Exit code**
-The number a program sends back to the terminal when it finishes. `0` means success. Any other number means something went wrong. Automated tools (cron jobs, CI pipelines) read exit codes to know whether to proceed or alert someone. A well-behaved CLI always returns the right exit code.
-
-**MCP (Model Context Protocol)**
-An open standard for connecting AI models to external tools and data sources. An MCP server exposes capabilities (like "look up a receipt") that any MCP-compatible AI client (Claude Desktop, Cursor, etc.) can call. Think of it as the USB-C of AI integrations — one standard connector, many devices.
+**Cold start**
+Running something with no prior context. Your Skill working when you run it means little, because you remember what you meant. Your Skill working cold means it is actually written down.
 
 ---
 
-*Anything missing? Something still confusing? The facilitator notes have contact details.*
+*Something missing or still unclear? Tell the facilitator, and it goes in the next version.*
 
 [← Back to home](index.html)
