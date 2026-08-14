@@ -66,7 +66,17 @@ claude mcp add chrome-devtools -- npx -y chrome-devtools-mcp@latest
 mise use -g node@24     # or nvm install 24 && nvm use 24, or brew upgrade node
 ```
 
-Then confirm the server is actually there. In a fresh Claude Code session, `/mcp` should list `chrome-devtools`. If it does not, the server is registered but not starting, and the cause is almost always the Node version.
+**If you use a version manager, pin the server's PATH rather than relying on it.** `claude mcp add` registers a bare `npx` with an empty environment, so the server inherits whatever Node your shell resolves — which with mise, nvm or asdf may not be the one you think:
+
+```bash
+claude mcp add chrome-devtools \
+  --env PATH="/opt/homebrew/opt/node/bin:$PATH" \
+  -- npx -y chrome-devtools-mcp@latest
+```
+
+Then confirm it. **Restart Claude Code first** — MCP servers load at session start, so a reload will not pick up a new one. In the fresh session, `/mcp` should list `chrome-devtools` and its tools should be callable.
+
+The failure mode to recognise: the server appears registered, the plugin count goes up, and no tools ever arrive. That means it is starting and exiting, and the cause is almost always Node.
 
 Rehearse the whole demo once end to end: connect, open a tab, run the search, read the result. Know how long it takes so you are not narrating dead air.
 
