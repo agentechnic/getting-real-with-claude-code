@@ -4,26 +4,31 @@
 **Goal:** Every attendee finishes the block with a working `receipts add` and `receipts list` against the supplied samples. The harness in Block 4 will tell us whether it's right.
 
 <!-- participant-start -->
-## Block 3 — What to do
+## Block 3 — Build it (you drive)
 
-45 minutes. Work on your own laptop. The facilitator circulates.
+You're about to have Claude write the whole tool. Before you do — a question: if Claude is going to write code from your spec, what's the cheapest moment to catch a mistake? Not after 200 lines exist. Before any line does. That's what Plan Mode is for.
 
-**Phase 1 (00:40–00:55) — Prime and plan**
+**Part 1 — Prime and plan**
 
-1. Run `/prime` if you haven't already
-2. Enable Plan Mode (Shift + Tab twice), then run `/plan`
-3. Read the plan Claude produces — approve it, or correct one thing first
+1. Run `/prime`. Claude reads `PRD.md` and `CLAUDE.md` and tells you what it understood. **Read the readback.** If it got something wrong, the fix goes in the *file*, not in a reply — the files are what it re-reads every turn. A correction typed into chat is forgotten; a correction written into `CLAUDE.md` is permanent.
+2. Turn on Plan Mode (Shift+Tab twice — the footer should say `plan mode on`) and run `/plan`. You get a numbered plan and no code. Before you approve, skim for one thing: **is anything in here that the PRD never asked for, or in the wrong order?** Push back now; it's free. In ten minutes it costs a rewrite.
+3. Approve when you're satisfied. Press Ctrl+G first if you'd rather edit a step by hand.
 
-**Phase 2 (00:55–01:15) — Build**
+**Part 2 — Build**
 
-1. Exit Plan Mode (Shift + Tab twice), then run `/implement`
-2. Watch the files being created — don't interrupt unless something looks clearly wrong
+4. Exit Plan Mode (Shift+Tab twice) and run `/implement`. Watch the diffs go by — green is added, red is removed. You're the reviewer here. You don't have to read every line; you're looking for anything that doesn't belong.
+5. If Claude starts doing the wrong thing, resist the urge to argue with it in chat. **The PRD or `CLAUDE.md` is wrong.** Fix the file, then re-plan.
 
-**Phase 3 (01:15–01:25) — First check**
+**Part 3 — First proof**
 
-1. Run `receipts add inbox/` against the sample files
-2. Run it again — confirm zero new rows the second time (idempotency check)
-3. Run `receipts list` — do the records look right?
+6. Run `receipts add inbox/`. You should see ten rows — not eleven, not nine.
+7. Run the exact same command again. **Predict first: what should happen?** Then run it. Zero new rows, ten duplicates. That property is called idempotency, and it's the thing a chat tab cannot do for you — a chat has no memory of the receipt you pasted last Tuesday.
+8. Run `receipts list`. Do the records look right? You know this data — you can read a receipt.
+
+**Part 4 — Change the spec, not the code**
+
+9. Now add one requirement *yourself*. Open `PRD.md` and add a `--category` filter to `receipts list` in the "In scope" section — one line, your words. Add a matching acceptance criterion.
+10. Re-run `/plan`. Notice what happened: you changed the spec, and the plan changed with it. **That's the loop.** You are not prompting a chatbot; you're maintaining a spec that a builder reads. This is the part that transfers to your own projects tomorrow.
 <!-- participant-end -->
 
 ## Block shape
@@ -115,7 +120,7 @@ The order of escalation:
 
 1. **"Are you in Plan Mode?"** Look at the terminal footer. 70% of "weird" is "you skipped the plan."
 2. **"Show me your last plan."** Did they approve a plan that contained the bug, or did Claude drift mid-implementation? Different fixes.
-3. **"What does `pytest tests/test_ledger.py` say?"** Get a real error message into the room before guessing.
+3. **"What does `uv run pytest tests/test_ledger.py` say?"** Get a real error message into the room before guessing.
 4. **"Let's `/rewind` and try the plan again."** `/rewind` undoes Claude's last set of changes — it restores the files to where they were before the last `/implement` run. Don't be sentimental about code Claude wrote two minutes ago.
 
 If a laptop is well and truly stuck, pair the attendee with a neighbour who's working. Don't take over their keyboard.

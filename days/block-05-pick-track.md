@@ -8,14 +8,15 @@
 
 10 minutes. Pick one track and start it.
 
-1. Choose by what you'd actually use:
-   - **Track A** — CSV report (simplest, good starting point)
-   - **Track B** — Category tags (richer data, good for expense sorting)
-   - **Track C** — Currency conversion (good for multi-currency contexts)
-   - **Track D** — Scheduled export (automated monthly reports)
-2. Open the track page from the workshop home
-3. Enable Plan Mode, then run `/plan` with the track's starter prompt
-4. If time allows: exit Plan Mode and run `/implement`
+1. Choose by what you'd actually use — not by difficulty:
+   - **Track A — Polished CLI** — publish it so a teammate installs it with one command (most contained; an evening)
+   - **Track B — Web App** — a browser interface, so non-technical colleagues never open a terminal (a weekend)
+   - **Track C — Agent** — it watches a folder and processes receipts as they land (a weekend)
+   - **Track D — MCP Server** — plug it into Claude Desktop and ask *"what did I spend on dining in May?"* (an evening)
+2. Open your track's page from the workshop home.
+3. **Write the starter prompt yourself.** Read the track brief, then write the prompt you'd give Claude — what to build, what's out of scope, how you'll know it worked. The track page has a ready-made prompt at the bottom, but open it *after* you've written yours and compare. Writing it is the skill; pasting it isn't.
+4. Enable Plan Mode and run `/plan` with your prompt. Read the plan before approving.
+5. If time allows: exit Plan Mode and run `/implement`.
 <!-- participant-end -->
 
 ## The four tracks

@@ -6,13 +6,18 @@
 > **Not familiar with the jargon?** Check the [Glossary](viewer.html?file=resources/glossary.md) — plain-language definitions for every term used in this workshop, written for non-techies.
 
 <!-- participant-start -->
-## Block 1 — What to do
+## Block 1 — What you're here to be able to do
 
-Settle in and watch. This block is the facilitator's — no code yet.
+**By the end of today you can take a blank folder and a one-page spec, and direct Claude Code to build, plan, and verify a working tool — and you'll know it's right because a test says so.**
 
-1. Run `claude --version` in your terminal when prompted.
-2. Run `claude doctor` — green checkmarks means you're ready.
-3. Watch the two-prompt demo. When the facilitator asks *"What's missing?"* — answer out loud.
+That last clause is the whole workshop. Plenty of people can get an AI to produce something that looks like software. The gap between that and something you'd let a colleague use is a way of knowing when it's wrong.
+
+No code in this block. Two things to do:
+
+1. Run `claude --version`, then `claude doctor`. Green checkmarks means you're ready. If something's red, flag it now — not at minute 40 when everyone else is building.
+2. Watch the two-prompt demo. The same request is made twice: once as you'd type it into a chat box, once with a written spec behind it. **Before the second run, predict what will change.** When you're asked *"what's missing?"*, answer out loud — getting this wrong in public costs nothing and is the fastest way to learn it.
+
+One thing to carry into the next two hours: Claude Code is a collaborator that needs a brief, not a genie that grants wishes. Everything today follows from that.
 <!-- participant-end -->
 
 ## Opening reframe (say this before anything else at 00:10)

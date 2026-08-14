@@ -4,16 +4,19 @@
 **Goal:** Everyone has read and understood the PRD, the `CLAUDE.md`, and the slash commands. No code is written yet.
 
 <!-- participant-start -->
-## Block 2 — What to do
+## Block 2 — Read the spec before anyone writes code
 
-Open the seed repo. Your job is to read and understand the spec before any code is written.
+You just watched a vague prompt produce vague software. The fix isn't a cleverer prompt — it's writing down what you want *before* asking. That's all "structured intent" means, and it's four files.
 
-1. `cd receipts-seed-repo` (or wherever you cloned it)
-2. Open `PRD.md` and read it — note anything unclear
-3. Open `CLAUDE.md` and read it — these are the rules Claude will follow
-4. Browse `.claude/commands/` — you'll use `/prime`, `/plan`, `/implement`, `/verify`
-5. Activate Plan Mode: press **Shift + Tab twice** in Claude Code
-6. Run `/prime` and wait for Claude to acknowledge the spec
+Read them in this order. You're not skimming; you're checking whether *you* could build the tool from this. If you couldn't, neither can Claude.
+
+1. `cd` into the seed repo you cloned.
+2. Open **`PRD.md`** — what the tool does, and pointedly what it does *not*. The "Out of scope" section is doing as much work as the "In scope" one: it's what stops Claude helpfully inventing a login page. Note anything unclear; unclear to you is unclear to it.
+3. Open **`CLAUDE.md`** — the standing rules. Conventions, layout, what to never assume. Every turn, Claude re-reads this. **This is why you fix files instead of arguing in chat:** a reply is forgotten by the next message; a line here holds forever.
+4. Browse **`.claude/commands/`** — `/prime`, `/plan`, `/implement`, `/verify`. Slash commands are just saved prompts in a file. Open one; there's no magic in it. You can write your own tonight.
+5. Look at **`tests/golden/may.csv`** — a hand-written answer key for what May's report should say. Someone decided that by hand. That's the point: **a human decides what "right" means, once, in a file** — and after that a machine can check it a thousand times.
+6. Turn on Plan Mode (**Shift + Tab twice**) and run `/prime`.
+7. **Read what Claude reads back.** This is the cheapest checkpoint you'll get all day. If its understanding is wrong here, everything downstream is wrong — and the fix is one line in a file, not a fight in chat.
 <!-- participant-end -->
 
 ## What happens in this block
@@ -37,7 +40,7 @@ The PRD says: a CLI called `receipts` that takes a folder of receipt files, call
 
 The acceptance criteria are testable:
 
-- `pytest tests/` is green. (All automated tests pass.)
+- `uv run pytest tests/` is green. (All automated tests pass.)
 - `receipts add inbox/` on the ten supplied samples produces ten rows.
 - Re-running it adds zero rows and reports ten duplicates.
 - `receipts report --month 2026-05 --format csv` is byte-identical to `tests/golden/may.csv`. (Same output, character for character — no hidden variation.)

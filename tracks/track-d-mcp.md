@@ -12,7 +12,13 @@ The CLI stays the canonical engine. The MCP server is a translation layer betwee
 
 ## Starting prompt
 
-Paste into a fresh Claude Code session in your repo, with Plan Mode on:
+**Write yours first.** You have everything you need above: what changes, and what
+"done" looks like below. Draft the prompt you'd hand Claude — what to build, what's
+out of scope, and how you'll know it worked. Then open the fold and compare. The
+one below isn't the right answer; it's a second opinion.
+
+<details>
+<summary><strong>Show a worked starting prompt</strong></summary>
 
 ```text
 Read PRD.md and CLAUDE.md.
@@ -55,6 +61,8 @@ Also produce:
 
 Plan first. Do not write code yet.
 ```
+
+</details>
 
 ## Milestones
 

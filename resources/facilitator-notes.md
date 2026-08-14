@@ -77,7 +77,7 @@ Order of escalation:
 
 1. **"Are you in Plan Mode?"** The bottom-of-terminal indicator answers this. 70% of "weird" is "you skipped the plan."
 2. **"What does your `CLAUDE.md` say?"** If they deleted it or never opened the seed repo properly, restore it.
-3. **"Run `pytest tests/` and show me the failure."** Get a real error into the room before guessing.
+3. **"Run `uv run pytest tests/` and show me the failure."** Get a real error into the room before guessing.
 4. **"Let's `/rewind` and try the plan again."** Don't be sentimental about code Claude wrote two minutes ago.
 5. **Pair with a working neighbour.** Don't take over their keyboard. Their fingers, their lesson.
 
@@ -92,8 +92,9 @@ Order of escalation:
 
 - [ ] Send the prerequisites sheet at T-5 days. Follow up at T-2 with anyone who hasn't confirmed install.
 - [ ] Pre-test the install flow yourself on a fresh laptop. macOS and Windows.
-- [ ] Pre-write or pre-verify the three golden test cases in `tests/golden/`.
-- [ ] Print 12 copies of: the PRD, the `CLAUDE.md`, the bad-vs-good prompts page, the agenda. Coffee-shop printers are unreliable; bring your own.
+- [ ] **Run the harness yourself on a fresh clone.** `uv sync`, then `uv run pytest tests/ --collect-only` should list five tests. This is the one prep item that can't be skipped — Block 4 is built on it.
+- [ ] Confirm `tests/golden/may.csv` is still **nine rows plus a header**. The missing row is the Jarir line (`sample-06.txt`), and it is missing on purpose. If someone has "fixed" it, Block 4 has no failure to teach from.
+- [ ] Print a dozen copies of: the PRD, the `CLAUDE.md`, the bad-vs-good prompts page, the agenda. Coffee-shop printers are unreliable; bring your own.
 - [ ] Pick the venue. Reservable back room, reliable Wi-Fi tested the day before, accessible power.
 - [ ] Bring: power strip, USB-C and USB-A hubs, an Ethernet adapter just in case.
 - [ ] Charge your own laptop to 100%.

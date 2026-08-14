@@ -24,18 +24,17 @@ workshop-seed-repo/
 │       ├── extract.py          # Empty — to be filled
 │       ├── ledger.py           # Empty — to be filled
 │       └── report.py           # Empty — to be filled
-├── migrations/
-│   └── 0001_init.sql           # Initial SQLite schema (provided)
+├── dashboard.html              # Visual viewer, reads data.json (provided)
 ├── inbox/
-│   ├── sample-01.txt           # Ten sample receipts in mixed formats
-│   ├── sample-02.txt
-│   ├── ...
+│   ├── sample-01.txt           # Ten sample receipts in mixed formats —
+│   ├── sample-02.txt           # POS slips, an email bill, order
+│   ├── ...                     # confirmations, a bilingual invoice
 │   └── sample-10.txt
 ├── tests/
-│   ├── conftest.py             # Mocks the Claude API call, replays fixtures
-│   ├── test_ledger.py          # Idempotency test (provided)
-│   ├── test_report.py          # Byte-identical CSV test (provided)
-│   ├── test_schema.py          # Pydantic schema validation (provided)
+│   ├── conftest.py             # Replays recorded extractions; no API calls
+│   ├── test_ledger.py          # Ten rows, and idempotency (provided)
+│   ├── test_report.py          # Byte-identical CSV + determinism (provided)
+│   ├── test_schema.py          # Field-shape validation (provided)
 │   ├── fixtures/
 │   │   └── extractions/        # Recorded JSON outputs for the ten samples
 │   │       ├── sample-01.json
@@ -61,13 +60,13 @@ After cloning, run:
 uv sync                          # OR: pip install -e .
 
 # Confirm the test harness loads (everything will fail — that's expected)
-pytest tests/ --collect-only
+uv run pytest tests/ --collect-only
 
 # Confirm Claude Code can see the slash commands
 claude /prime
 ```
 
-If `pytest --collect-only` lists three tests and `/prime` reads the PRD back to you, you're ready.
+If `uv run pytest --collect-only` lists five tests and `/prime` reads the PRD back to you, you're ready.
 
 ## What's deliberately not in it
 

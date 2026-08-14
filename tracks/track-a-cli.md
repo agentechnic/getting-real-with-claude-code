@@ -10,7 +10,13 @@ Add a `rich`-formatted output mode (coloured, tabular terminal output), a `--dry
 
 ## Starting prompt
 
-Paste into a fresh Claude Code session in your repo, with Plan Mode on (Shift+Tab twice):
+**Write yours first.** You have everything you need above: what changes, and what
+"done" looks like below. Draft the prompt you'd hand Claude — what to build, what's
+out of scope, and how you'll know it worked. Then open the fold and compare. The
+one below isn't the right answer; it's a second opinion.
+
+<details>
+<summary><strong>Show a worked starting prompt</strong></summary>
 
 ```text
 Read PRD.md and CLAUDE.md. We're polishing the receipts CLI for
@@ -34,9 +40,11 @@ Constraints:
 Plan first. Do not write code yet.
 ```
 
+</details>
+
 ## Milestones
 
-1. **Rich tables that don't break golden tests.** Verify with `pytest tests/ -v` after the change. The tests pipe stdout, which triggers the non-TTY path — they should still be green.
+1. **Rich tables that don't break golden tests.** Verify with `uv run pytest tests/ -v` after the change. The tests pipe stdout, which triggers the non-TTY path — they should still be green.
 2. **`--dry-run` for `add`**, with a new test that confirms zero ledger writes.
 3. **`pyproject.toml` and `uv build`** produces a wheel in `dist/`.
 

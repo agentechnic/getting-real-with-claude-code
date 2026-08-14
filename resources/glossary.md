@@ -63,7 +63,7 @@ A program you control by typing commands in a terminal instead of clicking butto
 The black (or dark) window where you type commands. On Mac: open Spotlight (Cmd+Space), type "Terminal," press Enter. On Windows: search for "PowerShell" or "Command Prompt." If you can open one and type `ls` (Mac/Linux) or `dir` (Windows), you're ready for this workshop.
 
 **Pytest**
-A Python testing tool. It runs all your test files and tells you which pass and which fail. You run it by typing `pytest tests/` in the terminal. Green = pass. Red = fail. The failure message is what you paste back to Claude.
+A Python testing tool. It runs all your test files and tells you which pass and which fail. You run it by typing `uv run pytest tests/` in the terminal. Green = pass. Red = fail. The failure message is what you paste back to Claude.
 
 **Pydantic**
 A Python library that validates data against a schema. If Claude returns a receipt with the date in the wrong format or a negative price, Pydantic catches it before the data reaches your database. Think of it as a strict receptionist that rejects badly filled forms before they enter the filing system.

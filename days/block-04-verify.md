@@ -4,16 +4,20 @@
 **Goal:** Every attendee sees a test fail, watches Claude read the failure, and watches the test pass. This is the workshop's central beat.
 
 <!-- participant-start -->
-## Block 4 — What to do
+## Block 4 — Prove it works (the part that matters)
 
-This block makes the work real. Follow these steps in order.
+You have a tool that ran once and looked right. That is exactly what a chat-tab demo gives you, and it is not the same as *being* right. The difference is that you can't yet name what would tell you it broke.
 
-1. Run `pytest` — note which tests pass and which fail
-2. If a test fails: paste the error into Claude Code and run `/verify`
-3. Watch Claude read the failure and propose a fix — approve it
-4. Run `pytest` again — all tests should pass now
-5. Run `receipts add inbox/` twice — confirm zero new rows the second time
-6. Run `receipts export` and open `dashboard.html` in your browser — your ledger should appear
+That's what this block builds. Not more features — a signal.
+
+1. Run `uv run pytest tests/ -v`. Five checks, three files. **Exactly one will fail**, and that is on purpose — the answer key that ships with this repo is deliberately imperfect.
+2. **Read the failure before you do anything with it.** It will show a single line of difference. Don't scroll past it. Ask yourself the question the whole workshop turns on: *what is this failure telling me?* There are only two possibilities — either the report is producing a row it shouldn't, or the answer key is missing a row it should have. Decide which you think it is before you read on.
+3. Paste the failure into Claude Code **verbatim** and run `/verify`. Not a summary, not "the test is broken" — the actual text. The failure message is the brief. Paraphrasing it throws away the evidence.
+4. Watch Claude read it and propose a fix. Notice that it *asks* before regenerating the golden file, because `CLAUDE.md` tells it to. That's deliberate: **an answer key that gets rewritten whenever it disagrees with the code is not an answer key.** If you only take one habit home, take that one.
+5. Run `uv run pytest tests/ -v` again. Green. Hold on to what just happened — a spec produced code, a test produced a failure signal, the signal produced a targeted fix, and the test confirmed it. That loop is the whole job.
+6. Run `receipts add inbox/` twice more, then `receipts export`, then open `dashboard.html` in your browser. Your receipts, your ledger, your data — rendered. Nothing here called the internet.
+
+**Then try this.** Ask Claude to add a `receipts top-vendors` command — where you spent the most, ranked. One sentence of spec, `/plan`, `/implement`, then a test. Same loop, new task, five minutes. That is what you'll be doing on your own projects next week; it may as well be familiar.
 <!-- participant-end -->
 
 ## Why this block exists
@@ -38,23 +42,26 @@ This block is 15 minutes, not 5. Don't shortcut it.
 In every attendee's repo:
 
 ```bash
-pytest tests/ -v
+uv run pytest tests/ -v
 ```
 
-What's in `tests/`:
+Five checks live in three files:
 
-- `test_ledger.py` — checks that adding the ten sample receipts twice produces exactly ten rows (not twenty).
-- `test_report.py` — checks that `receipts report --month 2026-05 --format csv` matches `tests/golden/may.csv` character for character.
-- `test_schema.py` — checks that each extracted receipt contains all required fields in the right format (date as YYYY-MM-DD, amount as a positive number, currency as a 3-letter code, etc.).
+- `test_ledger.py` — the ten samples land as ten rows; running `add` a second time still leaves ten (not twenty).
+- `test_report.py` — `receipts report --month 2026-05 --format csv` matches `tests/golden/may.csv` character for character, and two runs of the same report produce identical bytes.
+- `test_schema.py` — every row that reached the ledger has the right shape: date as `YYYY-MM-DD`, a non-empty vendor, a category from the approved list, a positive amount with exactly two decimal places, a known currency.
 
-At least one will fail on the first run. That's by design — the seed `golden/may.csv` is intentionally one row short of what the ten samples should produce. The test exists to fail the first time.
+Exactly one will fail on the first run. That's by design — the seed `tests/golden/may.csv` ships one row short of what the ten samples produce. The test exists to fail the first time.
 
 ## Step 2 — Read the failure
 
 ```text
 FAILED tests/test_report.py::test_may_report_matches_golden
-AssertionError: assert csv_output == golden_content
-  - 2026-05-12,Jarir,office,189.00,SAR,sample-04.pdf
+AssertionError: report output does not match tests/golden/may.csv
+
+  Skipping 316 identical leading characters in diff
+  + 2026-05-12,Jarir,office,275.00,SAR,sample-06.txt
+    2026-05-14,Al Baik,dining,38.50,SAR,sample-07.txt
 ```
 
 Don't tell the room what's wrong. Ask:
@@ -70,7 +77,7 @@ Verbatim. Don't paraphrase. Don't summarise.
 ```text
 The test test_may_report_matches_golden is failing with this diff:
 
-  - 2026-05-12,Jarir,office,189.00,SAR,sample-04.pdf
+  + 2026-05-12,Jarir,office,275.00,SAR,sample-06.txt
 
 Investigate whether the issue is in the golden file or in our report
 output. Do not guess. Read both files. Tell me what you find, then
@@ -84,14 +91,14 @@ That last bit is the discipline. Golden files don't get "fixed" on a hunch.
 ## Step 4 — Re-run
 
 ```bash
-pytest tests/ -v
+uv run pytest tests/ -v
 ```
 
 Green. Hold the moment. This is the entire workshop in 30 seconds: structured intent produced code, a test produced a failure signal, the failure signal produced a targeted fix, the test produced a confirmation.
 
 ## The three layers of verification (talk through, 3 minutes)
 
-**Layer 1 — Deterministic golden tests.** The CSV matches the golden file or it doesn't. No human judgment. These tests never call Claude or the internet — they use pre-recorded responses stored in `tests/fixtures/`. A setup file called `conftest.py` swaps the real Claude API for these recordings before any test runs, so tests are fast, free, and produce the same result every time.
+**Layer 1 — Deterministic golden tests.** The CSV matches the golden file or it doesn't. No human judgment. These tests never call Claude or the internet — they replay pre-recorded extractions from `tests/fixtures/extractions/`, one JSON file per sample receipt. `conftest.py` sets `RECEIPTS_FIXTURE_DIR` before running the CLI, and `extract.py` honours it by reading the recording instead of calling the API. Tests are therefore fast, free, and identical on every run — on your laptop, on a plane, in six months.
 
 **Layer 2 — Schema validation.** Every receipt extraction passes through a strict format check. If Claude returns a negative price, a date in the wrong format, or a spending category that isn't in the approved list, the check rejects it before it touches the database — like a strict receptionist who won't file a form with missing or invalid fields, regardless of how confidently it was submitted.
 
@@ -105,7 +112,7 @@ Green. Hold the moment. This is the entire workshop in 30 seconds: structured in
 
 - Every attendee has watched a real test fail with a real diff.
 - Every attendee has pasted the failure into Claude and watched it diagnose.
-- Every attendee has run `pytest tests/` and seen all green.
+- Every attendee has run `uv run pytest tests/` and seen all green.
 - The three layers of verification are named and understood.
 
 [← Back to home](index.html)

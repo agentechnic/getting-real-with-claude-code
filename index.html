@@ -353,11 +353,13 @@
 <span class="term-dim">2026-05-05,Starbucks,dining,42.00,SAR,sample-03.txt</span>
 <span class="term-dim">...</span>
 
-<span class="term-cmd">$ pytest tests/ -v</span>
-<span class="term-ok">PASSED</span> <span class="term-dim">tests/test_ledger.py::test_idempotent</span>
-<span class="term-ok">PASSED</span> <span class="term-dim">tests/test_schema.py::test_extraction_schema</span>
-<span class="term-ok">PASSED</span> <span class="term-dim">tests/test_report.py::test_golden_csv</span>
-<span class="term-bold">3 passed</span> <span class="term-dim">in 0.42s</span></div>
+<span class="term-cmd">$ uv run pytest tests/ -v</span>
+<span class="term-ok">PASSED</span> <span class="term-dim">tests/test_ledger.py::test_add_ingests_all_ten_samples</span>
+<span class="term-ok">PASSED</span> <span class="term-dim">tests/test_ledger.py::test_add_is_idempotent</span>
+<span class="term-ok">PASSED</span> <span class="term-dim">tests/test_report.py::test_may_report_matches_golden</span>
+<span class="term-ok">PASSED</span> <span class="term-dim">tests/test_report.py::test_report_is_deterministic</span>
+<span class="term-ok">PASSED</span> <span class="term-dim">tests/test_schema.py::test_every_ledger_row_matches_the_schema</span>
+<span class="term-bold">5 passed</span> <span class="term-dim">in 0.71s</span></div>
       </div>
     </div>
   </section>
@@ -451,14 +453,20 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <div class="card">
         <div class="tag mb-3">Start here</div>
+        <h3 class="text-lg font-semibold mb-2">Start Here — 3 Minutes</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">Didn't get to the pre-read? This is the whole mental model in one page. Read it while you set up.</p>
+        <a href="viewer.html?file=resources/start-here.md" class="btn btn-primary">Read it</a>
+      </div>
+      <div class="card">
+        <div class="tag mb-3">Background</div>
         <h3 class="text-lg font-semibold mb-2">How Claude Code Works</h3>
-        <p class="text-fg-muted mb-4 leading-relaxed">The mental model, the three theses explained, and what a chat box can't do. Read this before the workshop.</p>
-        <a href="viewer.html?file=resources/how-claude-code-works.md" class="btn btn-primary">Read it</a>
+        <p class="text-fg-muted mb-4 leading-relaxed">The full mental model, the three theses explained, and what a chat box can't do.</p>
+        <a href="viewer.html?file=resources/how-claude-code-works.md" class="btn btn-secondary">Read it</a>
       </div>
       <div class="card">
         <div class="tag mb-3">Setup</div>
         <h3 class="text-lg font-semibold mb-2">Prerequisites</h3>
-        <p class="text-fg-muted mb-4 leading-relaxed">Claude Pro subscription, Claude Code installed, Python 3.11+, the seed repo cloned.</p>
+        <p class="text-fg-muted mb-4 leading-relaxed">Claude Pro or an API key, Claude Code installed, Python 3.11+, uv, the seed repo cloned.</p>
         <a href="viewer.html?file=resources/prerequisites.md" class="btn btn-primary">Read Prereqs</a>
       </div>
       <div class="card">
@@ -472,6 +480,12 @@
         <h3 class="text-lg font-semibold mb-2">KSA Payment Notes</h3>
         <p class="text-fg-muted mb-4 leading-relaxed">What cards work for Claude Pro from Saudi Arabia, and what to do if yours doesn't.</p>
         <a href="viewer.html?file=resources/ksa-payments.md" class="btn btn-secondary">Quick Notes</a>
+      </div>
+      <div class="card">
+        <div class="tag mb-3">Access</div>
+        <h3 class="text-lg font-semibold mb-2">Free &amp; Low-Cost Options</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">No Pro subscription? What an API key actually costs for a session, and the cheaper ways in.</p>
+        <a href="viewer.html?file=resources/free-options.md" class="btn btn-secondary">See Options</a>
       </div>
     </div>
   </section>

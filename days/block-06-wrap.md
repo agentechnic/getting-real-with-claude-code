@@ -4,12 +4,39 @@
 **Goal:** Close cleanly. Every attendee names one thing they'll do differently. The room remembers what it just built and why.
 
 <!-- participant-start -->
-## Block 6 — What to do
+## Block 6 — What you're taking home
 
-Be ready to share with the room. No prep needed.
+Be ready to share with the room — no prep needed:
 
 - What's one thing you'll do differently in your next project because of today?
 - What surprised you most about how Claude Code worked?
+
+### The four files that mattered
+
+Everything today rotated around four files. Not a model, not a prompt — four files.
+
+```
+PRD.md                      what we're building, and what we're not
+CLAUDE.md                   how this codebase prefers to work
+.claude/commands/plan.md    think before you type
+tests/test_report.py        you're not done until I'm green
+```
+
+That's the whole methodology. It transfers to anything: a script, a service, a data pipeline, work that isn't code at all. Steal it for the next thing you build.
+
+### What to do tonight, while it's still warm
+
+The gap between "that was a good workshop" and "I use this now" is about forty minutes of your own time in the next few days. Pick one:
+
+1. **Finish your track.** You wrote a starter prompt in Block 5. Run it properly — plan, implement, verify.
+2. **Point it at something of your own.** Pick a small real task you do by hand. Write a ten-line `PRD.md` and a short `CLAUDE.md` for it, then run the same loop: `/prime` → Plan Mode → `/plan` → `/implement` → test. It will feel slow the first time and fast the third.
+3. **Write one `CLAUDE.md`** for a repo you already work in. Lowest effort, highest immediate return — you'll feel it on the very next task.
+
+### If you get stuck at home
+
+Three things fix most of it, in this order: *are you in Plan Mode?*; *did you read the plan before approving it?*; *is the thing you're annoyed about actually written down in the PRD?* Almost every "Claude did the wrong thing" turns out to be one of those.
+
+Everything from today stays at this site. The blocks, the templates, the harness, the four tracks — all of it readable without a facilitator in the room.
 <!-- participant-end -->
 
 ## The shape

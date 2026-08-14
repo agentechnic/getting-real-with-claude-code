@@ -87,10 +87,15 @@
     border-radius: 0;
     font-size: inherit;
   }
+  /* Tailwind's preflight strips list markers; put them back. Attendees follow
+     these as numbered steps during the session — the numbers have to be visible. */
   .prose-doc ul, .prose-doc ol {
     margin: 1rem 0;
     padding-left: 1.5rem;
   }
+  .prose-doc ol { list-style: decimal outside; }
+  .prose-doc ul { list-style: disc outside; }
+  .prose-doc ol ol { list-style: lower-alpha outside; }
   .prose-doc li {
     margin: 0.375rem 0;
   }
@@ -265,7 +270,7 @@
   const content = document.getElementById('content');
   const isDaysFile = file && file.startsWith('days/');
   if (isDaysFile) {
-    document.body.classList.add('mode-' + (localStorage.getItem('workshopView') || 'facilitator'));
+    document.body.classList.add('mode-' + (localStorage.getItem('workshopView') || 'participant'));
   }
 
   function escapeHtml(str) {
@@ -291,7 +296,7 @@
 
   function initTabBar() {
     if (!isDaysFile || !content.querySelector('.view-participant')) return;
-    var savedMode = localStorage.getItem('workshopView') || 'facilitator';
+    var savedMode = localStorage.getItem('workshopView') || 'participant';
     var bar = document.createElement('div');
     bar.id = 'view-tabs';
     bar.className = 'view-tabs';

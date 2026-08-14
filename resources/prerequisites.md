@@ -4,9 +4,21 @@
 
 Two hours in a coffee shop is not enough time to debug a broken install. Everyone needs the four things below working *before* walking in.
 
-## 1. A paid Claude subscription
+## 1. A paid Claude plan *or* an API key
 
-The $20/month Claude Pro plan is enough for this workshop. Monthly billing is fully supported as of May 2026 — annual is optional ($17/month if you prefer to pre-pay).
+Either works. Pick one and have it working before you arrive.
+
+**Option A — Claude Pro ($20/month).** Simplest. Claude Code is included; you log in through the browser once and forget about it.
+
+**Option B — an Anthropic API key.** Pay per use. Set it in your terminal before the session:
+
+```bash
+export ANTHROPIC_API_KEY=sk-ant-...          # add to ~/.zshrc or ~/.bashrc to persist
+```
+
+Budget roughly SAR 0.40–2.00 for the whole workshop, depending on how much you build. See [free and low-cost options](free-options.md) if that's a concern.
+
+Monthly billing on Pro is fully supported as of May 2026 — annual is optional ($17/month if you prefer to pre-pay).
 
 - Subscribe at `claude.com/pricing` → pick **Pro**.
 - Claude Code is included with Pro at no extra cost.
@@ -91,11 +103,14 @@ The seed lives inside the workshop repo, in the `seed/` subfolder:
 ```bash
 git clone https://github.com/thepandanlabs/claude-code-workshop.git
 cd claude-code-workshop/seed
-uv sync          # installs dependencies — should complete in under 30 seconds
-claude /prime    # should read the PRD back to you
+uv sync                              # dependencies — under 30 seconds
+uv run pytest tests/ --collect-only  # should list five tests
+claude /prime                        # should read the PRD back to you
 ```
 
-If `/prime` reads the PRD back to you, you're ready.
+Two green signals and you're ready: `--collect-only` lists **five tests**, and `/prime` reads the PRD back to you.
+
+If `pytest` reports errors rather than listing tests, that's worth sorting out before Saturday — say so in the group. (Once you *run* the tests they will fail. That's correct and it's the exercise; don't try to fix it in advance.)
 
 The seed folder ships with:
 
@@ -103,6 +118,7 @@ The seed folder ships with:
 - `CLAUDE.md` — the codebase conventions.
 - `.claude/commands/` — the four slash commands (`/prime`, `/plan`, `/implement`, `/verify`).
 - `inbox/` — ten sample receipt files for the build.
+- `tests/` — the verification harness, pre-written, plus the recorded extractions it replays.
 - `src/receipts/` — stub source files (Claude builds the implementation during the workshop).
 - `dashboard.html` — visual viewer for the exported data.
 
@@ -120,6 +136,6 @@ Bring your phone, with mobile hotspot ready. Coffee-shop Wi-Fi is the single mos
 
 ## If something is broken the morning of the workshop
 
-Run `claude doctor` and read the output. If it doesn't fix itself, message the facilitator with the **exact** error text — not a paraphrase. Don't show up with nothing installed; the room has 6–12 people and one facilitator, and one broken laptop can swallow ten minutes.
+Run `claude doctor` and read the output. If it doesn't fix itself, message the facilitator with the **exact** error text — not a paraphrase. Don't show up with nothing installed; the room has twenty-odd people and one facilitator, and one broken laptop can swallow ten minutes.
 
 [← Back to home](index.html)

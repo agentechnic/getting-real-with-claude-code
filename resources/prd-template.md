@@ -54,7 +54,7 @@ For a fixed input folder, the output of:
 must be byte-identical across runs. This is what the test suite asserts.
 
 ## Acceptance criteria
-- [ ] `pytest tests/` is green
+- [ ] `uv run pytest tests/` is green
 - [ ] `receipts add inbox/` on the supplied ten samples produces ten rows
 - [ ] Re-running it adds zero rows and reports ten duplicates
 - [ ] `receipts report --month 2026-05 --format csv` matches `tests/golden/may.csv`

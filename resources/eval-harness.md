@@ -24,68 +24,73 @@ flowchart TD
 
 ## Layer 1 — Deterministic golden tests
 
-These tests do not call Claude. They call your CLI, which reads pre-recorded fixtures from `tests/fixtures/extractions/*.json` (JSON files are a common format for storing structured data — think a spreadsheet row saved as plain text). The Claude API is mocked out in `conftest.py` — "mocked out" means replaced with a stand-in that returns the same pre-recorded answers every time, so tests are free, instant, and produce identical results regardless of what the real model would say today.
+These tests do not call Claude. They call your CLI, which reads pre-recorded fixtures from `tests/fixtures/extractions/*.json` (JSON files are a common format for storing structured data — think a spreadsheet row saved as plain text).
+
+The swap happens through an environment variable rather than a mocking library. `conftest.py` sets `RECEIPTS_FIXTURE_DIR` before it runs the CLI, and `extract.py` checks for that variable: if it's set, read the recorded answer for this receipt; if it isn't, call Claude. One `if`, no framework. That contract is written into `CLAUDE.md`, which is why Claude honours it while building.
+
+This is the real test that ships in the seed repo:
 
 ```python
 # tests/test_report.py
-from pathlib import Path
-import subprocess
+def test_may_report_matches_golden(run_receipts, golden_may):
+    run_receipts("add", "inbox/")
+    result = run_receipts("report", "--month", "2026-05", "--format", "csv")
 
-GOLDEN = Path("tests/golden")
+    actual = result.stdout
+    assert actual == golden_may, (
+        "report output does not match tests/golden/may.csv.\n"
+        f"--- expected ({len(golden_may.splitlines())} lines) ---\n{golden_may}\n"
+        f"--- actual ({len(actual.splitlines())} lines) ---\n{actual}"
+    )
+```
 
-def test_may_report_matches_golden(tmp_path, seed_ledger):
-    """seed_ledger copies a known ledger.db into tmp_path and chdirs there."""
-    out = subprocess.run(
-        ["receipts", "report", "--month", "2026-05", "--format", "csv"],
-        capture_output=True, text=True, check=True,
-    ).stdout
-    assert out == (GOLDEN / "may.csv").read_text()
+`run_receipts` and `golden_may` are fixtures defined in `conftest.py` — `run_receipts` runs the CLI in a throwaway copy of `inbox/` with its own empty ledger and the API stubbed out, and fails the test loudly if the command exits non-zero. Note that the assertion carries its own message: when this fails at 01:28 tomorrow, the failure has to be readable by someone who has never seen pytest before.
 
-
-def test_idempotent_add(tmp_path, fresh_repo):
+```python
+# tests/test_ledger.py
+def test_add_is_idempotent(run_receipts):
     """Adding the same folder twice produces zero new rows the second time."""
-    first = subprocess.run(
-        ["receipts", "add", "inbox/"],
-        capture_output=True, text=True, check=True,
+    run_receipts("add", "inbox/")
+    second = run_receipts("add", "inbox/")
+
+    listed = run_receipts("list")
+    rows = [line for line in listed.stdout.splitlines() if line.strip()]
+    assert len(rows) == 10, (
+        f"re-running add should leave the ledger at 10 rows, found {len(rows)}. "
+        "Deduplication is keyed on the SHA-256 of the source file bytes."
     )
-    second = subprocess.run(
-        ["receipts", "add", "inbox/"],
-        capture_output=True, text=True, check=True,
-    )
-    assert "added 10" in first.stdout
-    assert "added 0" in second.stdout
-    assert "skipped 10 duplicates" in second.stdout
+    assert "10" in second.stdout and "duplicate" in second.stdout.lower()
 ```
 
 This is the "code-based grading" pattern from Anthropic's evals cookbook: *"This is by far the best grading method if you can design an eval that allows for it, as it is super fast and highly reliable."*
 
 ## Layer 2 — Schema validation
 
-Every extraction passes through a Pydantic model — Pydantic is a Python library that acts like a strict form validator: it checks that every field is present, in the right format, and within allowed values. If Claude returns malformed data (a date written the wrong way, a negative price, a made-up category), the validator rejects it before anything reaches the ledger.
+Every row that reaches the ledger has to hold its shape. If Claude returns a date written the wrong way, a negative price, or a spending category it invented on the spot, something has to reject it — however confidently it was returned.
+
+The seed does this with the standard library, no extra dependency. `tests/test_schema.py`:
 
 ```python
-# src/receipts/extract.py
-from pydantic import BaseModel, Field
-from typing import Literal
-from pathlib import Path
+CATEGORIES = {"groceries", "dining", "transport", "utilities", "office", "other"}
+ISO_DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
-class Extraction(BaseModel):
-    date: str = Field(pattern=r"^\d{4}-\d{2}-\d{2}$")
-    vendor: str
-    category: Literal[
-        "groceries", "dining", "transport", "utilities", "office", "other"
-    ]
-    amount: float = Field(ge=0)
-    currency: str = Field(pattern=r"^[A-Z]{3}$")
-    confidence: float = Field(ge=0.0, le=1.0)
+for row in rows:
+    source = row.get("source_file", "<unknown>")
 
+    assert ISO_DATE.match(row["date"]), f"{source}: date {row['date']!r} is not YYYY-MM-DD"
+    date.fromisoformat(row["date"])          # raises if the date is not a real date
 
-def extract_receipt(path: Path) -> Extraction:
-    raw = call_claude(path)                    # returns dict
-    return Extraction.model_validate(raw)      # raises on schema drift (i.e. if the model's output format changes)
+    assert row["category"] in CATEGORIES, (
+        f"{source}: category {row['category']!r} is not one of {sorted(CATEGORIES)}"
+    )
+
+    amount = float(row["amount"])
+    assert amount > 0, f"{source}: amount {amount} is not positive"
 ```
 
-Fast feedback, no human judgment required. If a new model release returns slightly different JSON, this layer catches it on the first run.
+Fast feedback, no human judgment required. If a new model release returns slightly different JSON, this layer catches it on the first run — and the failure message names the file that broke.
+
+**If you want this stricter,** the natural upgrade is [Pydantic](https://docs.pydantic.dev/) — a library that turns the same rules into a declarative model (`amount: float = Field(ge=0)`) and validates at extraction time rather than after the fact. That is a new dependency, and `CLAUDE.md` says to ask before adding one. Ask; don't let Claude add it silently.
 
 ## Layer 3 — LLM-as-judge (optional)
 
@@ -151,7 +156,7 @@ We don't run Layer 3 during the 2-hour workshop. The file ships in the repo as a
 
 ```mermaid
 flowchart LR
-    impl["Implement\nnext step"] --> test["pytest tests/"]
+    impl["Implement\nnext step"] --> test["uv run pytest tests/"]
     test -->|"red ✗"| paste["Paste failure to Claude\nverbatim — don't paraphrase"]
     paste --> fix["Claude diagnoses\nand fixes"]
     fix --> impl
@@ -162,7 +167,7 @@ flowchart LR
 The rhythm:
 
 1. **Implement** the next step from the plan.
-2. **Run** `pytest tests/`.
+2. **Run** `uv run pytest tests/`.
 3. **If red:** paste the failure verbatim into Claude (do not paraphrase, do not summarise). The failure message — called a traceback — shows exactly which line of code failed and why. Claude reads it the same way a mechanic reads an error code. Let Claude diagnose.
 4. **If green:** commit. Move to the next step.
 

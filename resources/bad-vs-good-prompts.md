@@ -47,11 +47,11 @@ each step to verify. Stop after the plan and wait for my approval.
   2. Implement `extract.py` with the schema from PRD.md.
   3. Add `tests/fixtures/extractions/` recorded outputs.
   4. Implement `ledger.py` with sha256-keyed idempotent insert.
-  5. Implement `cli.py` `add` subcommand. Run `pytest tests/test_ledger.py`.
+  5. Implement `cli.py` `add` subcommand. Run `uv run pytest tests/test_ledger.py`.
   6. Implement `report.py` with the determinism contract.
-  7. Implement `cli.py` `report` subcommand. Run `pytest tests/test_report.py`.
+  7. Implement `cli.py` `report` subcommand. Run `uv run pytest tests/test_report.py`.
   8. Implement `cli.py` `list` subcommand.
-  9. Run full `pytest tests/`. Confirm green.
+  9. Run full `uv run pytest tests/`. Confirm green.
 - Stop. Wait for your approval.
 
 *(The individual steps look technical — that's the point. The plan is Claude's detailed breakdown of what it intends to do. You don't need to understand every line to review it; you need to spot anything that's missing, in the wrong order, or wasn't in the PRD.)*

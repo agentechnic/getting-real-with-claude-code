@@ -8,7 +8,13 @@ The CLI keeps doing what it does. The agent is a separate process — built with
 
 ## Starting prompt
 
-Paste into a fresh Claude Code session in your repo, with Plan Mode on:
+**Write yours first.** You have everything you need above: what changes, and what
+"done" looks like below. Draft the prompt you'd hand Claude — what to build, what's
+out of scope, and how you'll know it worked. Then open the fold and compare. The
+one below isn't the right answer; it's a second opinion.
+
+<details>
+<summary><strong>Show a worked starting prompt</strong></summary>
 
 ```text
 Read PRD.md, CLAUDE.md, and src/receipts/extract.py.
@@ -45,6 +51,8 @@ Constraints:
 Plan first. Do not write code yet.
 ```
 
+</details>
+
 ## Milestones
 
 1. **The polling loop works end-to-end.** Drop a file in `inbox/`, watch the agent pick it up within 30 seconds, watch it appear in the ledger.
@@ -56,7 +64,7 @@ Plan first. Do not write code yet.
 - Drop three receipts in `inbox/` (two clear, one ambiguous). Walk away. Come back to find: two automatically processed, one waiting for your input, one log entry per event.
 - Answer the escalation. Confirm the third receipt enters the ledger.
 - Trigger the end-of-day summary manually. `summary.md` is human-readable, accurate, and links to the day's log entries.
-- `pytest tests/` is green. New agent tests under `tests/agent/`.
+- `uv run pytest tests/` is green. New agent tests under `tests/agent/`.
 
 ## Stack notes (current as of May 2026)
 
