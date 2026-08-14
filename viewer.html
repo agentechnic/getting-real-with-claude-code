@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Getting Real with Claude Code — Pandan Labs</title>
+<title>Do It Once, Then Never Again — Pandan Labs</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css">
@@ -243,7 +243,7 @@
   <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
     <a href="index.html" class="back-link">
       <span>←</span>
-      <span>Getting Real with Claude Code</span>
+      <span>Do It Once, Then Never Again</span>
     </a>
     <div class="text-xs text-fg-muted" style="color: hsl(0 0% 64%);">Pandan Labs</div>
   </div>
@@ -268,7 +268,7 @@
   const params = new URLSearchParams(window.location.search);
   const file = params.get('file');
   const content = document.getElementById('content');
-  const isDaysFile = file && file.startsWith('days/');
+  const isDaysFile = file && (file.startsWith('beats/') || file.startsWith('days/'));
   if (isDaysFile) {
     document.body.classList.add('mode-' + (localStorage.getItem('workshopView') || 'participant'));
   }
@@ -327,7 +327,7 @@
     if (p.indexOf('..') !== -1) return false;
     if (p.charAt(0) === '/') return false;
     if (!/\.md$/i.test(p)) return false;
-    return /^(days|resources|tracks|appendix|cheat-sheets|exercises)\//.test(p);
+    return /^(beats|days|resources|tracks|appendix|cheat-sheets|exercises)\//.test(p);
   }
 
   mermaid.initialize({

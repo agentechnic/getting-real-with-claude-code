@@ -29,7 +29,7 @@ while IFS= read -r path; do
     printf '  MISS %s\n' "$path"
     missing=$((missing + 1))
   fi
-done < <(grep -oE 'viewer\.html\?file=[^"'"'"' ]+' index.html | sed 's|viewer\.html?file=||')
+done < <(grep -hoE 'viewer\.html\?file=[^"'"'"' ]+' index.html archive.html | sed 's|viewer\.html?file=||' | sort -u)
 
 echo
 echo "checked: $checked link(s)"

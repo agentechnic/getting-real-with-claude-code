@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archive — Getting Real with Claude Code</title>
+<meta name="description" content="A 2-hour, coffee-shop workshop in Riyadh for builders moving past the chat box. Run by Pandan Labs.">
+<meta property="og:title" content="Getting Real with Claude Code">
+<meta property="og:description" content="A 2-hour workshop for builders ready to move past the chat box.">
+<meta property="og:type" content="website">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'bg-base':       '#262624',
+          'bg-card':       '#2e2e2c',
+          'bg-card-hover': '#363633',
+          'border-soft':   'hsl(240 3.7% 15.9%)',
+          'fg-base':       'hsl(0 0% 98%)',
+          'fg-muted':      'hsl(0 0% 64%)',
+          'accent':        '#D17D59',
+          'accent-hover':  '#B8674A',
+          'accent-soft':   'rgba(209, 125, 89, 0.12)',
+        },
+        fontFamily: {
+          'sans': ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+          'mono': ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+        },
+      }
+    }
+  }
+</script>
+<style>
+  body { background-color: #262624; color: hsl(0 0% 98%); }
+  /* Terminal hero box — mirrors the Claude Code welcome panel aesthetic */
+  .terminal-box {
+    border: 1px solid #D17D59;
+    border-radius: 0.25rem;
+    position: relative;
+    margin-top: 1.25rem;
+  }
+  .terminal-box-label {
+    position: absolute;
+    top: -0.65em;
+    left: 1rem;
+    background: #262624;
+    padding: 0 0.5rem;
+    color: #D17D59;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+  }
+  .terminal-panel-heading {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #D17D59;
+    margin-bottom: 0.5rem;
+  }
+  /* Left panel: bottom border on mobile only (separator div handles desktop) */
+  .terminal-panel-left { border-bottom: 1px solid #D17D59; }
+  @media (min-width: 768px) { .terminal-panel-left { border-bottom: none; } }
+  /* Full-height vertical separator between panels — desktop only */
+  .terminal-divider { display: none; }
+  @media (min-width: 768px) {
+    .terminal-divider { display: block; width: 1px; background-color: #D17D59; flex-shrink: 0; }
+  }
+  /* Font control buttons */
+  .font-btn:hover { color: #D17D59 !important; }
+  /* ASCII block art scaled to fit inside the terminal box left panel */
+  .ascii-logo-small {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    color: #D17D59;
+    white-space: pre;
+    line-height: 1.1;
+    font-size: 0.45rem;
+    font-weight: bold;
+    letter-spacing: 0;
+    opacity: 0.9;
+  }
+  @media (min-width: 640px)  { .ascii-logo-small { font-size: 0.55rem; } }
+  @media (min-width: 1024px) { .ascii-logo-small { font-size: 0.65rem; } }
+  .card {
+    background-color: #2e2e2c;
+    border: 1px solid hsl(240 3.7% 15.9%);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: all 0.15s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover {
+    background-color: #363633;
+    border-color: rgba(209, 125, 89, 0.4);
+    transform: translateY(-1px);
+  }
+  .card-accent {
+    background-color: #D17D59;
+    border: 1px solid #B8674A;
+    color: #262624;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: all 0.15s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-accent:hover {
+    background-color: #B8674A;
+    transform: translateY(-1px);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.375rem 0.875rem;
+    border-radius: 0.375rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    text-decoration: none;
+    border: 1px solid transparent;
+  }
+  .btn-primary {
+    background-color: #D17D59;
+    color: #262624;
+  }
+  .btn-primary:hover { background-color: #B8674A; }
+  .btn-secondary {
+    background-color: transparent;
+    color: hsl(0 0% 98%);
+    border-color: hsl(240 3.7% 25%);
+  }
+  .btn-secondary:hover { border-color: #D17D59; color: #D17D59; }
+  .btn-on-accent {
+    background-color: #262624;
+    color: #D17D59;
+  }
+  .btn-on-accent:hover { background-color: #1a1a18; }
+  .tag {
+    display: inline-block;
+    padding: 0.1875rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #D17D59;
+    background-color: rgba(209, 125, 89, 0.12);
+  }
+  /* Terminal output preview */
+  .term-output {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.6875rem;
+    line-height: 1.6;
+    color: hsl(0 0% 72%);
+    white-space: pre;
+  }
+  @media (min-width: 640px)  { .term-output { font-size: 0.75rem; } }
+  @media (min-width: 1024px) { .term-output { font-size: 0.8125rem; } }
+  .term-cmd  { color: #D17D59; }
+  .term-ok   { color: #7EC8A4; }
+  .term-dim  { color: hsl(0 0% 44%); }
+  .term-bold { color: hsl(0 0% 92%); font-weight: 600; }
+  .heart {
+    display: inline-block;
+    color: #D17D59;
+    transform: translateY(-1px);
+    margin: 0 0.125rem;
+  }
+  /* Push buttons to card bottom across all grid rows */
+  .card > a.btn, .card-accent > a.btn { margin-top: auto; }
+  /* Card body typography — readable at all viewport widths */
+  .card p, .card-accent p {
+    font-size: 0.9125rem;
+    line-height: 1.75;
+  }
+  .card h3, .card-accent h3 {
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+</style>
+</head>
+<body class="font-sans">
+
+<div class="max-w-6xl mx-auto px-6 py-12 md:py-16">
+
+  <header class="mb-12">
+    <a href="index.html" class="btn btn-secondary mb-8">← Back to the current workshop</a>
+    <h1 class="text-3xl font-semibold mb-3">Getting Real with Claude Code</h1>
+    <p class="text-fg-muted leading-relaxed max-w-2xl">
+      The earlier version of this workshop, run in Riyadh through 2026. Everyone built <code style="background:rgba(209,125,89,0.12);color:#E8A687;padding:0.1rem 0.35rem;border-radius:3px;font-size:0.8125rem;">receipts</code>, a Python CLI that pulls structured data out of receipt files into a SQLite ledger and emits deterministic CSV reports.
+    </p>
+    <p class="text-fg-muted leading-relaxed max-w-2xl mt-4">
+      It is kept here because it still works and because people who attended it still use it. The current workshop teaches a different move: doing the work once, then turning it into something that repeats.
+    </p>
+  </header>
+
+  <section class="mb-16">
+    <h2 class="text-2xl font-semibold mb-1">The six blocks</h2>
+    <p class="text-fg-muted text-sm mb-6">Two hours, with slack for coffee-shop reality.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="card">
+        <div class="tag mb-3">00:00 – 00:20</div>
+        <h3 class="text-lg font-semibold mb-2">Block 1 — Setup &amp; The Thesis</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">Tool check, the three claims, the bad-prompt-vs-good-prompt demo.</p>
+        <a href="viewer.html?file=days/block-01-setup-and-thesis.md" class="btn btn-secondary">Open Block</a>
+      </div>
+      <div class="card">
+        <div class="tag mb-3">00:20 – 00:40</div>
+        <h3 class="text-lg font-semibold mb-2">Block 2 — Structured Intent</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">The PRD, the CLAUDE.md, and the slash commands that read them.</p>
+        <a href="viewer.html?file=days/block-02-structured-intent.md" class="btn btn-secondary">Open Block</a>
+      </div>
+      <div class="card">
+        <div class="tag mb-3">00:40 – 01:25</div>
+        <h3 class="text-lg font-semibold mb-2">Block 3 — Plan, Build</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">Plan Mode, then the build. The longest block of the day.</p>
+        <a href="viewer.html?file=days/block-03-plan-build.md" class="btn btn-secondary">Open Block</a>
+      </div>
+      <div class="card">
+        <div class="tag mb-3">01:25 – 01:40</div>
+        <h3 class="text-lg font-semibold mb-2">Block 4 — Verify</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">A test fails, Claude reads the failure, the test passes.</p>
+        <a href="viewer.html?file=days/block-04-verify.md" class="btn btn-secondary">Open Block</a>
+      </div>
+      <div class="card">
+        <div class="tag mb-3">01:40 – 01:50</div>
+        <h3 class="text-lg font-semibold mb-2">Block 5 — Pick Your Track</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">Choose an extension track and write its starting prompt.</p>
+        <a href="viewer.html?file=days/block-05-pick-track.md" class="btn btn-secondary">Open Block</a>
+      </div>
+      <div class="card">
+        <div class="tag mb-3">01:50 – 02:00</div>
+        <h3 class="text-lg font-semibold mb-2">Block 6 — Wrap</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">The four files that mattered, and what to do tonight.</p>
+        <a href="viewer.html?file=days/block-06-wrap.md" class="btn btn-secondary">Open Block</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="text-2xl font-semibold mb-1">Extension tracks</h2>
+    <p class="text-fg-muted text-sm mb-6">Four shapes of useful, to take home.</p>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div class="card">
+        <div class="tag mb-3">Track</div>
+        <h3 class="text-lg font-semibold mb-2">Polished CLI</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">Publish it so a teammate installs it with one command.</p>
+        <a href="viewer.html?file=tracks/track-a-cli.md" class="btn btn-secondary">Open Track</a>
+      </div>
+      <div class="card">
+        <div class="tag mb-3">Track</div>
+        <h3 class="text-lg font-semibold mb-2">Web App</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">A browser interface, so nobody has to open a terminal.</p>
+        <a href="viewer.html?file=tracks/track-b-web.md" class="btn btn-secondary">Open Track</a>
+      </div>
+      <div class="card">
+        <div class="tag mb-3">Track</div>
+        <h3 class="text-lg font-semibold mb-2">Agent</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">It watches a folder and processes receipts as they land.</p>
+        <a href="viewer.html?file=tracks/track-c-agent.md" class="btn btn-secondary">Open Track</a>
+      </div>
+      <div class="card">
+        <div class="tag mb-3">Track</div>
+        <h3 class="text-lg font-semibold mb-2">MCP Server</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">Plug it into Claude Desktop and ask it about your spending.</p>
+        <a href="viewer.html?file=tracks/track-d-mcp.md" class="btn btn-secondary">Open Track</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="text-2xl font-semibold mb-1">Reference</h2>
+    <p class="text-fg-muted text-sm mb-6">Templates and notes specific to the receipts kit.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="card">
+        <div class="tag mb-3">Reference</div>
+        <h3 class="text-lg font-semibold mb-2">PRD Template</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">The one-page spec, annotated.</p>
+        <a href="viewer.html?file=resources/prd-template.md" class="btn btn-secondary">Open</a>
+      </div>
+      <div class="card">
+        <div class="tag mb-3">Reference</div>
+        <h3 class="text-lg font-semibold mb-2">Bad vs Good Prompts</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">The same request, twice, with the diff.</p>
+        <a href="viewer.html?file=resources/bad-vs-good-prompts.md" class="btn btn-secondary">Open</a>
+      </div>
+      <div class="card">
+        <div class="tag mb-3">Reference</div>
+        <h3 class="text-lg font-semibold mb-2">The Eval Harness</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">Three layers of verification in about eighty lines.</p>
+        <a href="viewer.html?file=resources/eval-harness.md" class="btn btn-secondary">Open</a>
+      </div>
+      <div class="card">
+        <div class="tag mb-3">Reference</div>
+        <h3 class="text-lg font-semibold mb-2">Seed Repository</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">The receipts starter repo and its test suite.</p>
+        <a href="viewer.html?file=resources/seed-repo.md" class="btn btn-secondary">Open</a>
+      </div>
+      <div class="card">
+        <div class="tag mb-3">Reference</div>
+        <h3 class="text-lg font-semibold mb-2">Facilitator Notes</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">Room craft for running the older format.</p>
+        <a href="viewer.html?file=resources/facilitator-notes.md" class="btn btn-secondary">Open</a>
+      </div>
+      <div class="card">
+        <div class="tag mb-3">Reference</div>
+        <h3 class="text-lg font-semibold mb-2">KSA Payment Notes</h3>
+        <p class="text-fg-muted mb-4 leading-relaxed">What cards work from Saudi Arabia.</p>
+        <a href="viewer.html?file=resources/ksa-payments.md" class="btn btn-secondary">Open</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="pt-8 text-center" style="border-top: 1px solid hsl(240 3.7% 15.9%);">
+    <p class="text-fg-muted text-sm">From Pandan Labs with <span class="heart">&hearts;</span></p>
+  </footer>
+
+</div>
+
+</body>
+</html>

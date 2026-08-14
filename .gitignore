@@ -7,6 +7,9 @@ CLAUDE.md
 !seed/.claude/
 !seed/.claude/**
 
+# The Nussaa seed ships its own CLAUDE.md — attendees need it in the clone.
+!nussaa/CLAUDE.md
+
 # macOS
 .DS_Store
 **/.DS_Store
@@ -34,3 +37,7 @@ dist/
 .env
 .venv/
 venv/
+
+# Attendees generate this during the workshop; it must not ship in the seed.
+nussaa/themes-*.md
+!nussaa/context/themes-2025-q4.md
