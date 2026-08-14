@@ -53,7 +53,24 @@ Ten minutes, demo only. Do not let anyone install anything, that is a twenty-min
 
 ### Setup before the session
 
-Have the Chrome DevTools MCP server connected and tested. Have a browser tab ready to be opened. Practise once, because a demo that fails here undercuts the argument you are making about scoped access.
+**Do this the night before, not on the morning.** A demo that fails here undercuts the exact argument you are making.
+
+```bash
+node -v                                                    # must be >= 22.12
+claude mcp add chrome-devtools -- npx -y chrome-devtools-mcp@latest
+```
+
+**The Node version is the trap.** `chrome-devtools-mcp` requires `^20.19.0 || ^22.12.0 || >=23`. Anything older fails with an engine error rather than a useful message, and it fails at the moment you run the demo, not when you install it. If `node -v` is below that, upgrade before adding the server:
+
+```bash
+mise use -g node@24     # or nvm install 24 && nvm use 24, or brew upgrade node
+```
+
+Then confirm the server is actually there. In a fresh Claude Code session, `/mcp` should list `chrome-devtools`. If it does not, the server is registered but not starting, and the cause is almost always the Node version.
+
+Rehearse the whole demo once end to end: connect, open a tab, run the search, read the result. Know how long it takes so you are not narrating dead air.
+
+**If it will not work on the day, do not improvise.** Say what the demo would have shown and move to plugins. The scoping argument survives being described; a broken terminal in front of the room does not.
 
 ### Running the MCP demo
 
