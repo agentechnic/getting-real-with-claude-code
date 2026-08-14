@@ -13,29 +13,34 @@ Now do your job: read a quarter of support tickets and tell me the themes.
 
 1. Open `nussaa/tickets-q1/` in your file browser.
 2. Copy the contents of a ticket into the chat. Then another. Then another.
-3. Keep going.
+3. Keep going for five minutes.
 
-You will stop somewhere around ticket fifteen. That is the point of this beat.
+## Before you start, predict
 
-## Before you stop, predict
+You have five minutes and two hundred tickets. Guess:
 
-You are about to hit a wall. Guess which one first:
+- How many will you get through?
+- Will the answer at the end be a count you could defend, or a summary?
 
-- Will it run out of room?
-- Will it get bored and start summarising instead of counting?
-- Will you get bored?
+Say your guess to whoever is next to you, then start.
 
-Say your guess out loud to whoever is next to you. Then keep pasting until something gives.
+## What actually stops you
+
+Not the model. These tickets are small, and a chat window would happily take all two hundred if you were willing to sit there feeding them in one at a time. Somebody probably could, in about an hour.
+
+That is the finding. **Nothing here is beyond the model. The cost is all yours.**
+
+You are the file system. You open, select, copy, switch tabs, paste, send, go back. Two hundred times, and if you lose your place you start again. Meanwhile the answer drifts from counting toward "here are some themes I'm noticing", because nothing is keeping a tally except the conversation itself.
 
 ## Name what just happened
 
-Chat did not fail because the model is weak. It is the same model you are about to use in the terminal.
+Chat did not fail because the model is weak. It is the same model you are about to use in the terminal, and it would have read every ticket you gave it.
 
 Three things were missing, and none of them are about intelligence:
 
 | | What was missing |
 |---|---|
-| **It cannot open your folder** | You were the file system. Two hundred tickets, one paste at a time. |
+| **It cannot open your folder** | You were the file system. Two hundred tickets, one paste at a time, and no way to check you got them all. |
 | **It cannot remember** | Close the tab and the work is gone. Next quarter you start from ticket one. |
 | **It cannot write anything** | Whatever it tells you, you copy back out by hand. |
 
@@ -56,7 +61,9 @@ Fifteen minutes, and the first ten are people pasting.
 
 ### Do not rescue
 
-The instinct is to shortcut this once the room looks uncomfortable. The discomfort is the lesson. A room that has personally hit the wall does not need convincing in Beat 2.
+The instinct is to shortcut this once the room looks uncomfortable. The discomfort is the lesson. A room that has personally done the copying does not need convincing in Beat 2.
+
+Call time at five minutes. Ask how many tickets people managed. That spread, usually somewhere between eight and twenty-five, is the number Beat 2 gets compared against.
 
 ### Run it on the projector too
 

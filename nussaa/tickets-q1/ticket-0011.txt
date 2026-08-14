@@ -1,4 +1,4 @@
-	Ticket: NUS-00011
+Ticket: NUS-00011
 Date: 2026-01-05
 Channel: whatsapp
 Subject: العنوان مضبوط بس التطبيق يعطيه مكان

@@ -8,7 +8,7 @@
 ## Same job, different shape
 
 ```bash
-cd claude-code-workshop/nussaa
+cd nussaa     # wherever you unzipped it
 claude
 ```
 
@@ -50,8 +50,11 @@ That file is four minutes of writing. It is doing more work than any prompt you 
 Ask it something the chat box could not answer:
 
 ```text
-How many of those tickets are in Arabic?
+How many tickets contain Arabic script? And how many are written
+entirely in Arabic?
 ```
+
+Two different numbers, and the gap between them is the code-switching. A chat window can only answer for whatever you pasted into it.
 
 It can count, because it can read. Hold on to how ordinary that felt.
 <!-- participant-end -->

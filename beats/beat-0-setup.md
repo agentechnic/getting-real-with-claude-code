@@ -21,7 +21,7 @@ cd nussaa
 ls
 ```
 
-You should see `tickets-q1`, `tickets-q2`, `context`, and a `CLAUDE.md`.
+You should see `tickets-q1`, `tickets-q2`, `context`, `CLAUDE.md` and `README.md`.
 
 (Prefer git? `git clone https://github.com/thepandanlabs/claude-code-workshop.git`
 and the same folder is inside, under `nussaa/`.)

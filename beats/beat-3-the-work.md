@@ -9,7 +9,7 @@
 
 Forty-five minutes. The longest stretch of the day, and most of it is quiet.
 
-You are writing `themes-2026-q1.md`, matching the format of last quarter's report.
+You are writing **`themes-2026-q1.md`, saved in the `nussaa/` folder itself** — not inside `context/`. That folder holds what you were given; your report is what you produce.
 
 **Four parts:** plan it, build it, read what you got, then change the spec and watch the plan change.
 
@@ -20,9 +20,9 @@ Turn on Plan Mode with **Shift+Tab twice**. The footer should say `plan mode on`
 Then ask for the work:
 
 ```text
-Read the Q1 tickets, work out the themes with exact counts, and
-write themes-2026-q1.md matching the format of last quarter's
-report in context/.
+Read the Q1 tickets and work out the themes with exact counts.
+Write the result to themes-2026-q1.md in this folder, matching the
+format of context/themes-2025-q4.md.
 ```
 
 You get a numbered plan and no file. Before you approve it, look for one thing:
@@ -53,7 +53,13 @@ You have a list of things customers complained about. Complaints have reasons. N
 
 Last part of this beat, and it is the one that transfers to your own work.
 
-Open `CLAUDE.md`. Add one line to the conventions: every theme in the report must also say whether it appeared in last quarter's report.
+Open `CLAUDE.md`. Under **Conventions**, add one line:
+
+```text
+- Every theme carries a trend against last quarter: new, up, down, or flat.
+```
+
+Read the file before you add it. There is already a rule about *new* themes, so this one is deliberately different: it asks for a comparison on every theme, including the ones that were there last time.
 
 Save it. Re-run `/plan`.
 
