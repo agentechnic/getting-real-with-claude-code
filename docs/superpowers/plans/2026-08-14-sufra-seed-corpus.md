@@ -47,6 +47,8 @@ tools/                          Authoring tools; attendees never touch these
   tests/test_safety.py          No real brands anywhere
   pyproject.toml                Dev deps for the tooling
 
+sufra-co/  → moved out: now the separate repo thepandanlabs/sufra
+
 facilitator/
   sufra-answer-key.md           The planted cluster, its release, the counts
 ```
@@ -1502,25 +1504,62 @@ Immersion, on the AWS Wild Rydes / Unicorn Rentals principle: attendees who feel
 
 Does not gate anything. Can run in parallel with Tasks 1–8.
 
-**Files:**
-- Create: `sufra-co/index.html`
-- Test: `tools/tests/test_brand_page.py`
+**This lives in a separate repository**, published on GitHub Pages, so Sufra can grow into a real web app later and eventually take its own domain without dragging the workshop repo along. Nothing about it belongs on the `workshop-v2` branch.
+
+**Repository:** `thepandanlabs/sufra` → `https://thepandanlabs.github.io/sufra/`
+
+**Files (all in the new repo):**
+- Create: `index.html`
+- Create: `README.md`
+- Create: `.nojekyll`
+- Test: `tests/test_brand_page.py`
 
 **Interfaces:**
-- Consumes: `spec.RELEASES` for the feature list.
-- Produces: a standalone page. Nothing imports it; the workshop links to it from beat 0.
+- Consumes: the release list from `tools/corpus/spec.py` in the workshop repo — copied by hand, not imported. Two repos, no coupling.
+- Produces: a public URL the workshop links to at beat 0. Nothing imports it.
+
+**Honesty requirement, non-negotiable:** this is a public site for a company that does not exist. Both the page footer and the repo README must say plainly that Sufra is fictional and made for a workshop. It must never be possible for someone landing on it cold to think it is a real service — no signup field, no fake app-store links, no fake contact details, nothing that collects input.
 
 **The one hard constraint: the address picker must not look broken.** It has to read as a sensible product decision, because that is the actual lesson — reasonable changes cause problems and only the data tells you. A mock that telegraphs the failure hands over the discovery, exactly like the Subject-line bug in Task 5.
 
-- [ ] **Step 1: Write the failing test**
+- [ ] **Step 1: Create the repository**
 
-Create `tools/tests/test_brand_page.py`:
+Confirm with the user before creating anything public.
+
+```bash
+mkdir -p ~/dev/projects/sufra && cd ~/dev/projects/sufra
+git init && git branch -M main
+touch .nojekyll
+gh repo create thepandanlabs/sufra --public --source=. \
+  --description "Sufra — a fictional Riyadh food delivery app, built for a Claude Code workshop."
+```
+
+- [ ] **Step 2: Write the failing test**
+
+Create `tests/test_brand_page.py` in the new repo:
 
 ```python
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
-PAGE = ROOT / "sufra-co" / "index.html"
+ROOT = Path(__file__).resolve().parents[1]
+PAGE = ROOT / "index.html"
+
+
+def test_page_says_plainly_that_sufra_is_fictional():
+    """A public site for a company that does not exist must say so."""
+    html = PAGE.read_text(encoding="utf-8").lower()
+    assert "fictional" in html, (
+        "someone landing here cold must not be able to mistake this for a "
+        "real service"
+    )
+
+
+def test_page_collects_nothing():
+    html = PAGE.read_text(encoding="utf-8").lower()
+    for element in ("<form", "<input", "<textarea", "mailto:"):
+        assert element not in html, (
+            f"{element} suggests a real service taking real details"
+        )
 
 
 def test_page_exists_and_is_self_contained():
@@ -1554,17 +1593,30 @@ def test_page_does_not_use_the_workshop_palette():
     assert "#D17D59" not in html, "Sufra needs its own brand, not the site's"
 ```
 
-- [ ] **Step 2: Run it to make sure it fails**
+- [ ] **Step 3: Run it to make sure it fails**
 
 ```bash
-cd tools && uv run pytest tests/test_brand_page.py -v
+cd ~/dev/projects/sufra && uv run --with pytest pytest tests/ -v
 ```
 
 Expected: FAIL — `FileNotFoundError` on `index.html`
 
-- [ ] **Step 3: Write `sufra-co/index.html`**
+- [ ] **Step 4: Design `index.html`**
 
-Own palette — deep green `#1B4332` with warm sand `#E9C46A`, nothing borrowed from the workshop. Inline SVG mark: a circle for the plate, a ring for the spread. Bilingual wordmark.
+**REQUIRED SUB-SKILL: invoke `frontend-design` before writing this page.** This is the one asset in phase 1 that is judged on how it looks. It should stand up as a real company's site — the kind of thing someone would screenshot without knowing it was made for a workshop.
+
+Design direction:
+
+- **Bilingual by construction, not translated.** Arabic and Latin share the lockup. The RTL half is laid out as RTL, not mirrored as an afterthought. Getting this right is most of what will make a Riyadh room believe it.
+- **Its own palette, deliberately far from `#D17D59`.** The reference below uses deep green and sand; take it further if something better presents itself. Warm, food-adjacent, confident. Not another orange startup.
+- **Typographic confidence over decoration.** Resist geometric-pattern clichés for Gulf brands. Strong type, generous space, restraint.
+- **The two phone mocks are the centrepiece** — English and Arabic side by side, both showing the address picker. That pairing is what beat 3 calls back to.
+- **Self-contained.** Inline SVG, inline CSS, no external anything. Tested.
+- **Motion, if any, is subtle.** A static page that feels alive beats one that performs.
+
+The block below is a **floor, not a target** — a working starting point that already passes the tests. Exceed it.
+
+The one thing that must not change: nothing on the page may hint that the address picker caused a problem. It reads as a straightforward product improvement, because that is what it looked like at the time.
 
 ```html
 <!DOCTYPE html>
@@ -1697,28 +1749,37 @@ Own palette — deep green `#1B4332` with warm sand `#E9C46A`, nothing borrowed 
 
 Note the "Pin your location" entry reads as an improvement, because that is what it was. Nothing on this page hints at what happened next.
 
-- [ ] **Step 4: Run the tests to verify they pass**
+- [ ] **Step 5: Run the tests to verify they pass**
 
 ```bash
-cd tools && uv run pytest tests/test_brand_page.py -v
+cd ~/dev/projects/sufra && uv run --with pytest pytest tests/ -v
 ```
 
-Expected: 4 passed
+Expected: all passed
 
-- [ ] **Step 5: Look at it**
+- [ ] **Step 6: Look at it, in both directions**
 
 ```bash
 python3 -m http.server 8080
 ```
 
-Open `http://localhost:8080/sufra-co/`. It should look like a company's site, not like a workshop asset. If it looks like a prop, the immersion is not doing its job.
+Open `http://localhost:8080/sufra-co/`. Check it at desktop and phone widths, and read the Arabic half as an Arabic reader would — right to left, starting top-right.
 
-- [ ] **Step 6: Commit**
+The bar: it looks like a company's site, not a workshop asset. If it reads as a prop, the immersion is not doing its job and the page is not done. Screenshot it; if you would not post that screenshot, iterate.
+
+- [ ] **Step 7: Write the README, commit, and publish**
+
+`README.md` must open by saying Sufra is fictional and why it exists.
 
 ```bash
-git add sufra-co/ tools/tests/test_brand_page.py
-git commit -m "Add the Sufra brand and product page for immersion"
+cd ~/dev/projects/sufra
+git add -A
+git commit -m "Sufra — fictional Riyadh food delivery app for the Claude Code workshop"
+git push -u origin main
+gh api -X POST repos/thepandanlabs/sufra/pages -f 'source[branch]=main' -f 'source[path]=/'
 ```
+
+Then confirm `https://thepandanlabs.github.io/sufra/` renders, and that the fictional-company notice is visible without scrolling to the very bottom.
 
 ---
 
@@ -1729,7 +1790,7 @@ git commit -m "Add the Sufra brand and product page for immersion"
 - Regenerating produces no git diff.
 - A facilitator dry run found the v4.2 correlation without coaching, and that run is written down.
 - No real company is named anywhere under `sufra/`.
-- The Sufra product page renders, is self-contained, and does not telegraph the v4.2 discovery.
+- Task 9 is tracked separately: the Sufra site lives in `thepandanlabs/sufra`, not on this branch. Phase 1 is done without it; it is done when the page is live, self-contained, says plainly that Sufra is fictional, and does not telegraph the v4.2 discovery.
 - Everything is on `workshop-v2`. Nothing is on `main`.
 
 Phase 2 (workshop content) is written against the dry-run record, not against this plan's assumptions.
