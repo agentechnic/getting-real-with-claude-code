@@ -1,14 +1,27 @@
-# Getting Real with Claude Code
+# Do It Once, Then Never Again
 
-A 2-hour, coffee-shop-friendly Claude Code workshop for builders ready to move past the chat box.
+A 3-hour Claude Code workshop. Do one piece of real work with an agent, then turn that work into a Skill that repeats, and prove it repeats by testing it in a clean context.
 
 | | |
 |---|---|
 | **Live site** | https://thepandanlabs.github.io/claude-code-workshop/ |
-| **Audience** | Mixed-skill — ex-techies, PMs, BDMs, some developers. Workshop run in English. |
-| **Anchor project** | `receipts` — a Python CLI that extracts structured data from receipt files, maintains a SQLite ledger, and emits deterministic CSV reports. |
-| **Pedagogy** | Structured intent (PRD + `CLAUDE.md` + Plan Mode) plus a small verification harness, demonstrated by experience rather than asserted. |
+| **Audience** | Mixed — students, engineers, devops, managers. No cloud or coding background assumed. English, run in Riyadh. |
+| **Anchor task** | A quarter of support tickets for **Nussaa** (نص ساعة), a fictional Riyadh food-delivery app. Find the themes, count them, and connect a spike to the release that caused it. |
+| **What they take home** | A `SKILL.md` they harvested from their own session, tested cold with a subagent, patched, and re-tested. |
 | **Run by** | Pandan Labs — Riyadh |
+
+## The material
+
+- `beats/` — the eight session pages. Each has a Participant view that teaches on its own, and a Facilitator overlay.
+- `nussaa/` — what attendees open. 320 tickets, a changelog, last quarter's report, and a `CLAUDE.md`.
+- `facilitator/` — **the answer key and a dry-run record. Read before running the session.** Deliberately not on the website.
+- `tools/` — the seeded generator and the test suite that verifies the corpus can still teach. `cd tools && uv run pytest`.
+
+## The archive
+
+The earlier workshop, *Getting Real with Claude Code*, built around a Python CLI called `receipts`, is preserved at [`archive.html`](https://thepandanlabs.github.io/claude-code-workshop/archive.html). Its blocks, tracks and eval harness all still work, and links handed to previous cohorts still resolve.
+
+It is deliberately not linked from the landing page. Attendees came for the current workshop; pointing them at an older one only raises a question they do not need.
 
 ## Running locally
 
@@ -31,38 +44,31 @@ That's it. No build step. The site is plain HTML + Tailwind via CDN + marked.js 
 
 ```
 claude-code-workshop/
-├── index.html                          # Landing page
-├── viewer.html                         # Markdown renderer (?file=path.md)
-├── README.md                           # This file
-├── days/                               # The six workshop blocks
-│   ├── block-01-setup-and-thesis.md
-│   ├── block-02-structured-intent.md
-│   ├── block-03-plan-build.md
-│   ├── block-04-verify.md
-│   ├── block-05-pick-track.md
-│   └── block-06-wrap.md
-├── resources/                          # Templates, demos, references
-│   ├── how-claude-code-works.md
-│   ├── prerequisites.md
-│   ├── seed-repo.md
-│   ├── ksa-payments.md
-│   ├── prd-template.md
-│   ├── claude-md-template.md
-│   ├── bad-vs-good-prompts.md
-│   ├── plan-mode.md
-│   ├── eval-harness.md
-│   ├── facilitator-notes.md
-│   └── further-reading.md
-├── tracks/                             # Post-workshop extension tracks
-│   ├── track-a-cli.md
-│   ├── track-b-web.md
-│   ├── track-c-agent.md
-│   └── track-d-mcp.md
-├── appendix/
-│   └── gcc-reskin.md                   # Future-workshop sketch
-├── .nojekyll                           # GitHub Pages: don't run Jekyll
+├── index.html            # Landing page — the current workshop
+├── archive.html          # The earlier workshop, unlinked from the landing page
+├── viewer.html           # Markdown renderer (?file=path.md), with the
+│                         # Participant / Facilitator tab system
+├── beats/                # The eight session pages
+│   ├── beat-0-setup.md
+│   ├── beat-1-the-wall.md
+│   ├── beat-2-the-loop.md
+│   ├── beat-3-the-work.md
+│   ├── beat-4-the-harvest.md
+│   ├── beat-5-the-proof.md
+│   ├── beat-6-scale-it.md
+│   └── beat-7-wrap.md
+├── nussaa/               # What attendees open
+│   ├── CLAUDE.md         #   the conventions; it does more work than any prompt
+│   ├── tickets-q1/       #   200 tickets, holding the planted signal
+│   ├── tickets-q2/       #   120 more, a different story, for the cold run
+│   └── context/          #   changelog + last quarter's report
+├── facilitator/          # Answer key and dry-run record. Not on the website.
+├── tools/                # Seeded corpus generator + its test suite
+├── resources/            # Prerequisites, glossary, templates, theory
+├── days/ tracks/         # Archived: the earlier workshop's material
+├── .nojekyll
 └── scripts/
-    └── verify-links.sh                 # Sanity check that all linked files exist
+    └── verify-links.sh   # Checks every viewer link in index.html and archive.html
 ```
 
 ## Deploying to GitHub Pages
@@ -96,33 +102,45 @@ Every subsequent push to `main` redeploys automatically.
 ## Updating content
 
 ```bash
-# Edit any markdown file in days/, resources/, tracks/, or appendix/
-vim resources/eval-harness.md
+# Edit any markdown file in beats/ or resources/
+vim beats/beat-3-the-work.md
 
 # Test locally
 python3 -m http.server 8080
-# Visit http://localhost:8080/viewer.html?file=resources/eval-harness.md
+# Visit http://localhost:8080/viewer.html?file=beats/beat-3-the-work.md
 
 # When happy, commit and push
-git add resources/eval-harness.md
-git commit -m "Clarify Layer 3 LLM-as-judge example"
+git add beats/beat-3-the-work.md
+git commit -m "Sharpen the planted-signal question"
 git push
 # Live in ~2 minutes
 ```
 
 Adding a new resource card to the landing page:
 
-1. Create the markdown file under the right folder (`resources/`, `tracks/`, etc.).
+1. Create the markdown file under the right folder (`beats/`, `resources/`).
 2. Open `index.html`.
 3. Find the relevant `<section>` and copy an existing card.
 4. Update the title, description, and `viewer.html?file=...` href.
 5. Test locally. Push.
 
-## Workshop materials versioning
+## Verifying the corpus before a session
 
-The current version is **v1.0 — Riyadh edition (May 2026)**.
+The workshop stands or falls on the planted signal still being findable.
 
-Future revisions should land in a sibling folder (e.g. `revisions/20260601/`) before being merged.
+```bash
+cd tools && uv run pytest -q
+```
+
+That asserts the properties the session depends on: the cluster exists and stands out against its own baseline, it appears in Arabic, English and code-switched tickets, Q2 tells a different story so a hardcoded Skill fails the cold run, and no real company is named anywhere.
+
+Regenerating is deterministic:
+
+```bash
+cd tools && uv run python -m corpus.generate
+```
+
+Same seed, byte-identical corpus. If you change `tools/corpus/spec.py`, the numbers in the facilitator answer key stop being true — rerun the suite and update them.
 
 ## Design system
 
@@ -142,7 +160,7 @@ Font stack: system fonts (`-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, 
 bash scripts/verify-links.sh
 ```
 
-Confirms every `viewer.html?file=...` link in `index.html` points to an existing markdown file.
+Confirms every `viewer.html?file=...` link in `index.html` and `archive.html` points to a markdown file that exists.
 
 ## Credits
 
