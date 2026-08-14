@@ -1,12 +1,15 @@
 # The Material
 
-Everything you work on lives in one folder. This page describes it so you know what you are looking at before the session starts.
+One folder, 108KB, no git required.
 
 ## Get it
 
+**[Download nussaa.zip](nussaa.zip)**
+
+Unzip it anywhere you like, then:
+
 ```bash
-git clone https://github.com/thepandanlabs/claude-code-workshop.git
-cd claude-code-workshop/nussaa
+cd nussaa
 ls
 ```
 
@@ -18,7 +21,18 @@ Then check Claude Code can see it:
 claude
 ```
 
-Ask it something small, like how many files are in `tickets-q1/`. If it answers 200, you are ready.
+Ask it how many files are in `tickets-q1/`. If it answers 200, you are ready.
+
+### If you would rather use git
+
+Everything is also on GitHub, and the repo carries the workshop pages as well as the material:
+
+```bash
+git clone https://github.com/thepandanlabs/claude-code-workshop.git
+cd claude-code-workshop/nussaa
+```
+
+Same folder either way. The zip is just faster and does not need git installed.
 
 ## What is in it
 

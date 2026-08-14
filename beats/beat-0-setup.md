@@ -14,15 +14,17 @@ claude --version
 claude doctor
 ```
 
-Then get the material:
+Then get the material. Download **[nussaa.zip](nussaa.zip)**, unzip it, and:
 
 ```bash
-git clone https://github.com/thepandanlabs/claude-code-workshop.git
-cd claude-code-workshop/nussaa
+cd nussaa
 ls
 ```
 
 You should see `tickets-q1`, `tickets-q2`, `context`, and a `CLAUDE.md`.
+
+(Prefer git? `git clone https://github.com/thepandanlabs/claude-code-workshop.git`
+and the same folder is inside, under `nussaa/`.)
 
 If something is red, say so now. At minute forty everyone else will be building and you will be installing.
 
@@ -60,7 +62,9 @@ Thirty minutes for setup sounds generous until two people arrive with nothing in
 
 ### Run this yourself first
 
-On a clean machine, before the session. The clone plus `ls` is the whole check. If `nussaa/` is missing files, nothing else in the day works.
+On a clean machine, before the session: download the zip, unzip, `cd nussaa`, `ls`. That is the whole check. If anything is missing, nothing else in the day works.
+
+Rebuild the download with `bash scripts/build-download.sh` after any change to the corpus. It refuses to build if the ticket counts are wrong or if facilitator material has leaked in.
 
 ### What to do with the room while you wait
 

@@ -58,17 +58,21 @@ The free claude.ai tier will not work. Claude Code needs one or the other.
 
 Saudi Arabia is supported for both, no VPN needed. If your card is declined, see the [KSA payment notes](ksa-payments.md).
 
-## 2. The material, cloned
+## 2. The material, downloaded
 
-Do this at home. Do not clone on venue wifi alongside twenty other people.
+Do this at home, not on venue wifi alongside twenty other people.
+
+**[Download nussaa.zip](nussaa.zip)** — 108KB. Unzip it anywhere.
 
 ```bash
-git clone https://github.com/thepandanlabs/claude-code-workshop.git
-cd claude-code-workshop/nussaa
+cd nussaa
 ls
 ```
 
 You should see `tickets-q1`, `tickets-q2`, `context`, and a `CLAUDE.md`.
+
+No git needed. If you would rather clone, the same folder is at
+`github.com/thepandanlabs/claude-code-workshop` under `nussaa/`.
 
 **Then check Claude can see it:**
 

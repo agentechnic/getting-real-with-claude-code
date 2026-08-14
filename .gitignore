@@ -41,3 +41,11 @@ venv/
 # Attendees generate this during the workshop; it must not ship in the seed.
 nussaa/themes-*.md
 !nussaa/context/themes-2025-q4.md
+
+# Internal working artifacts — planning docs, agent workspaces, tool caches.
+# Attendees clone or download this repo; none of this is workshop content.
+docs/
+.superpowers/
+.claude/
+tools/.venv/
+tools/uv.lock
