@@ -49,3 +49,13 @@ docs/
 .claude/
 tools/.venv/
 tools/uv.lock
+
+# Separate video work, not part of the workshop site.
+animations/
+
+# Scratch notes and drafts. Workshop markdown lives in beats/, resources/,
+# nussaa/, facilitator/ or archive/ — anything loose at the root is working
+# material and should not be committed.
+/*.md
+!/README.md
+!/DEPLOY.md

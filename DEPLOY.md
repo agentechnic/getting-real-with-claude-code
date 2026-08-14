@@ -12,7 +12,7 @@ Step-by-step. The whole flow takes about 5 minutes once you have a GitHub accoun
 
 1. Go to https://github.com/organizations/thepandanlabs/repositories/new (or your user's New Repo page).
 2. **Repository name:** `claude-code-workshop`
-3. **Description:** *Getting Real with Claude Code — a 2-hour coffee-shop workshop kit by Pandan Labs.*
+3. **Description:** *Do It Once, Then Never Again — a 3-hour Claude Code workshop kit by Pandan Labs.*
 4. **Visibility:** Public (required for free GitHub Pages).
 5. **Do NOT** initialize with a README, .gitignore, or license — this directory already has those.
 6. Click **Create repository**.
