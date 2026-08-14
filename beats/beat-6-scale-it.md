@@ -1,6 +1,7 @@
 # Beat 6 — Scale It
 
 **Duration:** 10 minutes
+
 **Goal:** Watch two demos. Understand where the agent's reach comes from, and how a Skill leaves your laptop.
 
 <!-- participant-start -->

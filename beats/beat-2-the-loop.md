@@ -1,6 +1,7 @@
 # Beat 2 — The Loop
 
 **Duration:** 20 minutes
+
 **Goal:** Same job, same folder, same model. Everyone watches it read all 200 tickets.
 
 <!-- participant-start -->
@@ -59,19 +60,29 @@ It can count, because it can read. Hold on to how ordinary that felt.
 
 Twenty minutes. Ten of it is people watching output scroll, which is fine.
 
-**Project your own terminal for the first run.** They need to see the tool calls go past, not just the answer. The visible Read calls are the whole contrast with Beat 1.
+### Project your own terminal for the first run
 
-**The beat lands at the moment the first person says "it's done".** Ask the room how long that took. Compare it to fifteen tickets pasted by hand. Do not labour it, the arithmetic does the work.
+They need to see the tool calls go past, not just the answer. The visible Read calls are the whole contrast with Beat 1.
 
-**Two things to say out loud, and only these two:**
+### Where the beat lands
+
+The moment the first person says "it's done". Ask the room how long that took. Compare it to fifteen tickets pasted by hand. Do not labour it, the arithmetic does the work.
+
+### Two things to say out loud, and only these two
 
 1. About seven minutes in: *"Notice you did not tell it the tickets were in Arabic. Something else did."* Then open `CLAUDE.md` on the projector.
 2. About fifteen minutes in: *"Everything it knows about your job is in a file you can edit. That is the whole trick."*
 
-**Expect this question:** "so is this just a chatbot with file access?" Yes, and the honest answer is that file access changes what kind of work you can hand it. Do not oversell it into something mystical.
+### Expect this question
 
-**Do not** let anyone start writing the report yet. The counts they get here will be rough and that is correct. Beat 3 is where they do it properly, with a plan they read first.
+"So is this just a chatbot with file access?" Yes, and the honest answer is that file access changes what kind of work you can hand it. Do not oversell it into something mystical.
 
-**Watch for** anyone whose first run produced a confident answer with no counts. Flag it quietly. They will need it in Beat 3 and it is a good private example of a plausible answer that is not checkable.
+### Do not let anyone start the report yet
+
+ The counts they get here will be rough and that is correct. Beat 3 is where they do it properly, with a plan they read first.
+
+### Watch for
+
+Anyone whose first run produced a confident answer with no counts. Flag it quietly. They will need it in Beat 3 and it is a good private example of a plausible answer that is not checkable.
 
 [← Back to home](index.html)

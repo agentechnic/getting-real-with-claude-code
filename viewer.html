@@ -280,11 +280,18 @@
   function renderWithAudience(md) {
     var PSTART = '<!-- participant-start -->';
     var PEND   = '<!-- participant-end -->';
-    var html = '', rest = md;
+    var html = '', rest = md, first = true;
     while (rest.length) {
       var si = rest.indexOf(PSTART);
       if (si === -1) { html += '<div class="view-facilitator">' + marked.parse(rest) + '</div>'; break; }
-      if (si > 0) html += '<div class="view-facilitator">' + marked.parse(rest.slice(0, si)) + '</div>';
+      if (si > 0) {
+        var head = marked.parse(rest.slice(0, si));
+        // Anything before the FIRST participant block is the page preamble —
+        // the title, the duration, the goal. Both audiences need it, so it is
+        // rendered unwrapped rather than hidden from participants.
+        html += first ? head : '<div class="view-facilitator">' + head + '</div>';
+      }
+      first = false;
       var after = rest.slice(si + PSTART.length);
       var ei = after.indexOf(PEND);
       if (ei === -1) { html += '<div class="view-participant">' + marked.parse(after) + '</div>'; break; }
@@ -312,13 +319,9 @@
       document.body.classList.add('mode-' + mode);
       localStorage.setItem('workshopView', mode);
       bar.querySelectorAll('.view-tab').forEach(function(b) { b.classList.toggle('active', b.dataset.view === mode); });
-      var sb = document.getElementById('sidebar');
-      if (sb) sb.style.display = mode === 'participant' ? 'none' : '';
+      buildTOC();
+      setupScrollSpy();
     });
-    if (savedMode === 'participant') {
-      var sb = document.getElementById('sidebar');
-      if (sb) sb.style.display = 'none';
-    }
   }
 
   // Whitelist: only allow files under known content dirs, .md extension, no traversal.
@@ -369,16 +372,40 @@
     return text.toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/[\s]+/g, '-');
   }
 
+  // Headings that belong to the view currently on screen. A beat page holds
+  // both the participant and facilitator copy in the DOM at once, so a TOC
+  // built from every heading lists sections the reader cannot see.
+  function visibleHeadings() {
+    const mode = document.body.classList.contains('mode-participant')
+      ? 'participant' : 'facilitator';
+    return Array.from(content.querySelectorAll('h2, h3')).filter(h => {
+      const wrap = h.closest('.view-participant, .view-facilitator');
+      if (!wrap) return true;   // outside both views, so shown in either
+      return wrap.classList.contains('view-' + mode);
+    });
+  }
+
+  let scrollSpy = null;
+
   function buildTOC() {
     const toc = document.getElementById('toc');
-    const headings = content.querySelectorAll('h2, h3');
-    if (headings.length < 2) { document.getElementById('sidebar').style.display = 'none'; return; }
+    const sidebar = document.getElementById('sidebar');
+    toc.innerHTML = '';
+
+    // Give every heading a stable id, visible or not, so anchors keep working
+    // across a tab switch.
     const seen = {};
-    headings.forEach(h => {
-      let base = slugify(h.textContent);
-      if (!base) base = 'section';
+    content.querySelectorAll('h2, h3').forEach(h => {
+      let base = slugify(h.textContent) || 'section';
       seen[base] = (seen[base] || 0) + 1;
       h.id = seen[base] > 1 ? base + '-' + seen[base] : base;
+    });
+
+    const headings = visibleHeadings();
+    if (!headings.length) { sidebar.style.display = 'none'; return; }
+    sidebar.style.display = '';
+
+    headings.forEach(h => {
       const a = document.createElement('a');
       a.href = '#' + h.id;
       a.textContent = h.textContent;
@@ -388,10 +415,10 @@
   }
 
   function setupScrollSpy() {
+    if (scrollSpy) { scrollSpy.disconnect(); scrollSpy = null; }
     const links = document.querySelectorAll('#toc a');
     if (!links.length) return;
-    const headings = content.querySelectorAll('h2, h3');
-    const observer = new IntersectionObserver(entries => {
+    scrollSpy = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           links.forEach(l => l.classList.remove('toc-active'));
@@ -400,7 +427,7 @@
         }
       });
     }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
-    headings.forEach(h => observer.observe(h));
+    visibleHeadings().forEach(h => scrollSpy.observe(h));
   }
 
   if (!isSafePath(file)) {

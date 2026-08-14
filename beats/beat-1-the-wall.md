@@ -1,6 +1,7 @@
 # Beat 1 — The Wall
 
 **Duration:** 15 minutes
+
 **Goal:** Everyone tries the job in a chat box and finds out where it stops.
 
 <!-- participant-start -->
@@ -53,19 +54,27 @@ Watch for the moment in the next beat when that difference stops being an argume
 
 Fifteen minutes, and the first ten are people pasting.
 
-**Do not rescue.** The instinct is to shortcut this once the room looks uncomfortable. The discomfort is the lesson. A room that has personally hit the wall does not need convincing in Beat 2.
+### Do not rescue
 
-**Run it on the projector too**, at your own pace, slightly behind theirs. You want to still be pasting when the first person gives up, so they see it is not their technique.
+The instinct is to shortcut this once the room looks uncomfortable. The discomfort is the lesson. A room that has personally hit the wall does not need convincing in Beat 2.
 
-**The pause that matters, about eleven minutes in.** Ask:
+### Run it on the projector too
+
+At your own pace, slightly behind theirs. You want to still be pasting when the first person gives up, so they see it is not their technique.
+
+### The pause that matters, about eleven minutes in
+
+Ask:
 
 > *"What stopped you?"*
 
 Wait. Someone says "it ran out of space". Someone else says "I got bored". Both are right. Let a third person get to "I was doing the copying", because that is the answer you want in the room and it lands harder from an attendee than from you.
 
-**If somebody points out they could upload files:** good, that person is paying attention. Agree, then ask what happens next quarter with a new folder, and whether they would trust a count they could not check. Do not treat it as an interruption. It is the same wall one step further along.
+### If somebody mentions uploading files
 
-**What to say at the end:**
+Good, that person is paying attention. Agree, then ask what happens next quarter with a new folder, and whether they would trust a count they could not check. Do not treat it as an interruption. It is the same wall one step further along.
+
+### What to say at the end
 
 > *"Nothing you just did was wrong. That is the tool working as designed. We are about to give the same model a different job description."*
 

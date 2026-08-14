@@ -1,6 +1,7 @@
 # Beat 0 — Setup
 
 **Duration:** 30 minutes
+
 **Goal:** Every laptop can run `claude` inside the `nussaa/` folder before anyone talks about anything.
 
 <!-- participant-start -->
@@ -57,14 +58,16 @@ Open `context/themes-2025-q4.md` and read it. That is last quarter's report, wri
 
 Thirty minutes for setup sounds generous until two people arrive with nothing installed.
 
-**Run this yourself on a clean machine before the session.** The clone plus `ls` is the whole check. If `nussaa/` is missing files, nothing else in the day works.
+### Run this yourself first
 
-**What to do with the room while you wait:**
+On a clean machine, before the session. The clone plus `ls` is the whole check. If `nussaa/` is missing files, nothing else in the day works.
+
+### What to do with the room while you wait
 
 - Ask who has used Claude Code before today. Never, a few times, most days. Remember the split, it tells you how hard to push in Beat 3.
 - Point people at `context/themes-2025-q4.md`. It gets them reading the material before the clock starts.
 
-**Common failures, in the order you will see them:**
+### Common failures, in the order you will see them
 
 1. `claude` not on PATH after an npm install. Fix with a user-local prefix, not `sudo`.
 2. Cloned the repo but ran `claude` from the repo root instead of `nussaa/`. The whole session assumes you are inside `nussaa/`.

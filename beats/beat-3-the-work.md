@@ -1,6 +1,7 @@
 # Beat 3 — The Work
 
 **Duration:** 45 minutes
+
 **Goal:** Everyone produces a real themes report. Someone in the room finds the thing hiding in the data.
 
 <!-- participant-start -->

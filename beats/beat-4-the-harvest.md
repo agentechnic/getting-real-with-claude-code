@@ -1,6 +1,7 @@
 # Beat 4 — The Harvest
 
 **Duration:** 30 minutes
+
 **Goal:** Everyone leaves this beat holding a Skill they did not write from scratch.
 
 <!-- participant-start -->
@@ -61,13 +62,17 @@ If it says "as discussed" or "the usual format", it is a diary entry. Make it in
 
 Thirty minutes. The first ten are fast and the last twenty are where the value is.
 
-**This is the beat nobody else teaches.** Anthropic Academy has a free course on what a Skill is. What it does not do is show you that you get one by mining a session you already ran. That is the whole differentiator, so give it room.
+### This is the beat nobody else teaches
 
-**Say the framing before they run anything:**
+Anthropic Academy has a free course on what a Skill is. What it does not do is show you that you get one by mining a session you already ran. That is the whole differentiator, so give it room.
+
+### Say the framing before they run anything
 
 > *"You are not going to write this. You already wrote it, this morning, by doing the work. We are just asking for it back."*
 
-**The harvest itself takes about four minutes.** Do not let the room stop there. A drafted Skill nobody edited is a party trick. The two hand edits are the lesson.
+### Do not stop at the harvest
+
+It takes about four minutes. Do not let the room stop there. A drafted Skill nobody edited is a party trick. The two hand edits are the lesson.
 
 ### Watch for these
 

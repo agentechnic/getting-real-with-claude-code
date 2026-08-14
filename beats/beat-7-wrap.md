@@ -1,6 +1,7 @@
 # Beat 7 — Wrap
 
 **Duration:** 5 minutes
+
 **Goal:** Everyone leaves knowing the one thing to do tonight.
 
 <!-- participant-start -->

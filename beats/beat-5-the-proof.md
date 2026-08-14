@@ -1,6 +1,7 @@
 # Beat 5 — The Proof
 
 **Duration:** 25 minutes
+
 **Goal:** The Skill gets tested by something with no memory of today, fails at something, and gets fixed.
 
 <!-- participant-start -->
