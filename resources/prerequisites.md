@@ -18,12 +18,7 @@ export ANTHROPIC_API_KEY=sk-ant-...          # add to ~/.zshrc or ~/.bashrc to p
 
 Budget roughly SAR 0.40–2.00 for the whole workshop, depending on how much you build. See [free and low-cost options](free-options.md) if that's a concern.
 
-Monthly billing on Pro is fully supported as of May 2026 — annual is optional ($17/month if you prefer to pre-pay).
-
-- Subscribe at `claude.com/pricing` → pick **Pro**.
-- Claude Code is included with Pro at no extra cost.
-- The free claude.ai plan will **not** work — Claude Code requires a subscription or API key.
-- **No subscription?** An API key costs ~SAR 0.40 per session — [see free and low-cost options](free-options.md).
+Subscribe at `claude.com/pricing` → pick **Pro**. Monthly billing is fully supported as of May 2026; annual is optional ($17/month if you prefer to pre-pay). The free claude.ai plan will **not** work — Claude Code needs a paid plan or an API key.
 
 For Saudi Arabia specifically: Anthropic officially supports Saudi Arabia for both Claude.ai and the API. No VPN needed. See the [KSA payment notes](ksa-payments.md) page if your card is declined.
 
@@ -104,11 +99,11 @@ The seed lives inside the workshop repo, in the `seed/` subfolder:
 git clone https://github.com/thepandanlabs/claude-code-workshop.git
 cd claude-code-workshop/seed
 uv sync                              # dependencies — under 30 seconds
-uv run pytest tests/ --collect-only  # should list five tests
+uv run pytest tests/ --collect-only  # should list seven tests
 claude /prime                        # should read the PRD back to you
 ```
 
-Two green signals and you're ready: `--collect-only` lists **five tests**, and `/prime` reads the PRD back to you.
+Two green signals and you're ready: `--collect-only` lists **seven tests**, and `/prime` reads the PRD back to you.
 
 If `pytest` reports errors rather than listing tests, that's worth sorting out before Saturday — say so in the group. (Once you *run* the tests they will fail. That's correct and it's the exercise; don't try to fix it in advance.)
 

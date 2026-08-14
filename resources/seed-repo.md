@@ -35,6 +35,7 @@ workshop-seed-repo/
 │   ├── test_ledger.py          # Ten rows, and idempotency (provided)
 │   ├── test_report.py          # Byte-identical CSV + determinism (provided)
 │   ├── test_schema.py          # Field-shape validation (provided)
+│   ├── test_export.py          # data.json matches dashboard.html (provided)
 │   ├── fixtures/
 │   │   └── extractions/        # Recorded JSON outputs for the ten samples
 │   │       ├── sample-01.json
@@ -66,7 +67,7 @@ uv run pytest tests/ --collect-only
 claude /prime
 ```
 
-If `uv run pytest --collect-only` lists five tests and `/prime` reads the PRD back to you, you're ready.
+If `uv run pytest --collect-only` lists seven tests and `/prime` reads the PRD back to you, you're ready.
 
 ## What's deliberately not in it
 

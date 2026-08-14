@@ -10,7 +10,7 @@ You have a tool that ran once and looked right. That is exactly what a chat-tab 
 
 That's what this block builds. Not more features — a signal.
 
-1. Run `uv run pytest tests/ -v`. Five checks, three files. **Exactly one will fail**, and that is on purpose — the answer key that ships with this repo is deliberately imperfect.
+1. Run `uv run pytest tests/ -v`. Seven checks, four files. **Exactly one will fail**, and that is on purpose — the answer key that ships with this repo is deliberately imperfect.
 2. **Read the failure before you do anything with it.** It will show a single line of difference. Don't scroll past it. Ask yourself the question the whole workshop turns on: *what is this failure telling me?* There are only two possibilities — either the report is producing a row it shouldn't, or the answer key is missing a row it should have. Decide which you think it is before you read on.
 3. Paste the failure into Claude Code **verbatim** and run `/verify`. Not a summary, not "the test is broken" — the actual text. The failure message is the brief. Paraphrasing it throws away the evidence.
 4. Watch Claude read it and propose a fix. Notice that it *asks* before regenerating the golden file, because `CLAUDE.md` tells it to. That's deliberate: **an answer key that gets rewritten whenever it disagrees with the code is not an answer key.** If you only take one habit home, take that one.
@@ -45,11 +45,12 @@ In every attendee's repo:
 uv run pytest tests/ -v
 ```
 
-Five checks live in three files:
+Seven checks live in four files:
 
 - `test_ledger.py` — the ten samples land as ten rows; running `add` a second time still leaves ten (not twenty).
 - `test_report.py` — `receipts report --month 2026-05 --format csv` matches `tests/golden/may.csv` character for character, and two runs of the same report produce identical bytes.
 - `test_schema.py` — every row that reached the ledger has the right shape: date as `YYYY-MM-DD`, a non-empty vendor, a category from the approved list, a positive amount with exactly two decimal places, a known currency.
+- `test_export.py` — `receipts export` writes a `data.json` that `dashboard.html` can actually read, with `amount` as a JSON *number*. Get that wrong and the dashboard renders an empty table with no error in the console — the worst kind of bug to hit in front of a room.
 
 Exactly one will fail on the first run. That's by design — the seed `tests/golden/may.csv` ships one row short of what the ten samples produce. The test exists to fail the first time.
 
