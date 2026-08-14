@@ -20,19 +20,29 @@ A local Python CLI that reads receipt files from a folder, extracts structured f
 - `src/receipts/extract.py` — Claude API call, JSON schema validation
 - `src/receipts/report.py`  — deterministic CSV emitter
 - `inbox/`                  — sample receipts shipped with the repo
+- `fixtures/extractions/`   — recorded extraction per sample; offline + test source
 - `tests/`                  — the verification harness; pre-written, do not weaken it
 - `dashboard.html`          — visual viewer, reads `data.json` produced by `receipts export`
 
-## Testing contract
+## Extraction contract — read this before writing `extract.py`
 
-The test suite must never call the Claude API. `extract.py` therefore checks two
-environment variables before doing any network work:
+`extract.py` decides where a receipt's fields come from, in this order:
 
-- `RECEIPTS_FIXTURE_DIR` — when set, load the extraction result for `sample-NN.txt`
-  from `<dir>/sample-NN.json` and return it directly. No API call, no network.
-- `RECEIPTS_DB` — when set, use this path for the SQLite ledger instead of `./ledger.db`.
+1. **`RECEIPTS_FIXTURE_DIR` is set** → load `<dir>/sample-NN.json` and return it.
+   No API call, no network. This is what the test suite uses.
+2. **`ANTHROPIC_API_KEY` is set** → call the Claude API for real.
+3. **Neither** → fall back to `./fixtures/extractions/sample-NN.json` and print a
+   single line to **stderr** saying it is running offline from recorded
+   extractions. Do not fail, and do not pretend it called Claude.
 
-Both are read at call time, not import time. Honour them or the harness cannot run.
+Rule 3 matters: a Claude Pro subscription runs Claude Code but does **not** grant
+API access, which is billed separately. Someone can build this tool correctly and
+still have `receipts add` fail on the last step. The fallback means everyone gets
+the same ten rows, and the tool still works when the wifi does not.
+
+`RECEIPTS_DB`, when set, replaces `./ledger.db` as the ledger path.
+
+All of these are read at call time, not import time.
 
 ## Golden files
 

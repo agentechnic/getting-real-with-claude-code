@@ -72,7 +72,7 @@ A Python library that validates data against a schema. If Claude returns a recei
 Using a second AI call to evaluate the output of the first. Instead of a human checking whether Claude assigned the right category to each receipt, you ask Claude again: "Was this category correct? PASS or FAIL." Useful for checking things that are subjective enough that a deterministic test won't work, but common enough that human review would take too long.
 
 **Fixture**
-In testing, a pre-prepared piece of data used as the input for a test. The workshop has sample receipts in `tests/fixtures/` — they stand in for real receipts so tests run without calling the live Claude API.
+In testing, a pre-prepared piece of data used as the input for a test. The workshop has sample receipts in `fixtures/extractions/` — they stand in for real receipts so tests run without calling the live Claude API.
 
 **Exit code**
 The number a program sends back to the terminal when it finishes. `0` means success. Any other number means something went wrong. Automated tools (cron jobs, CI pipelines) read exit codes to know whether to proceed or alert someone. A well-behaved CLI always returns the right exit code.

@@ -45,7 +45,7 @@ each step to verify. Stop after the plan and wait for my approval.
 - Produce a 6–10 step plan, in order:
   1. Apply `migrations/0001_init.sql` to create `ledger.db`.
   2. Implement `extract.py` with the schema from PRD.md.
-  3. Add `tests/fixtures/extractions/` recorded outputs.
+  3. Add `fixtures/extractions/` recorded outputs.
   4. Implement `ledger.py` with sha256-keyed idempotent insert.
   5. Implement `cli.py` `add` subcommand. Run `uv run pytest tests/test_ledger.py`.
   6. Implement `report.py` with the determinism contract.

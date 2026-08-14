@@ -99,11 +99,11 @@ The seed lives inside the workshop repo, in the `seed/` subfolder:
 git clone https://github.com/thepandanlabs/claude-code-workshop.git
 cd claude-code-workshop/seed
 uv sync                              # dependencies — under 30 seconds
-uv run pytest tests/ --collect-only  # should list seven tests
+uv run pytest tests/ --collect-only  # should list nine tests
 claude /prime                        # should read the PRD back to you
 ```
 
-Two green signals and you're ready: `--collect-only` lists **seven tests**, and `/prime` reads the PRD back to you.
+Two green signals and you're ready: `--collect-only` lists **nine tests**, and `/prime` reads the PRD back to you.
 
 If `pytest` reports errors rather than listing tests, that's worth sorting out before Saturday — say so in the group. (Once you *run* the tests they will fail. That's correct and it's the exercise; don't try to fix it in advance.)
 
@@ -113,7 +113,8 @@ The seed folder ships with:
 - `CLAUDE.md` — the codebase conventions.
 - `.claude/commands/` — the four slash commands (`/prime`, `/plan`, `/implement`, `/verify`).
 - `inbox/` — ten sample receipt files for the build.
-- `tests/` — the verification harness, pre-written, plus the recorded extractions it replays.
+- `tests/` — the verification harness, pre-written.
+- `fixtures/extractions/` — one recorded extraction per sample receipt; the tests replay these, and so does the tool when you have no API key.
 - `src/receipts/` — stub source files (Claude builds the implementation during the workshop).
 - `dashboard.html` — visual viewer for the exported data.
 

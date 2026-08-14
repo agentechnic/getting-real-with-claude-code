@@ -11,7 +11,7 @@ The single most important file in the workshop is `tests/test_report.py`. Everyt
 ```mermaid
 flowchart TD
     L1["Layer 1 — Golden tests\nDoes the CSV match the golden file byte for byte?\nCheap · fast · run on every change"]
-    L2["Layer 2 — Schema validation\nDoes every extraction pass the Pydantic model?\nCheap · fast · run on every extraction"]
+    L2["Layer 2 — Schema validation\nDoes every row hold the right shape?\nCheap · fast · run on every extraction"]
     L3["Layer 3 — LLM-as-judge\nIs the assigned category correct?\nSlow · costs tokens · run on significant changes only"]
     L1 --> L2 --> L3
 ```
@@ -19,14 +19,14 @@ flowchart TD
 | Layer | What it checks | Cost | When to run |
 |---|---|---|---|
 | **Layer 1 — Deterministic golden tests** | Does the CSV match the golden file byte for byte? | Cheap, fast | On every change |
-| **Layer 2 — Schema validation** | Does every extraction validate against the Pydantic model? | Cheap, fast | On every extraction |
+| **Layer 2 — Schema validation** | Does every row hold the right shape? | Cheap, fast | On every extraction |
 | **Layer 3 — LLM-as-judge** | Is the category assigned to each receipt correct? | Slow, spendy | On significant changes only |
 
 ## Layer 1 — Deterministic golden tests
 
-These tests do not call Claude. They call your CLI, which reads pre-recorded fixtures from `tests/fixtures/extractions/*.json` (JSON files are a common format for storing structured data — think a spreadsheet row saved as plain text).
+These tests do not call Claude. They call your CLI, which reads pre-recorded fixtures from `fixtures/extractions/*.json` (JSON files are a common format for storing structured data — think a spreadsheet row saved as plain text).
 
-The swap happens through an environment variable rather than a mocking library. `conftest.py` sets `RECEIPTS_FIXTURE_DIR` before it runs the CLI, and `extract.py` checks for that variable: if it's set, read the recorded answer for this receipt; if it isn't, call Claude. One `if`, no framework. That contract is written into `CLAUDE.md`, which is why Claude honours it while building.
+The swap happens through an environment variable rather than a mocking library. `conftest.py` sets `RECEIPTS_FIXTURE_DIR` before it runs the CLI, and `extract.py` checks for that variable: if it is set, read the recorded answer for this receipt. Failing that it calls Claude when an API key is available, and otherwise replays the recordings in `fixtures/extractions/` so the tool still works offline. A couple of `if`s, no framework. That contract is written into `CLAUDE.md`, which is why Claude honours it while building.
 
 This is the real test that ships in the seed repo:
 

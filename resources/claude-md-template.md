@@ -38,7 +38,7 @@ See PRD.md for the full spec — read it before planning anything.
 - Stdout is for data. Logs go to stderr.
 - Exit code 0 on success, 1 on any failure, 2 on user error (bad flag).
 - Never call Claude inside a test. Tests use recorded fixtures in
-  `tests/fixtures/extractions/*.json`.
+  `fixtures/extractions/*.json`.
 - No network calls in `ledger.py` or `report.py`. Ever.
 
 ## Determinism

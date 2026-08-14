@@ -10,7 +10,7 @@ You have a tool that ran once and looked right. That is exactly what a chat-tab 
 
 That's what this block builds. Not more features — a signal.
 
-1. Run `uv run pytest tests/ -v`. Seven checks, four files. **Exactly one will fail**, and that is on purpose — the answer key that ships with this repo is deliberately imperfect.
+1. Run `uv run pytest tests/ -v`. Nine checks, five files. **Exactly one will fail**, and that is on purpose — the answer key that ships with this repo is deliberately imperfect.
 2. **Read the failure before you do anything with it.** It will show a single line of difference. Don't scroll past it. Ask yourself the question the whole workshop turns on: *what is this failure telling me?* There are only two possibilities — either the report is producing a row it shouldn't, or the answer key is missing a row it should have. Decide which you think it is before you read on.
 3. Paste the failure into Claude Code **verbatim** and run `/verify`. Not a summary, not "the test is broken" — the actual text. The failure message is the brief. Paraphrasing it throws away the evidence.
 4. Watch Claude read it and propose a fix. Notice that it *asks* before regenerating the golden file, because `CLAUDE.md` tells it to. That's deliberate: **an answer key that gets rewritten whenever it disagrees with the code is not an answer key.** If you only take one habit home, take that one.
@@ -45,12 +45,13 @@ In every attendee's repo:
 uv run pytest tests/ -v
 ```
 
-Seven checks live in four files:
+Nine checks live in five files:
 
 - `test_ledger.py` — the ten samples land as ten rows; running `add` a second time still leaves ten (not twenty).
 - `test_report.py` — `receipts report --month 2026-05 --format csv` matches `tests/golden/may.csv` character for character, and two runs of the same report produce identical bytes.
 - `test_schema.py` — every row that reached the ledger has the right shape: date as `YYYY-MM-DD`, a non-empty vendor, a category from the approved list, a positive amount with exactly two decimal places, a known currency.
 - `test_export.py` — `receipts export` writes a `data.json` that `dashboard.html` can actually read, with `amount` as a JSON *number*. Get that wrong and the dashboard renders an empty table with no error in the console — the worst kind of bug to hit in front of a room.
+- `test_offline.py` — `receipts add` still produces ten rows with no `ANTHROPIC_API_KEY` set, and says on stderr that it's replaying recorded extractions. A Pro subscription runs Claude Code but doesn't include API access, so without this the tool would work for some of the room and not the rest.
 
 Exactly one will fail on the first run. That's by design — the seed `tests/golden/may.csv` ships one row short of what the ten samples produce. The test exists to fail the first time.
 
@@ -99,7 +100,7 @@ Green. Hold the moment. This is the entire workshop in 30 seconds: structured in
 
 ## The three layers of verification (talk through, 3 minutes)
 
-**Layer 1 — Deterministic golden tests.** The CSV matches the golden file or it doesn't. No human judgment. These tests never call Claude or the internet — they replay pre-recorded extractions from `tests/fixtures/extractions/`, one JSON file per sample receipt. `conftest.py` sets `RECEIPTS_FIXTURE_DIR` before running the CLI, and `extract.py` honours it by reading the recording instead of calling the API. Tests are therefore fast, free, and identical on every run — on your laptop, on a plane, in six months.
+**Layer 1 — Deterministic golden tests.** The CSV matches the golden file or it doesn't. No human judgment. These tests never call Claude or the internet — they replay pre-recorded extractions from `fixtures/extractions/`, one JSON file per sample receipt. `conftest.py` sets `RECEIPTS_FIXTURE_DIR` before running the CLI, and `extract.py` honours it by reading the recording instead of calling the API. Tests are therefore fast, free, and identical on every run — on your laptop, on a plane, in six months.
 
 **Layer 2 — Schema validation.** Every receipt extraction passes through a strict format check. If Claude returns a negative price, a date in the wrong format, or a spending category that isn't in the approved list, the check rejects it before it touches the database — like a strict receptionist who won't file a form with missing or invalid fields, regardless of how confidently it was submitted.
 

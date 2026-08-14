@@ -15,7 +15,7 @@ uv run pytest tests/ --collect-only
 claude /prime
 ```
 
-If `uv run pytest --collect-only` lists seven tests and `/prime` reads the PRD back to you, you're ready.
+If `uv run pytest --collect-only` lists nine tests and `/prime` reads the PRD back to you, you're ready.
 
 ## What's in here
 
@@ -23,6 +23,7 @@ If `uv run pytest --collect-only` lists seven tests and `/prime` reads the PRD b
 PRD.md          — the spec; read this first
 CLAUDE.md       — conventions and constraints
 inbox/          — 10 sample receipts in mixed formats
+fixtures/       — recorded extractions (offline mode + tests)
 src/receipts/   — stubs (empty — Claude builds this during the workshop)
 tests/          — pre-built pytest suite
 .claude/        — /prime, /plan, /implement, /verify slash commands
@@ -32,9 +33,9 @@ tests/          — pre-built pytest suite
 
 The implementation files under `src/receipts/` are intentionally empty. The workshop's central exercise is building them with Claude Code, guided by the PRD and CLAUDE.md.
 
-The test suite under `tests/` is pre-built — seven checks across four files. `pytest` will fail until the implementation is complete; that's expected.
+The test suite under `tests/` is pre-built — nine checks across five files. `pytest` will fail until the implementation is complete; that's expected.
 
 Two things about it are deliberate and shouldn't be "fixed":
 
 - `tests/golden/may.csv` is one row short of what the ten samples produce. Finding out which row, and why, is the exercise.
-- The tests never call the Claude API. `conftest.py` sets `RECEIPTS_FIXTURE_DIR`, and `extract.py` is expected to honour it by replaying `tests/fixtures/extractions/*.json` instead of calling out. `RECEIPTS_DB` likewise redirects the ledger so each test gets a clean one. Both contracts are written down in `CLAUDE.md`.
+- The tests never call the Claude API. `conftest.py` sets `RECEIPTS_FIXTURE_DIR`, and `extract.py` is expected to honour it by replaying `fixtures/extractions/*.json` instead of calling out. `RECEIPTS_DB` likewise redirects the ledger so each test gets a clean one. Both contracts are written down in `CLAUDE.md`.

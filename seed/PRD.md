@@ -15,6 +15,7 @@ A single user, on their own laptop. No multi-tenant, no auth.
 3. `receipts report --month YYYY-MM --format csv` — print a CSV with header row: `date, vendor, category, amount, currency, source_file`. Rows sorted by date ascending, then by source_file ascending.
 4. Idempotency: re-running `add` on the same folder produces zero new rows and prints "skipped N duplicates".
 5. `receipts export [--month YYYY-MM] [--output PATH]` — write matching records to a JSON file (default: `data.json` in the current directory). Consumed by `dashboard.html`.
+6. Offline extraction: when no `ANTHROPIC_API_KEY` is available, `add` replays the recorded extractions in `fixtures/extractions/` instead of failing, and says on stderr that it is doing so. See the extraction contract in `CLAUDE.md`.
 
 ## Out of scope (v0.1)
 
@@ -52,5 +53,6 @@ For a fixed input folder, the output of `receipts report --month YYYY-MM --forma
 - [ ] Re-running it adds zero rows and reports ten duplicates
 - [ ] `receipts report --month 2026-05 --format csv` prints a valid CSV to stdout
 - [ ] `--help` is informative on every subcommand
+- [ ] `receipts add inbox/` produces the same ten rows with no `ANTHROPIC_API_KEY` set, announcing offline mode on stderr
 - [ ] `receipts export` writes `data.json` with all ledger records
 - [ ] Opening `dashboard.html` in a browser after export renders all records visually

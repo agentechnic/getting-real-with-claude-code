@@ -22,6 +22,8 @@ You're about to have Claude write the whole tool. Before you do — a question: 
 **Part 3 — First proof**
 
 6. Run `receipts add inbox/`. You should see ten rows — not eleven, not nine.
+
+   *If you're on a Pro plan without an API key, you'll see a line saying it's replaying recorded extractions. That's expected — a Pro subscription runs Claude Code but doesn't include API access, so the tool falls back to answers recorded earlier. Same ten rows; the loop you're learning is identical.*
 7. Run the exact same command again. **Predict first: what should happen?** Then run it. Zero new rows, ten duplicates. That property is called idempotency, and it's the thing a chat tab cannot do for you — a chat has no memory of the receipt you pasted last Tuesday.
 8. Run `receipts list`. Do the records look right? You know this data — you can read a receipt.
 
