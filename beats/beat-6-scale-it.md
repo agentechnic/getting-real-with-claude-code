@@ -66,17 +66,23 @@ claude mcp add chrome-devtools -- npx -y chrome-devtools-mcp@latest
 mise use -g node@24     # or nvm install 24 && nvm use 24, or brew upgrade node
 ```
 
-**If you use a version manager, pin the server's PATH rather than relying on it.** `claude mcp add` registers a bare `npx` with an empty environment, so the server inherits whatever Node your shell resolves — which with mise, nvm or asdf may not be the one you think:
+Then confirm it. **Restart Claude Code — do not just reload.** MCP servers start when the session does, so a plugin reload registers the server without ever launching it. In the fresh session, `/mcp` should list `chrome-devtools` and its tools should be callable.
+
+**The failure to recognise: registered, count went up, no tools.** That means the server is starting and exiting immediately, and the cause is almost always Node.
+
+A long-running session is the usual culprit, and it is not your machine's fault. `claude mcp add` writes a bare `npx` with an empty environment, so the server inherits the PATH of the process that launched it — which for a Claude Code session opened days ago may be a Node your version manager has long since moved on from. Check inside the session rather than in a new terminal:
+
+```bash
+node -v     # run this from within Claude Code, not a fresh shell
+```
+
+If that disagrees with a fresh terminal, restart and the problem goes with it. If your shell genuinely resolves an old Node, pin the server instead of chasing it:
 
 ```bash
 claude mcp add chrome-devtools \
   --env PATH="/opt/homebrew/opt/node/bin:$PATH" \
   -- npx -y chrome-devtools-mcp@latest
 ```
-
-Then confirm it. **Restart Claude Code first** — MCP servers load at session start, so a reload will not pick up a new one. In the fresh session, `/mcp` should list `chrome-devtools` and its tools should be callable.
-
-The failure mode to recognise: the server appears registered, the plugin count goes up, and no tools ever arrive. That means it is starting and exiting, and the cause is almost always Node.
 
 Rehearse the whole demo once end to end: connect, open a tab, run the search, read the result. Know how long it takes so you are not narrating dead air.
 
