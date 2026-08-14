@@ -75,7 +75,9 @@ Ask:
 
 > *"What stopped you?"*
 
-Wait. Someone says "it ran out of space". Someone else says "I got bored". Both are right. Let a third person get to "I was doing the copying", because that is the answer you want in the room and it lands harder from an attendee than from you.
+Wait. Someone says "I got bored". Someone else says "I lost count". Let a third person get to "I was doing the copying", because that is the answer you want and it lands harder from an attendee than from you.
+
+**If somebody says it ran out of space, correct it.** It did not. The whole quarter is 38KB and fifteen tickets is under 3KB, so nothing here strains a chat window. Claiming otherwise sets up something the room can disprove in thirty seconds, and the true answer is better: the model would have read all two hundred. The cost was yours.
 
 ### If somebody mentions uploading files
 

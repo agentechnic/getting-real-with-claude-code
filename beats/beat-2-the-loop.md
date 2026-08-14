@@ -82,7 +82,7 @@ The moment the first person says "it's done". Ask the room how long that took. C
 
 ### Do not let anyone start the report yet
 
- The counts they get here will be rough and that is correct. Beat 3 is where they do it properly, with a plan they read first.
+The counts they get here will be rough and that is correct. Beat 3 is where they do it properly, with a plan they read first.
 
 ### Watch for
 
