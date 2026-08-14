@@ -65,7 +65,10 @@ claude-code-workshop/
 ├── facilitator/          # Answer key and dry-run record. Not on the website.
 ├── tools/                # Seeded corpus generator + its test suite
 ├── resources/            # Prerequisites, glossary, templates, theory
-├── days/ tracks/         # Archived: the earlier workshop's material
+├── archive/              # The earlier workshop, out of the way
+│   ├── days/ tracks/     #   its blocks and extension tracks
+│   ├── seed/             #   the receipts starter repo
+│   └── resources/        #   its templates and eval harness
 ├── .nojekyll
 └── scripts/
     └── verify-links.sh   # Checks every viewer link in index.html and archive.html

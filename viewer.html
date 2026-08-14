@@ -330,7 +330,7 @@
     if (p.indexOf('..') !== -1) return false;
     if (p.charAt(0) === '/') return false;
     if (!/\.md$/i.test(p)) return false;
-    return /^(beats|days|resources|tracks|appendix|cheat-sheets|exercises)\//.test(p);
+    return /^(beats|archive|days|resources|tracks|appendix|cheat-sheets|exercises)\//.test(p);
   }
 
   mermaid.initialize({
@@ -436,7 +436,15 @@
       <p>This viewer renders markdown content from the workshop. Head back to the <a href="index.html">workshop home</a> and pick a card.</p>
     `;
   } else {
+    // Links handed to earlier cohorts point at days/, tracks/ and appendix/,
+    // which now live under archive/. Fall back rather than 404 on them.
+    const ARCHIVED = /^(days|tracks|appendix)\//;
     fetch(file)
+      .then(r => {
+        if (r.ok) return r;
+        if (ARCHIVED.test(file)) return fetch('archive/' + file);
+        return r;
+      })
       .then(r => {
         if (!r.ok) throw new Error(r.status + ' ' + r.statusText);
         return r.text();

@@ -1,6 +1,6 @@
 # The Seed Repository
 
-The seed is the starting point for the workshop's build block. Everyone clones the workshop repo and navigates into the `seed/` subfolder — no separate repo to clone.
+The seed is the starting point for the workshop's build block. Everyone clones the workshop repo and navigates into the `archive/seed/` subfolder — no separate repo to clone.
 
 ## What's in it
 
@@ -50,7 +50,7 @@ workshop-seed-repo/
 
 ```bash
 git clone https://github.com/thepandanlabs/claude-code-workshop.git
-cd claude-code-workshop/seed
+cd claude-code-workshop/archive/seed
 ```
 
 ## How to confirm it's healthy
