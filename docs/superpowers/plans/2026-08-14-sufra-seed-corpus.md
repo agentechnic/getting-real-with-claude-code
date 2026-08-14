@@ -1496,6 +1496,232 @@ git commit -m "Record the Sufra corpus dry run"
 
 ---
 
+### Task 9: Sufra brand and product page
+
+Immersion, on the AWS Wild Rydes / Unicorn Rentals principle: attendees who feel like Sufra's support lead notice more than attendees doing an exercise. It also gives beat 3's discovery something to look at — reading 23 complaints is analytical, reading them *after seeing the screen that caused them* is visceral.
+
+Does not gate anything. Can run in parallel with Tasks 1–8.
+
+**Files:**
+- Create: `sufra-co/index.html`
+- Test: `tools/tests/test_brand_page.py`
+
+**Interfaces:**
+- Consumes: `spec.RELEASES` for the feature list.
+- Produces: a standalone page. Nothing imports it; the workshop links to it from beat 0.
+
+**The one hard constraint: the address picker must not look broken.** It has to read as a sensible product decision, because that is the actual lesson — reasonable changes cause problems and only the data tells you. A mock that telegraphs the failure hands over the discovery, exactly like the Subject-line bug in Task 5.
+
+- [ ] **Step 1: Write the failing test**
+
+Create `tools/tests/test_brand_page.py`:
+
+```python
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+PAGE = ROOT / "sufra-co" / "index.html"
+
+
+def test_page_exists_and_is_self_contained():
+    html = PAGE.read_text(encoding="utf-8")
+    assert "<svg" in html, "logo should be inline SVG — no external assets"
+    for external in ("http://", "https://", "cdn."):
+        assert external not in html, (
+            "the brand page must work offline like everything else"
+        )
+
+
+def test_page_is_bilingual():
+    html = PAGE.read_text(encoding="utf-8")
+    assert "سفرة" in html
+    assert 'lang="ar"' in html or 'dir="rtl"' in html
+
+
+def test_address_picker_is_not_described_as_broken():
+    """The discovery must stay discoverable."""
+    html = PAGE.read_text(encoding="utf-8").lower()
+    for giveaway in ("broken", "bug", "issue", "problem", "sorry",
+                     "known", "outage", "complaint"):
+        assert giveaway not in html, (
+            f"the product page says {giveaway!r} — that gives away beat 3"
+        )
+
+
+def test_page_does_not_use_the_workshop_palette():
+    """Sufra is a company, not workshop chrome."""
+    html = PAGE.read_text(encoding="utf-8").upper()
+    assert "#D17D59" not in html, "Sufra needs its own brand, not the site's"
+```
+
+- [ ] **Step 2: Run it to make sure it fails**
+
+```bash
+cd tools && uv run pytest tests/test_brand_page.py -v
+```
+
+Expected: FAIL — `FileNotFoundError` on `index.html`
+
+- [ ] **Step 3: Write `sufra-co/index.html`**
+
+Own palette — deep green `#1B4332` with warm sand `#E9C46A`, nothing borrowed from the workshop. Inline SVG mark: a circle for the plate, a ring for the spread. Bilingual wordmark.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sufra — سفرة</title>
+<style>
+  :root {
+    --green: #1B4332; --green-light: #2D6A4F; --sand: #E9C46A;
+    --cream: #FDFBF7; --ink: #1A1A18; --muted: #6B7280;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--cream); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+  }
+  header {
+    background: var(--green); color: var(--cream);
+    padding: 1.25rem 2rem; display: flex; align-items: center; gap: 0.75rem;
+  }
+  .wordmark { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
+  .wordmark-ar { font-size: 1.25rem; opacity: 0.75; }
+  .hero { padding: 4rem 2rem; max-width: 60rem; margin: 0 auto; text-align: center; }
+  .hero h1 { font-size: 2.5rem; margin: 0 0 0.75rem; letter-spacing: -0.03em; }
+  .hero p { font-size: 1.15rem; color: var(--muted); margin: 0 auto; max-width: 34rem; }
+  .phones {
+    display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
+    padding: 2rem; max-width: 60rem; margin: 0 auto;
+  }
+  .phone {
+    width: 15rem; border: 1px solid #E5E0D8; border-radius: 1.5rem;
+    background: #fff; padding: 1rem; box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+  .phone h3 { font-size: 0.8125rem; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--muted); margin: 0 0 0.75rem; }
+  .map {
+    height: 8rem; border-radius: 0.75rem; position: relative;
+    background:
+      repeating-linear-gradient(0deg, #EDF2EE 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(90deg, #EDF2EE 0 1px, transparent 1px 28px),
+      #F6F8F6;
+  }
+  .pin {
+    position: absolute; left: 50%; top: 46%; width: 14px; height: 14px;
+    margin: -7px 0 0 -7px; border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg); background: var(--green);
+  }
+  .field {
+    margin-top: 0.75rem; border: 1px solid #E5E0D8; border-radius: 0.5rem;
+    padding: 0.5rem 0.625rem; font-size: 0.8125rem; color: var(--ink);
+  }
+  .field span { display: block; font-size: 0.6875rem; color: var(--muted); }
+  .btn {
+    margin-top: 0.75rem; background: var(--green); color: var(--cream);
+    border-radius: 0.5rem; padding: 0.5rem; text-align: center;
+    font-size: 0.8125rem; font-weight: 600;
+  }
+  .rtl { direction: rtl; text-align: right; }
+  section.notes { max-width: 42rem; margin: 0 auto; padding: 2rem; }
+  section.notes h2 { font-size: 1.125rem; }
+  .rel { border-left: 3px solid var(--sand); padding-left: 1rem; margin: 1rem 0; }
+  .rel strong { display: block; }
+  .rel span { color: var(--muted); font-size: 0.875rem; }
+  footer { padding: 2rem; text-align: center; color: var(--muted); font-size: 0.8125rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <svg width="32" height="32" viewBox="0 0 32 32" aria-label="Sufra">
+    <circle cx="16" cy="16" r="14" fill="none" stroke="#E9C46A" stroke-width="1.5"/>
+    <circle cx="16" cy="16" r="7" fill="#E9C46A"/>
+  </svg>
+  <span class="wordmark">sufra</span>
+  <span class="wordmark-ar" lang="ar" dir="rtl">سفرة</span>
+</header>
+
+<div class="hero">
+  <h1>Dinner, on its way.</h1>
+  <p>Order from the restaurants near you across Riyadh, Jeddah and Dammam.
+     Track it to your door.</p>
+</div>
+
+<div class="phones">
+  <div class="phone">
+    <h3>Set your address</h3>
+    <div class="map"><div class="pin"></div></div>
+    <div class="field"><span>Delivering to</span>An Narjis, Riyadh</div>
+    <div class="btn">Confirm location</div>
+  </div>
+
+  <div class="phone rtl" lang="ar" dir="rtl">
+    <h3>حدد موقعك</h3>
+    <div class="map"><div class="pin"></div></div>
+    <div class="field"><span>التوصيل إلى</span>النرجس، الرياض</div>
+    <div class="btn">تأكيد الموقع</div>
+  </div>
+</div>
+
+<section class="notes">
+  <h2>What's new</h2>
+
+  <div class="rel">
+    <strong>Group orders</strong>
+    <span>Everyone adds to one basket. Split it however you like.</span>
+  </div>
+  <div class="rel">
+    <strong>Faster checkout</strong>
+    <span>Card payments move to our new processor.</span>
+  </div>
+  <div class="rel">
+    <strong>Pin your location</strong>
+    <span>Drop a pin on the map instead of typing your address. Your saved
+          addresses come across automatically.</span>
+  </div>
+  <div class="rel">
+    <strong>Loyalty at checkout</strong>
+    <span>See your points before you pay.</span>
+  </div>
+</section>
+
+<footer>Sufra is a fictional company, invented for a workshop.</footer>
+
+</body>
+</html>
+```
+
+Note the "Pin your location" entry reads as an improvement, because that is what it was. Nothing on this page hints at what happened next.
+
+- [ ] **Step 4: Run the tests to verify they pass**
+
+```bash
+cd tools && uv run pytest tests/test_brand_page.py -v
+```
+
+Expected: 4 passed
+
+- [ ] **Step 5: Look at it**
+
+```bash
+python3 -m http.server 8080
+```
+
+Open `http://localhost:8080/sufra-co/`. It should look like a company's site, not like a workshop asset. If it looks like a prop, the immersion is not doing its job.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add sufra-co/ tools/tests/test_brand_page.py
+git commit -m "Add the Sufra brand and product page for immersion"
+```
+
+---
+
 ## Definition of done for phase 1
 
 - `cd tools && uv run pytest -v` passes in full.
@@ -1503,6 +1729,7 @@ git commit -m "Record the Sufra corpus dry run"
 - Regenerating produces no git diff.
 - A facilitator dry run found the v4.2 correlation without coaching, and that run is written down.
 - No real company is named anywhere under `sufra/`.
+- The Sufra product page renders, is self-contained, and does not telegraph the v4.2 discovery.
 - Everything is on `workshop-v2`. Nothing is on `main`.
 
 Phase 2 (workshop content) is written against the dry-run record, not against this plan's assumptions.
