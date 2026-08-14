@@ -1,16 +1,18 @@
 # Beat 3 — The Work
 
-**Time:** 12:05 – 12:50
+**Duration:** 45 minutes
 **Goal:** Everyone produces a real themes report. Someone in the room finds the thing hiding in the data.
 
 <!-- participant-start -->
 ## The actual job
 
-Forty-five minutes. This is the longest stretch of the day and most of it is quiet.
+Forty-five minutes. The longest stretch of the day, and most of it is quiet.
 
 You are writing `themes-2026-q1.md`, matching the format of last quarter's report.
 
-### Plan before you build
+**Four parts:** plan it, build it, read what you got, then change the spec and watch the plan change.
+
+### 1. Plan before you build
 
 Turn on Plan Mode with **Shift+Tab twice**. The footer should say `plan mode on`. Claude now cannot edit or run anything. It can only read, search, and write you a plan.
 
@@ -28,13 +30,13 @@ You get a numbered plan and no file. Before you approve it, look for one thing:
 
 Approve when the plan says what you meant. Then Shift+Tab back out and let it run.
 
-### While it works
+### 2. While it works
 
 Read the diffs going past. You do not need to read every line. You are looking for anything that does not belong.
 
 If it starts doing the wrong thing, resist arguing with it. Open `CLAUDE.md`, fix the rule, re-plan. The file wins.
 
-## Read your own report
+### 3. Read your own report
 
 When it finishes, read what you produced. Then answer these, out loud if someone is next to you:
 
@@ -46,7 +48,7 @@ Sit with the third one.
 
 You have a list of things customers complained about. Complaints have reasons. Nothing in `tickets-q1/` tells you the reason, because customers do not know it either. Something else in that folder might.
 
-## Now change the spec, not the code
+### 4. Change the spec, not the code
 
 Last part of this beat, and it is the one that transfers to your own work.
 
@@ -93,8 +95,8 @@ What matters is that the report finds the theme, states a count the attendee can
 
 ### Two things to call out from the front
 
-- Around 12:25: *"Notice how short your prompts have got. You stopped engineering them somewhere around minute ten."*
-- Around 12:40: *"If it is doing the wrong thing right now, the file is wrong. Fix the file."*
+- About twenty minutes in: *"Notice how short your prompts have got. You stopped engineering them somewhere around minute ten."*
+- About thirty-five minutes in: *"If it is doing the wrong thing right now, the file is wrong. Fix the file."*
 
 ### When someone is stuck
 

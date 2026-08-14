@@ -1,6 +1,6 @@
 # Beat 2 — The Loop
 
-**Time:** 11:45 – 12:05
+**Duration:** 20 minutes
 **Goal:** Same job, same folder, same model. Everyone watches it read all 200 tickets.
 
 <!-- participant-start -->
@@ -20,17 +20,17 @@ themes are. Give me a count for each one.
 
 Watch what it does before you read what it says. It opens the folder. It reads files. You are not pasting anything.
 
-## What just happened, in three parts
+## What just happened
 
 Claude Code runs a loop, and the loop is the whole product:
 
-**It reads context.** Your message, plus `CLAUDE.md`, plus any file it has opened. This happens on every turn, not once at the start.
+1. **It reads context.** Your message, plus `CLAUDE.md`, plus any file it has opened.
+2. **It acts through tools.** Read a file, search a folder, run a command, write a file. You see each one before it happens.
+3. **It stops for you.** Then round again.
 
-**It acts through tools.** Read a file, search a folder, run a command, write a file. You see each one before it happens.
+### The part people miss
 
-**It stops for you.** Then the loop goes round again.
-
-The part people miss is that first box running every single turn. Which gives you the one habit worth taking home:
+Step 1 runs on *every single turn*, not once at the start. Which gives you the one habit worth taking home:
 
 > **You steer it by editing files, not by arguing in chat.**
 
@@ -65,8 +65,8 @@ Twenty minutes. Ten of it is people watching output scroll, which is fine.
 
 **Two things to say out loud, and only these two:**
 
-1. Around 11:52: *"Notice you did not tell it the tickets were in Arabic. Something else did."* Then open `CLAUDE.md` on the projector.
-2. Around 12:00: *"Everything it knows about your job is in a file you can edit. That is the whole trick."*
+1. About seven minutes in: *"Notice you did not tell it the tickets were in Arabic. Something else did."* Then open `CLAUDE.md` on the projector.
+2. About fifteen minutes in: *"Everything it knows about your job is in a file you can edit. That is the whole trick."*
 
 **Expect this question:** "so is this just a chatbot with file access?" Yes, and the honest answer is that file access changes what kind of work you can hand it. Do not oversell it into something mystical.
 

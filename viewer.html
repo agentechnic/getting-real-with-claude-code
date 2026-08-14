@@ -301,8 +301,8 @@
     bar.id = 'view-tabs';
     bar.className = 'view-tabs';
     bar.innerHTML =
-      '<button class="view-tab' + (savedMode === 'facilitator' ? ' active' : '') + '" data-view="facilitator">Facilitator</button>' +
-      '<button class="view-tab' + (savedMode === 'participant' ? ' active' : '') + '" data-view="participant">Participant</button>';
+      '<button class="view-tab' + (savedMode === 'participant' ? ' active' : '') + '" data-view="participant">Participant</button>' +
+      '<button class="view-tab' + (savedMode === 'facilitator' ? ' active' : '') + '" data-view="facilitator">Facilitator</button>';
     content.parentNode.insertBefore(bar, content);
     bar.addEventListener('click', function(e) {
       var btn = e.target.closest('[data-view]');

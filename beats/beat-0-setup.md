@@ -1,6 +1,6 @@
 # Beat 0 — Setup
 
-**Time:** 11:00 – 11:30
+**Duration:** 30 minutes
 **Goal:** Every laptop can run `claude` inside the `nussaa/` folder before anyone talks about anything.
 
 <!-- participant-start -->
@@ -50,12 +50,12 @@ Nussaa is not a real company. Nobody was harmed in the making of these complaint
 
 ## While you wait
 
-Open `context/themes-2025-q4.md` and read it. That is last quarter's report, written by whoever had your job before you. You will be matching its format later, so knowing what it looks like now saves you ten minutes at 12:30.
+Open `context/themes-2025-q4.md` and read it. That is last quarter's report, written by whoever had your job before you. You will be matching its format later, so knowing what it looks like now saves you ten minutes in the middle of the day.
 <!-- participant-end -->
 
 ## Facilitator
 
-Thirty minutes for setup sounds generous until two people arrive with no Python.
+Thirty minutes for setup sounds generous until two people arrive with nothing installed.
 
 **Run this yourself on a clean machine before the session.** The clone plus `ls` is the whole check. If `nussaa/` is missing files, nothing else in the day works.
 
@@ -69,6 +69,8 @@ Thirty minutes for setup sounds generous until two people arrive with no Python.
 1. `claude` not on PATH after an npm install. Fix with a user-local prefix, not `sudo`.
 2. Cloned the repo but ran `claude` from the repo root instead of `nussaa/`. The whole session assumes you are inside `nussaa/`.
 3. No paid plan and no API key. Pair them with a neighbour and sort it at the break.
+
+Nobody needs Python today. If somebody starts installing it because they assumed a workshop means code, stop them.
 
 **Do not** start Beat 1 for latecomers. Hand them a neighbour and carry on.
 

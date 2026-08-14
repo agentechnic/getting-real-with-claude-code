@@ -1,10 +1,12 @@
 # Beat 5 — The Proof
 
-**Time:** 13:20 – 13:45
+**Duration:** 25 minutes
 **Goal:** The Skill gets tested by something with no memory of today, fails at something, and gets fixed.
 
 <!-- participant-start -->
 ## You believe your Skill works. Prove it.
+
+**Three steps:** send a subagent at it cold, read what it struggled with, patch and re-run.
 
 You have a `SKILL.md` that reads well. So did everyone else's.
 
@@ -12,7 +14,7 @@ The problem is that you cannot test it yourself. You know what you meant. You we
 
 You need someone with no memory of today to try it. That is what a **subagent** is: a separate Claude session with its own context window, which knows nothing about your session.
 
-## Send it in cold
+### 1. Send it in cold
 
 There is a second batch of tickets in the folder you have not touched. Point a subagent at it:
 
@@ -25,7 +27,7 @@ and what it wished the Skill had said.
 
 That last sentence is the whole beat. You are not asking whether it produced a report. You are asking **what it had to guess**.
 
-## Read the complaint, not the output
+### 2. Read the complaint, not the output
 
 The subagent comes back with a report and a list of friction. The friction is the valuable half.
 
@@ -38,7 +40,7 @@ Expect things like:
 
 Every one of those is a sentence missing from your `SKILL.md`. Not a failure of the subagent.
 
-## Patch and run again
+### 3. Patch and run again
 
 Fix the two or three that matter. Be specific. "Be clearer about counting" is not a fix. "A ticket raising several issues counts once, under its dominant one" is a fix.
 
@@ -75,7 +77,7 @@ Some attendees will not have used a subagent before. Introduce it in one sentenc
 
 Do not lecture on context windows. Nobody needs the architecture to get the point.
 
-### The pause, around 13:32
+### The pause, about twelve minutes in
 
 When the first subagent reports back, ask:
 

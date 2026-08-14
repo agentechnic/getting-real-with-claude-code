@@ -1,6 +1,6 @@
 # Beat 1 — The Wall
 
-**Time:** 11:30 – 11:45
+**Duration:** 15 minutes
 **Goal:** Everyone tries the job in a chat box and finds out where it stops.
 
 <!-- participant-start -->
@@ -28,15 +28,19 @@ Say your guess out loud to whoever is next to you. Then keep pasting until somet
 
 ## Name what just happened
 
-Chat did not fail because the model is weak. It is the same model you are about to use in the terminal. Three things were missing, and none of them are about intelligence:
+Chat did not fail because the model is weak. It is the same model you are about to use in the terminal.
 
-**It cannot open your folder.** You had to be the file system. Two hundred tickets, one paste at a time, and you are the bottleneck.
+Three things were missing, and none of them are about intelligence:
 
-**It cannot remember.** Close the tab and the work is gone. Next quarter you start from ticket one.
+| | What was missing |
+|---|---|
+| **It cannot open your folder** | You were the file system. Two hundred tickets, one paste at a time. |
+| **It cannot remember** | Close the tab and the work is gone. Next quarter you start from ticket one. |
+| **It cannot write anything** | Whatever it tells you, you copy back out by hand. |
 
-**It cannot write anything.** Whatever it tells you, you copy back out by hand into a document you make yourself.
+Read those again and notice they are the same complaint three times.
 
-Read those again and notice they are all the same complaint. The chat box can think about your work. It cannot touch it.
+> The chat box can think about your work. It cannot touch it.
 
 ## The question worth carrying
 
@@ -53,7 +57,7 @@ Fifteen minutes, and the first ten are people pasting.
 
 **Run it on the projector too**, at your own pace, slightly behind theirs. You want to still be pasting when the first person gives up, so they see it is not their technique.
 
-**The pause that matters, around 11:41.** Ask:
+**The pause that matters, about eleven minutes in.** Ask:
 
 > *"What stopped you?"*
 

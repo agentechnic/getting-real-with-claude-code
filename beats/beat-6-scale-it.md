@@ -1,6 +1,6 @@
 # Beat 6 — Scale It
 
-**Time:** 13:45 – 13:55
+**Duration:** 10 minutes
 **Goal:** Watch two demos. Understand where the agent's reach comes from, and how a Skill leaves your laptop.
 
 <!-- participant-start -->
@@ -30,18 +30,20 @@ A **plugin** is a versioned bundle: Skills, commands, hooks, MCP servers, packag
 
 That is how a personal habit becomes how a team works.
 
-## The four pieces, in one line each
+## The four pieces
 
 You have now met all of them. They are easy to confuse, and the difference is simple:
 
-- **Skill** — something you want the agent to know how to do.
-- **Subagent** — something you want it to delegate to a clean context.
-- **MCP server** — a specific capability you are choosing to grant.
-- **Plugin** — those things bundled up so somebody else can install them.
+| Piece | What it is |
+|---|---|
+| **Skill** | Something you want the agent to know how to do |
+| **Subagent** | Something you delegate to a clean context |
+| **MCP server** | A specific capability you choose to grant |
+| **Plugin** | Those bundled, so somebody else installs them in one command |
 
-Nobody wrote a framework today. You composed four existing pieces, and you tested the result by asking for an isolated run.
+Nobody wrote a framework today. You composed four existing pieces, and tested the result by asking for an isolated run.
 
-**Building harnesses without building them.** That is the whole idea.
+> **Building harnesses without building them.** That is the whole idea.
 <!-- participant-end -->
 
 ## Facilitator

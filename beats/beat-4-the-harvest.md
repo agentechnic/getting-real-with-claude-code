@@ -1,6 +1,6 @@
 # Beat 4 — The Harvest
 
-**Time:** 12:50 – 13:20
+**Duration:** 30 minutes
 **Goal:** Everyone leaves this beat holding a Skill they did not write from scratch.
 
 <!-- participant-start -->
@@ -14,7 +14,7 @@ Most people never write one, because a blank `SKILL.md` is intimidating and nobo
 
 So do not write it. Harvest it.
 
-## Ask for it back
+### 1. Ask for it back
 
 In the same session, with all of today's work still in its context:
 
@@ -28,7 +28,7 @@ It has the whole session. It knows you insisted on exact counts, that you made i
 
 Read what it produces before you keep it.
 
-## Two edits you make by hand
+### 2. Two edits you make by hand
 
 The draft will be roughly right and wrong in two specific places. Fix both yourself. This is the part that teaches.
 
@@ -50,7 +50,7 @@ Change it so the folder is an input. Something like: *"Ask which quarter to anal
 
 One variable. That is the difference between a recording of today and a tool for next quarter.
 
-## Before you move on
+### 3. Before you move on
 
 Read your `SKILL.md` once more and ask: **if I read this in three months, having forgotten today, could I follow it?**
 
