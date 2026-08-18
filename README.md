@@ -4,11 +4,11 @@ A 3-hour Claude Code workshop. Do one piece of real work with an agent, then tur
 
 | | |
 |---|---|
-| **Live site** | https://thepandanlabs.github.io/claude-code-workshop/ |
+| **Live site** | https://agentechnic.github.io/getting-real-with-claude-code/ |
 | **Audience** | Mixed — students, engineers, devops, managers. No cloud or coding background assumed. English, run in Riyadh. |
 | **Anchor task** | A quarter of support tickets for **Nussaa** (نص ساعة), a fictional Riyadh food-delivery app. Find the themes, count them, and connect a spike to the release that caused it. |
 | **What they take home** | A `SKILL.md` they harvested from their own session, tested cold with a subagent, patched, and re-tested. |
-| **Run by** | Pandan Labs — Riyadh |
+| **Run by** | Agentechnic — Riyadh |
 
 ## The material
 
@@ -19,14 +19,14 @@ A 3-hour Claude Code workshop. Do one piece of real work with an agent, then tur
 
 ## The archive
 
-The earlier workshop, *Getting Real with Claude Code*, built around a Python CLI called `receipts`, is preserved at [`archive.html`](https://thepandanlabs.github.io/claude-code-workshop/archive.html). Its blocks, tracks and eval harness all still work, and links handed to previous cohorts still resolve.
+The earlier workshop, *Getting Real with Claude Code*, built around a Python CLI called `receipts`, is preserved at [`archive.html`](https://agentechnic.github.io/getting-real-with-claude-code/archive.html). Its blocks, tracks and eval harness all still work, and links handed to previous cohorts still resolve.
 
 It is deliberately not linked from the landing page. Attendees came for the current workshop; pointing them at an older one only raises a question they do not need.
 
 ## Running locally
 
 ```bash
-git clone https://github.com/thepandanlabs/claude-code-workshop.git
+git clone https://github.com/agentechnic/getting-real-with-claude-code.git
 cd claude-code-workshop
 
 # Any static HTTP server works
@@ -78,14 +78,14 @@ claude-code-workshop/
 
 This site is configured for GitHub Pages from the `main` branch.
 
-1. **Create the repo** at `github.com/thepandanlabs/claude-code-workshop`.
+1. **Create the repo** at `github.com/agentechnic/getting-real-with-claude-code`.
 2. **Push this directory** to the new repo:
 
    ```bash
    git init
    git add .
    git commit -m "Initial workshop site"
-   git remote add origin git@github.com:thepandanlabs/claude-code-workshop.git
+   git remote add origin git@github.com:agentechnic/getting-real-with-claude-code.git
    git branch -M main
    git push -u origin main
    ```
@@ -96,7 +96,7 @@ This site is configured for GitHub Pages from the `main` branch.
    - Branch: `main` / `(root)`
    - Save
 
-4. **Wait ~2 minutes.** The first deploy lives at `https://thepandanlabs.github.io/claude-code-workshop/`.
+4. **Wait ~2 minutes.** The first deploy lives at `https://agentechnic.github.io/getting-real-with-claude-code/`.
 
 5. **Verify deployment:** Actions tab → look for "pages build and deployment" → green check = live.
 
@@ -177,4 +177,4 @@ Confirms every `viewer.html?file=...` link in `index.html` and `archive.html` po
 
 The workshop content is MIT-licensed. Run this workshop in your own city. Tell us how it went.
 
-From Pandan Labs with ♥.
+From Agentechnic with ♥.

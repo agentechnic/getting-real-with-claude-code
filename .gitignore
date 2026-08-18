@@ -59,3 +59,11 @@ animations/
 /*.md
 !/README.md
 !/DEPLOY.md
+
+# Slide decks and their build assets — large binaries, rebuilt from scripts/.
+# Deliberately untracked; the workshop site does not serve them.
+*.pptx
+*.pdf
+scripts/*-assets/
+scripts/build-*-deck.py
+scripts/ecc_deck_lib.py

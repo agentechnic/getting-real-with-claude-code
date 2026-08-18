@@ -23,7 +23,7 @@ ls
 
 You should see `tickets-q1`, `tickets-q2`, `context`, `CLAUDE.md` and `README.md`.
 
-(Prefer git? `git clone https://github.com/thepandanlabs/claude-code-workshop.git`
+(Prefer git? `git clone https://github.com/agentechnic/getting-real-with-claude-code.git`
 and the same folder is inside, under `nussaa/`.)
 
 If something is red, say so now. At minute forty everyone else will be building and you will be installing.

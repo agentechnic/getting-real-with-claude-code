@@ -4,15 +4,15 @@ Step-by-step. The whole flow takes about 5 minutes once you have a GitHub accoun
 
 ## Prerequisites
 
-- A GitHub account with access to the `thepandanlabs` organization (or rename the repo to your own user/org).
+- A GitHub account with access to the `theagentechnic` organization (or rename the repo to your own user/org).
 - `git` installed locally.
 - This directory on your machine.
 
 ## 1. Create the repository on GitHub
 
-1. Go to https://github.com/organizations/thepandanlabs/repositories/new (or your user's New Repo page).
+1. Go to https://github.com/organizations/theagentechnic/repositories/new (or your user's New Repo page).
 2. **Repository name:** `claude-code-workshop`
-3. **Description:** *Do It Once, Then Never Again — a 3-hour Claude Code workshop kit by Pandan Labs.*
+3. **Description:** *Do It Once, Then Never Again — a 3-hour Claude Code workshop kit by Agentechnic.*
 4. **Visibility:** Public (required for free GitHub Pages).
 5. **Do NOT** initialize with a README, .gitignore, or license — this directory already has those.
 6. Click **Create repository**.
@@ -29,26 +29,26 @@ git add .
 git commit -m "Initial workshop kit"
 
 git branch -M main
-git remote add origin https://github.com/thepandanlabs/claude-code-workshop.git
+git remote add origin https://github.com/agentechnic/getting-real-with-claude-code.git
 git push -u origin main
 ```
 
 If you prefer SSH:
 
 ```bash
-git remote add origin git@github.com:thepandanlabs/claude-code-workshop.git
+git remote add origin git@github.com:agentechnic/getting-real-with-claude-code.git
 ```
 
 ## 3. Enable GitHub Pages
 
-1. On GitHub, go to https://github.com/thepandanlabs/claude-code-workshop/settings/pages.
+1. On GitHub, go to https://github.com/agentechnic/getting-real-with-claude-code/settings/pages.
 2. Under **Source**, choose **Deploy from a branch**.
 3. **Branch:** `main`. **Folder:** `/ (root)`. Click **Save**.
 4. GitHub starts the first Pages build. Refresh after about 60 seconds. You'll see a green "Your site is live at..." banner.
 
 ## 4. Verify
 
-Open https://thepandanlabs.github.io/claude-code-workshop/ in a browser.
+Open https://agentechnic.github.io/getting-real-with-claude-code/ in a browser.
 
 - The landing page should render with the dark theme and orange accent.
 - Click any "Open Block" or "View Template" link — `viewer.html` should load the Markdown.
@@ -91,11 +91,11 @@ Pages rebuilds within 30–60 seconds. Hard-refresh your browser (`Cmd+Shift+R` 
 
 ## 7. Custom domain (optional)
 
-If you later want to put this at, say, `workshop.pandanlabs.io`:
+If you later want to put this at, say, `workshop.agentechnic.com`:
 
-1. Add a `CNAME` file at the repo root containing `workshop.pandanlabs.io` (no protocol, no path).
-2. In your DNS provider, create a CNAME record for `workshop.pandanlabs.io` pointing to `thepandanlabs.github.io`.
-3. In **Settings → Pages → Custom domain**, enter `workshop.pandanlabs.io` and save.
+1. Add a `CNAME` file at the repo root containing `workshop.agentechnic.com` (no protocol, no path).
+2. In your DNS provider, create a CNAME record for `workshop.agentechnic.com` pointing to `agentechnic.github.io`.
+3. In **Settings → Pages → Custom domain**, enter `workshop.agentechnic.com` and save.
 4. Wait for DNS to propagate (usually a few minutes). Then check **Enforce HTTPS**.
 
 GitHub Pages handles the TLS certificate automatically via Let's Encrypt.
@@ -113,11 +113,11 @@ Neither tracks individuals. Both are GDPR-friendly. Avoid Google Analytics if yo
 
 Once live, share:
 
-- The main URL: `https://thepandanlabs.github.io/claude-code-workshop/`
-- The repo: `https://github.com/thepandanlabs/claude-code-workshop`
+- The main URL: `https://agentechnic.github.io/getting-real-with-claude-code/`
+- The repo: `https://github.com/agentechnic/getting-real-with-claude-code`
 
 In the workshop WhatsApp group, pin both.
 
 ---
 
-From Pandan Labs with ♥
+From Agentechnic with ♥

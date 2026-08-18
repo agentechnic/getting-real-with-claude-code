@@ -49,7 +49,7 @@ workshop-seed-repo/
 ## How to get it
 
 ```bash
-git clone https://github.com/thepandanlabs/claude-code-workshop.git
+git clone https://github.com/agentechnic/getting-real-with-claude-code.git
 cd claude-code-workshop/archive/seed
 ```
 

@@ -28,7 +28,7 @@ Ask it how many files are in `tickets-q1/`. If it answers 200, you are ready.
 Everything is also on GitHub, and the repo carries the workshop pages as well as the material:
 
 ```bash
-git clone https://github.com/thepandanlabs/claude-code-workshop.git
+git clone https://github.com/agentechnic/getting-real-with-claude-code.git
 cd claude-code-workshop/nussaa
 ```
 
@@ -52,7 +52,7 @@ Nussaa (نص ساعة, "half an hour") is a food delivery app in Riyadh. The nam
 
 You are its support lead. Someone has handed you a quarter of complaints and asked what the themes were.
 
-Nussaa does not exist. Its restaurants, riders and customers were invented for this workshop. You can see the company at [thepandanlabs.github.io/nussaa](https://thepandanlabs.github.io/nussaa/), which is also invented.
+Nussaa does not exist. Its restaurants, riders and customers were invented for this workshop. You can see the company at [agentechnic.github.io/nussaa](https://agentechnic.github.io/nussaa/), which is also invented.
 
 ## The tickets
 

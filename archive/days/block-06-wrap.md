@@ -100,7 +100,7 @@ If a question is too big — *"how do I build my company's internal knowledge se
 
 Read aloud, then stop:
 
-> *"You came in this morning with a chat tab. You're leaving with a CLI that has state, tests, and a workflow. From Pandan Labs — go build something."*
+> *"You came in this morning with a chat tab. You're leaving with a CLI that has state, tests, and a workflow. From Agentechnic — go build something."*
 
 Photos. Done.
 
