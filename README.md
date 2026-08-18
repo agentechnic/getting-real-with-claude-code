@@ -13,9 +13,8 @@ A 3-hour Claude Code workshop. Do one piece of real work with an agent, then tur
 ## The material
 
 - `beats/` — the eight session pages. Each has a Participant view that teaches on its own, and a Facilitator overlay.
-- `nussaa/` — what attendees open. 320 tickets, a changelog, last quarter's report, and a `CLAUDE.md`.
-- `facilitator/` — **the answer key and a dry-run record. Read before running the session.** Deliberately not on the website.
-- `tools/` — the seeded generator and the test suite that verifies the corpus can still teach. `cd tools && uv run pytest`.
+- `facilitator/` — **a dry-run record. Read before running the session.** Deliberately not on the website.
+- The material attendees open — 320 tickets, a changelog, last quarter's report and the rules file — is not in this repository. It is a shared fixture in [nussaa-tickets-corpus](https://github.com/agentechnic/nussaa-tickets-corpus), along with its generator, its test suite and the answer key.
 
 ## The archive
 
@@ -57,13 +56,7 @@ claude-code-workshop/
 │   ├── beat-5-the-proof.md
 │   ├── beat-6-scale-it.md
 │   └── beat-7-wrap.md
-├── nussaa/               # What attendees open
-│   ├── CLAUDE.md         #   the conventions; it does more work than any prompt
-│   ├── tickets-q1/       #   200 tickets, holding the planted signal
-│   ├── tickets-q2/       #   120 more, a different story, for the cold run
-│   └── context/          #   changelog + last quarter's report
-├── facilitator/          # Answer key and dry-run record. Not on the website.
-├── tools/                # Seeded corpus generator + its test suite
+├── facilitator/          # Dry-run record. Not on the website.
 ├── resources/            # Prerequisites, glossary, templates, theory
 ├── archive/              # The earlier workshop, out of the way
 │   ├── days/ tracks/     #   its blocks and extension tracks
@@ -127,23 +120,39 @@ Adding a new resource card to the landing page:
 4. Update the title, description, and `viewer.html?file=...` href.
 5. Test locally. Push.
 
-## Verifying the corpus before a session
+## The corpus lives elsewhere
 
-The workshop stands or falls on the planted signal still being findable.
+The 320 tickets are a shared fixture used by more than one workshop. They live
+in [**nussaa-tickets-corpus**](https://github.com/agentechnic/nussaa-tickets-corpus) with the seeded generator, the property
+tests and the facilitator answer key.
+
+**This workshop is calibrated against corpus `v1.2.0`.** Every count in the
+beats and in the answer key comes from that version. If you bump the pin,
+re-read the facilitator notes first — a spec change moves the numbers.
+
+Before a session, verify the planted signal is still findable:
 
 ```bash
-cd tools && uv run pytest -q
+git clone https://github.com/agentechnic/nussaa-tickets-corpus
+cd nussaa-tickets-corpus/tools && uv run pytest -q
 ```
 
-That asserts the properties the session depends on: the cluster exists and stands out against its own baseline, it appears in Arabic, English and code-switched tickets, Q2 tells a different story so a hardcoded Skill fails the cold run, and no real company is named anywhere.
+That asserts the properties the session depends on: the cluster exists and
+stands out against its own baseline, it appears in Arabic, English and
+code-switched tickets, Q2 tells a different story so a hardcoded Skill fails
+the cold run, and no real company is named anywhere.
 
-Regenerating is deterministic:
+The download links in `resources/prerequisites.md`,
+`resources/the-material.md` and `beats/beat-0-setup.md` point at a pinned
+release asset. Change the pin in all three or none — `verify-links.sh` fails if
+they disagree.
 
-```bash
-cd tools && uv run python -m corpus.generate
-```
+### Two rules files
 
-Same seed, byte-identical corpus. If you change `tools/corpus/spec.py`, the numbers in the facilitator answer key stop being true — rerun the suite and update them.
+The corpus ships the same rules file as both `CLAUDE.md` and `AGENTS.md`,
+because Claude Code reads the first and other agent tools read the second.
+**This workshop teaches `CLAUDE.md`.** Beat 0 tells attendees to ignore the
+other one.
 
 ## Design system
 

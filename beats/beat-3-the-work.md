@@ -76,7 +76,7 @@ Forty-five minutes, mostly silent. Circulate, do not narrate.
 
 `tickets-q1/` contains **36 tickets** about drivers unable to find the customer's address. **Four** of them fall before 11 February. **Thirty-two** fall on or after it, and 26 land inside the three weeks following. On 11 February, v4.2 shipped a map-pin address picker that replaced free-text address entry.
 
-The full answer, with what a good report does and what a weak one does, is in `facilitator/nussaa-answer-key.md`. **Read it before the session, not during.**
+The full answer, with what a good report does and what a weak one does, is in the [corpus answer key](https://github.com/agentechnic/nussaa-tickets-corpus/blob/main/facilitator/nussaa-answer-key.md). **Read it before the session, not during.**
 
 ### How to run the moment
 

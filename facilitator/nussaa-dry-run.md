@@ -59,8 +59,8 @@ under app-crash that the generator labelled driver-address, and split out a
 service-fee theme the generator has no concept of. A second analyst would
 differ again.
 
-**Facilitator: do not "correct" an attendee's counts against the answer key.**
-The answer key's figures are the generator's labels, not the only defensible
+**Facilitator: do not "correct" an attendee's counts against the [answer key](https://github.com/agentechnic/nussaa-tickets-corpus/blob/main/facilitator/nussaa-answer-key.md).**
+Its figures are the generator's labels, not the only defensible
 answer. What matters is whether the report finds the theme, states a count it
 can defend, and connects it to v4.2 by date. A report saying 34 is not wrong.
 

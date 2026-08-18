@@ -62,7 +62,7 @@ Saudi Arabia is supported for both, no VPN needed. If your card is declined, see
 
 Do this at home, not on venue wifi alongside twenty other people.
 
-**[Download nussaa.zip](nussaa.zip)** — 108KB. Unzip it anywhere.
+**[Download nussaa.zip](https://github.com/agentechnic/nussaa-tickets-corpus/releases/download/v1.2.0/nussaa.zip)** — 110KB. Unzip it anywhere.
 
 ```bash
 cd nussaa

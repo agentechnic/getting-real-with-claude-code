@@ -14,17 +14,18 @@ claude --version
 claude doctor
 ```
 
-Then get the material. Download **[nussaa.zip](nussaa.zip)**, unzip it, and:
+Then get the material. Download **[nussaa.zip](https://github.com/agentechnic/nussaa-tickets-corpus/releases/download/v1.2.0/nussaa.zip)**, unzip it, and:
 
 ```bash
 cd nussaa
 ls
 ```
 
-You should see `tickets-q1`, `tickets-q2`, `context`, `CLAUDE.md` and `README.md`.
+You should see `tickets-q1`, `tickets-q2`, `context`, `CLAUDE.md`, `AGENTS.md` and `README.md`.
 
-(Prefer git? `git clone https://github.com/agentechnic/getting-real-with-claude-code.git`
-and the same folder is inside, under `nussaa/`.)
+Two rules files, and they are the same file. Claude Code reads `CLAUDE.md` and ignores `AGENTS.md`; other agent tools read the other one. The corpus is shared, so it ships both. **Today you care about `CLAUDE.md`** — leave the other one alone.
+
+(Prefer git? The material has its own repository, [nussaa-tickets-corpus](https://github.com/agentechnic/nussaa-tickets-corpus), and the zip above is a release from it.)
 
 If something is red, say so now. At minute forty everyone else will be building and you will be installing.
 

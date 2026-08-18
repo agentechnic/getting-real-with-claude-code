@@ -4,7 +4,9 @@ One folder, 108KB, no git required.
 
 ## Get it
 
-**[Download nussaa.zip](nussaa.zip)**
+**[Download nussaa.zip](https://github.com/agentechnic/nussaa-tickets-corpus/releases/download/v1.2.0/nussaa.zip)**
+
+That is corpus **v1.2.0**, the version this workshop's numbers were calibrated against.
 
 Unzip it anywhere you like, then:
 
@@ -25,14 +27,14 @@ Ask it how many files are in `tickets-q1/`. If it answers 200, you are ready.
 
 ### If you would rather use git
 
-Everything is also on GitHub, and the repo carries the workshop pages as well as the material:
+The material lives in its own repository, because more than one workshop uses it:
 
 ```bash
-git clone https://github.com/agentechnic/getting-real-with-claude-code.git
-cd claude-code-workshop/nussaa
+git clone https://github.com/agentechnic/nussaa-tickets-corpus
+cd nussaa-tickets-corpus/nussaa
 ```
 
-Same folder either way. The zip is just faster and does not need git installed.
+Same folder either way. The zip is a release from that repository, and it is faster and does not need git installed.
 
 ## What is in it
 
@@ -43,6 +45,7 @@ context/
   changelog.md         what shipped, and when
   themes-2025-q4.md    last quarter's report
 CLAUDE.md      the conventions Claude works to
+AGENTS.md      the same file, under the name other agent tools read — ignore it today
 README.md      what this is
 ```
 

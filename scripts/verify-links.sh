@@ -35,6 +35,30 @@ echo
 echo "checked: $checked link(s)"
 echo "missing: $missing"
 
+# The corpus is a pinned release asset in another repository. Check the pin is
+# identical everywhere and that the asset actually resolves — a stale pin in one
+# file splits the room across two corpus versions, and nobody notices until the
+# counts disagree.
+pins=$(grep -rhoE 'https://github\.com/agentechnic/nussaa-tickets-corpus/releases/download/[^)" ]+' \
+       index.html beats resources 2>/dev/null | sort -u)
+count=$(printf '%s\n' "$pins" | grep -c . || true)
+if [[ "$count" -eq 0 ]]; then
+  echo "MISS: no corpus download link found" >&2
+  missing=$((missing + 1))
+elif [[ "$count" -gt 1 ]]; then
+  echo "FAIL: download links disagree on the corpus version:" >&2
+  printf '  %s\n' $pins >&2
+  missing=$((missing + 1))
+else
+  code=$(curl -s -o /dev/null -w '%{http_code}' -L "$pins")
+  if [[ "$code" == "200" ]]; then
+    echo "ok: corpus pin resolves — $pins"
+  else
+    echo "MISS: corpus pin returned $code — $pins" >&2
+    missing=$((missing + 1))
+  fi
+fi
+
 if [[ $missing -gt 0 ]]; then
   echo "FAIL: some links are broken." >&2
   exit 1
